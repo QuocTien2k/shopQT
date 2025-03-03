@@ -1,0 +1,71 @@
+/* Thiết lập font chữ giống Tiki */
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  background-color: #f5f5fa;
+  color: #333;
+}
+
+/* Button */
+.custom-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.custom-btn.primary {
+  background-color: #1890ff;
+  color: white;
+}
+
+.custom-btn.primary:disabled {
+  background-color: #b0d7ff;
+  cursor: not-allowed;
+}
+
+.custom-btn.default {
+  background-color: transparent;
+  border: 1px solid gray;
+  color: gray;
+  cursor: not-allowed;
+}
+
+.custom-btn.loading {
+  opacity: 0.7;
+}
+
+.spin-overlay {
+  position: absolute;
+}
+
+/* Viền và shadow cho thẻ card */
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+}
+
+/* Thiết lập tiêu đề */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  color: #222;
+}
+
+/* Hiệu ứng text overflow */
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
