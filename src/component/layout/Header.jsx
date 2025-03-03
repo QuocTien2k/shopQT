@@ -5,10 +5,10 @@ import Search from "../Search";
 import Button from "../Button";
 
 const Header = () => {
-    const isAuthenticated = false; // Tạm thời chưa có logic đăng nhập
+    const isAuthenticated = true; // Tạm thời chưa có logic đăng nhập
 
     return (
-        <header className="h-[88px] flex gap-[50px] justify-between items-center bg-white shadow-md px-7 py-3 ml-auto mr-auto">
+        <header className="h-[88px] flex gap-[50px] justify-between items-center header-bg shadow-md px-7 py-3 ml-auto mr-auto">
             {/* Logo */}
             <div className="w-32 font-extrabold text-4xl tracking-wide ">
                 <Link to="/" className="text-gray-900 border-none outline-none">
@@ -38,7 +38,29 @@ const Header = () => {
                                     1
                                 </span>
                             </Link>
-                            <span className="font-semibold">Xin chào, User</span>
+                            <div className="group relative">
+                                {/* user name*/}
+                                <span className="font-semibold cursor-pointer">Xin chào, User</span>
+
+                                {/* dropdown */}
+                                <div className="dropdown-menu">
+                                    {/* User Info */}
+                                    <div className="flex items-center gap-3 border-b pb-3">
+                                        <img src="user-avatar.jpg" alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
+                                        <div>
+                                            <h2 className="text-lg font-semibold">User1</h2>
+                                            <p className="text-sm text-gray-500">SĐT: 0123456789</p>
+                                            <p className="text-sm text-gray-500">Email: user@example.com</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Buttons */}
+                                    <div className="flex flex-col gap-2 mt-3 items-center">
+                                        <Button label="Cập nhật" variant="primary" />
+                                        <Button label="Đăng xuất" variant="primary" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     ) : (
                         <div className="flex items-center space-x-4">

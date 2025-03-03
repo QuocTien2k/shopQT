@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 
 
 /* Thiết lập font chữ giống Tiki */
@@ -69,4 +69,34 @@ h4 {
 /* Hiệu ứng text overflow */
 .text-ellipsis {
   @apply truncate;
+}
+
+@layer components {
+  .header-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%),
+      linear-gradient(264.03deg, rgb(220, 229, 251) -10.27%,
+        rgb(234, 236, 255) 35.65%,
+        rgb(213, 236, 253) 110.66%);
+  }
+
+  .box-shadow {
+    box-shadow: rgb(0 0 0 / 28%) 0px 6px 12px 0px;
+  }
+
+  .dropdown-menu {
+    @apply absolute top-[20px] right-0 w-[220px] bg-white rounded-md box-shadow border p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform scale-95 origin-bottom-right transition-all duration-300;
+  }
+
+  .dropdown-menu::before {
+    @apply absolute content-[''] top-[-16px] left-0 w-full h-[16px] bg-transparent;
+  }
+
+  .dropdown-menu::after {
+    @apply absolute content-[''] top-[-12px] right-8 border-[10px] border-transparent border-b-gray-400 z-20;
+  }
+
+  .dropdown-menu::after {
+    @apply absolute content-[''] top-[-28px] right-8 border-[14px] border-transparent border-b-white drop-shadow-md z-30;
+  }
+
 }
