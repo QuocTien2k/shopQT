@@ -1,23 +1,30 @@
 import { Route, Routes } from 'react-router-dom'
-import Header from './component/layout/Header'
 import HomePage from './Pages/HomePage'
 import { LoginPage } from './Pages/LoginPage'
 import { SignUpPage } from './Pages/SignUpPage'
 import NotFoundPage from './Pages/NotFoundPage'
-import ButtonJSX from './component/layout/Button/Button'
-
+import Button from "./component/Button";
+import Footer from './component/layout/Footer'
+import ShoppingCart from './Pages/ShoppingCart'
+import MainLayout from './Router/MainLayout'
 function App() {
 
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* Layout có Header */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+        </Route>
+
+        {/* Layout KHÔNG có Header */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/error" element={<NotFoundPage />} />
       </Routes>
-      {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={'disabled'} /> */}
+      {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={true} /> */}
+      {/* <Footer /> */}
     </>
   )
 }

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Spin } from "antd";
 
-const ButtonJSX = ({ label, onClick, disabled, variant = "primary" }) => {
+const Button = ({ label, onClick, disabled, variant = "primary" }) => {
     const [loading, setLoading] = useState(false);
     const labelRef = useRef(null);
     const [buttonWidth, setButtonWidth] = useState("auto");
@@ -34,6 +33,4 @@ const ButtonJSX = ({ label, onClick, disabled, variant = "primary" }) => {
         </button>
     );
 };
-
-export default ButtonJSX;
-
+export default Button;

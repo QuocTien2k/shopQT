@@ -1,57 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+
 /* Thiết lập font chữ giống Tiki */
 body {
+  @apply font-sans text-sm bg-gray-100 text-gray-900;
   font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 14px;
-  background-color: #f5f5fa;
-  color: #333;
 }
 
 /* Button */
 .custom-btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  position: relative;
-  white-space: nowrap;
+  @apply px-4 py-2 rounded-md font-semibold border transition-all flex items-center justify-center relative whitespace-nowrap;
 }
 
 .custom-btn.primary {
-  background-color: #1890ff;
-  color: white;
+  @apply bg-blue-500 text-white;
 }
 
 .custom-btn.primary:disabled {
-  background-color: #b0d7ff;
-  cursor: not-allowed;
+  @apply bg-blue-300 cursor-not-allowed;
 }
 
 .custom-btn.default {
-  background-color: transparent;
-  border: 1px solid gray;
-  color: gray;
-  cursor: not-allowed;
+  @apply bg-transparent border border-gray-400 text-gray-400 cursor-not-allowed;
 }
 
 .custom-btn.loading {
-  opacity: 0.7;
+  @apply opacity-70;
 }
 
 .spin-overlay {
-  position: absolute;
+  @apply absolute;
+}
+
+/* Header */
+.header {
+  @apply flex justify-between items-center px-5 bg-white shadow-md;
+}
+
+.logo {
+  @apply text-xl font-bold;
+}
+
+.search-bar {
+  @apply w-72;
+}
+
+.nav-menu {
+  @apply flex-1 flex justify-end;
 }
 
 /* Viền và shadow cho thẻ card */
 .card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  padding: 16px;
+  @apply bg-white rounded-lg shadow-md p-4;
 }
 
 /* Thiết lập tiêu đề */
@@ -59,13 +63,10 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 700;
-  color: #222;
+  @apply font-bold text-gray-800;
 }
 
 /* Hiệu ứng text overflow */
 .text-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @apply truncate;
 }
