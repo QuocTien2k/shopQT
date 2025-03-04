@@ -1,11 +1,18 @@
 import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
 import Search from "../Search";
 import Button from "../Button";
+import { useContext } from "react";
+import ModalUpdateInfo from "../Modal/ModalUpdateInfo";
+import { DataContext } from "../Context/DataContext";
 
 const Header = () => {
-    const isAuthenticated = true; // Tạm thời chưa có logic đăng nhập
+    let isAuthenticated = true; // Tạm thời chưa có logic đăng nhập
+    const handleLogout = () => {
+        isAuthenticated = false;
+    }
+
+    const { isModalOpen, handleOpenModal, handleCloseModal } = useContext(DataContext);
 
     return (
         <header className="h-[88px] flex gap-[50px] justify-between items-center header-bg shadow-md px-7 py-3 ml-auto mr-auto">
@@ -56,8 +63,9 @@ const Header = () => {
 
                                     {/* Buttons */}
                                     <div className="flex flex-col gap-2 mt-3 items-center">
-                                        <Button label="Cập nhật" variant="primary" />
-                                        <Button label="Đăng xuất" variant="primary" />
+                                        <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" />
+                                        <ModalUpdateInfo open={isModalOpen} onClose={handleCloseModal} />
+                                        <Button onClick={handleLogout} label="Đăng xuất" variant="primary" />
                                     </div>
                                 </div>
                             </div>

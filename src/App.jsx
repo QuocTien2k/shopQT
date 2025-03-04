@@ -7,24 +7,27 @@ import Button from "./component/Button";
 import Footer from './component/layout/Footer'
 import ShoppingCart from './Pages/ShoppingCart'
 import MainLayout from './Router/MainLayout'
+import ContextProvider from './component/Context/DataContext'
 function App() {
 
   return (
     <>
-      <Routes>
-        {/* Layout có Header */}
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<ShoppingCart />} />
-        </Route>
+      <ContextProvider>
+        <Routes>
+          {/* Layout có Header */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cart" element={<ShoppingCart />} />
+          </Route>
 
-        {/* Layout KHÔNG có Header */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<SignUpPage />} />
-        <Route path="/error" element={<NotFoundPage />} />
-      </Routes>
-      {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={true} /> */}
-      {/* <Footer /> */}
+          {/* Layout KHÔNG có Header */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
+          <Route path="/error" element={<NotFoundPage />} />
+        </Routes>
+        {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={true} /> */}
+        {/* <Footer /> */}
+      </ContextProvider>
     </>
   )
 }
