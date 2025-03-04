@@ -1,56 +1,114 @@
-import { useState } from "react";
-import { Modal, Input, Form } from "antd";
+import { useContext, useState } from "react";
+import { Modal, Input, Form, message } from "antd";
 import Button from "../Button";
+import { DataContext } from "../Context/DataContext";
 
 const ModalUpdateInfo = ({ open, onClose }) => {
+    const { setUser } = useContext(DataContext)
+    const user = JSON.parse(localStorage.getItem("user")) || {}; //lấy thông tin từ localStorage
     const initialData = {
-        fullname: "Nguyễn Văn A",
-        phone: "0123456789",
-        email: "nguyenvana@gmail.com",
-        password: "123456",
+        firstname: user.firstname || "",
+        lastname: user.lastname || "",
+        fullname: user.fullname || "",
+        phone: user.phone || "",
+        email: user.email || "",
+        password: user.password || "",
         confirmPassword: ""
     };
 
     const [formData, setFormData] = useState(initialData);
     const [errors, setErrors] = useState({});
 
-    const validateField = (name, value) => {
+    // Cập nhật field nhưng không gây re-render toàn bộ form
+    const updateField = (field, value) => {
+        setFormData((prev) => {
+            const newData = { ...prev, [field]: value };
+
+            // Cập nhật fullname nếu lastname hoặc firstname thay đổi
+            if (field === "lastname" || field === "firstname") {
+                newData.fullname = `${newData.lastname} ${newData.firstname}`;
+            }
+
+            return newData;
+        });
+
+        validateField(field, value);
+    };
+
+
+    // Hàm validate từng trường
+    const validateField = (field, value) => {
         let error = "";
-        if (!value.trim()) {
-            error = "Vui lòng không để trống trường này.";
-        } else {
-            if (name === "phone" && !/^\d{10}$/.test(value)) {
-                error = "Số điện thoại không hợp lệ.";
-            }
-            if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                error = "Email không hợp lệ.";
-            }
-            if (name === "confirmPassword" && value !== formData.password) {
-                error = "Mật khẩu nhập lại không khớp.";
-            }
+        switch (field) {
+            case "firstname":
+                if (!value.match(/^[A-Za-zÀ-ỹ]{2,}$/)) {
+                    error = "Tên phải có ít nhất 2 ký tự và không chứa số";
+                }
+                break;
+            case "lastname":
+                if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
+                    error = "Họ phải có từ 4-25 ký tự và không chứa số";
+                }
+                break;
+            case "phone":
+                if (!value.match(/^0\d{9}$/)) {
+                    error = "Số điện thoại không hợp lệ";
+                }
+                break;
+            case "password":
+                if (!value || value.length < 6) {
+                    error = "Mật khẩu phải có ít nhất 6 ký tự";
+                }
+                break;
+            case "confirmPassword":
+                if (value !== formData.password) {
+                    error = "Mật khẩu nhập lại không khớp";
+                }
+                break;
+            default:
+                break;
         }
-        setErrors((prev) => ({ ...prev, [name]: error }));
+        setErrors((prev) => ({ ...prev, [field]: error }));
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleSave = async () => {
+        try {
+            const updatedData = { ...formData };
 
-        // Cập nhật giá trị chỉ khi thực sự thay đổi
-        setFormData((prev) => (prev[name] !== value ? { ...prev, [name]: value } : prev));
+            // Kiểm tra nếu có thay đổi thì mới cập nhật
+            if (!updatedData.fullname || !updatedData.phone || !updatedData.email) {
+                message.error("Vui lòng điền đầy đủ thông tin!");
+                return;
+            }
 
-        // Chỉ cập nhật lỗi nếu đã có lỗi trước đó
-        if (errors[name]) validateField(name, value);
-    };
+            // Lấy ID user hiện tại từ localStorage
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user || !user.id) {
+                message.error("Không tìm thấy thông tin người dùng!");
+                return;
+            }
 
-    const handleBlur = (e) => {
-        const { name, value } = e.target;
-        validateField(name, value);
-    };
+            // Gửi request cập nhật thông tin
+            const res = await fetch(`http://localhost:5000/users/${user.id}`, {
+                method: "PUT", // Cập nhật dữ liệu user
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedData),
+            });
 
-    const handleSave = () => {
-        const updatedData = { ...formData };
-        console.log("Dữ liệu cập nhật:", updatedData);
-        onClose();
+            if (!res.ok) throw new Error("Cập nhật thất bại!");
+            // Cập nhật lại localStorage với thông tin mới
+            localStorage.setItem("user", JSON.stringify(updatedData));
+
+            message.success("Cập nhật thành công!");
+            setUser(updatedData); //Cập nhật lại state user
+
+            console.log("Dữ liệu cập nhật:", updatedData);
+            onClose();
+
+        } catch (error) {
+            console.error(error);
+            message.error("Có lỗi xảy ra khi cập nhật!");
+        }
     };
 
     const handleCancel = () => {
@@ -60,29 +118,60 @@ const ModalUpdateInfo = ({ open, onClose }) => {
     };
 
     return (
-        <Modal title="Cập nhật thông tin" open={open} onCancel={handleCancel} footer={null}>
-            <Form layout="vertical">
-                <Form.Item label="Họ và tên" validateStatus={errors.fullname ? "error" : ""} help={errors.fullname}>
-                    <Input name="fullname" value={formData.fullname} onChange={handleChange} onBlur={handleBlur} />
-                </Form.Item>
-                <Form.Item label="Số điện thoại" validateStatus={errors.phone ? "error" : ""} help={errors.phone}>
-                    <Input name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} />
-                </Form.Item>
-                <Form.Item label="Email" validateStatus={errors.email ? "error" : ""} help={errors.email}>
-                    <Input name="email" value={formData.email} onChange={handleChange} onBlur={handleBlur} />
-                </Form.Item>
-                <Form.Item label="Mật khẩu">
-                    <Input.Password name="password" value={formData.password} onChange={handleChange} />
-                </Form.Item>
-                <Form.Item label="Nhập lại mật khẩu" validateStatus={errors.confirmPassword ? "error" : ""} help={errors.confirmPassword}>
-                    <Input.Password name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} onBlur={handleBlur} />
-                </Form.Item>
-                <div className="flex justify-end gap-2">
-                    <Button label="Hủy" onClick={handleCancel} variant="normal" />
-                    <Button label="Lưu" onClick={handleSave} variant="primary" disabled={Object.values(errors).some(err => err)} />
-                </div>
-            </Form>
+        <Modal
+            title="Cập nhật thông tin"
+            open={open}
+            onCancel={onClose}
+            footer={null}
+            centered
+        >
+            <div className="max-h-[80vh] overflow-y-auto p-4">
+                <Form layout="vertical">
+                    {/* Họ & Tên trên cùng một hàng */}
+                    <div className="grid grid-cols-2 gap-2">
+                        <Form.Item label="Họ">
+                            <Input
+                                name="lastname"
+                                value={formData.lastname}
+                                onChange={(e) => updateField("lastname", e.target.value)}
+                                onBlur={(e) => validateField("lastname", e.target.value)}
+                            />
+                        </Form.Item>
+                        <Form.Item label="Tên">
+                            <Input
+                                name="firstname"
+                                value={formData.firstname}
+                                onChange={(e) => updateField("firstname", e.target.value)}
+                                onBlur={(e) => validateField("firstname", e.target.value)}
+                            />
+                        </Form.Item>
+                    </div>
+
+                    <Form.Item label="Họ và tên">
+                        <Input name="fullname" value={formData.fullname} disabled />
+                    </Form.Item>
+                    <Form.Item label="Số điện thoại">
+                        <Input name="phone" value={formData.phone} onChange={(e) => updateField("phone", e.target.value)} onBlur={(e) => validateField("phone", e.target.value)} />
+                    </Form.Item>
+                    <Form.Item label="Email">
+                        <Input name="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} onBlur={(e) => validateField("email", e.target.value)} />
+                    </Form.Item>
+                    <Form.Item label="Mật khẩu">
+                        <Input.Password name="password" value={formData.password} onChange={(e) => updateField("password", e.target.value)} />
+                    </Form.Item>
+                    <Form.Item label="Nhập lại mật khẩu">
+                        <Input.Password name="confirmPassword" value={formData.confirmPassword} onChange={(e) => updateField("confirmPassword", e.target.value)} onBlur={(e) => validateField("confirmPassword", e.target.value)} />
+                    </Form.Item>
+
+                    {/* Nút hành động */}
+                    <div className="flex justify-end gap-2">
+                        <Button label="Hủy" onClick={handleCancel} variant="normal" />
+                        <Button label="Lưu" onClick={handleSave} variant="primary" disabled={Object.values(errors).some(err => err)} />
+                    </div>
+                </Form>
+            </div>
         </Modal>
+
     );
 };
 

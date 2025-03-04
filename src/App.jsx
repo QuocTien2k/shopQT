@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import LoginPage from './Pages/LoginPage'
-import { SignUpPage } from './Pages/SignUpPage'
+import RegisterPage from './Pages/SignUpPage'
 import NotFoundPage from './Pages/NotFoundPage'
 import Button from "./component/Button";
 import Footer from './component/layout/Footer'
@@ -22,7 +22,7 @@ function App() {
 
           {/* Layout KHÔNG có Header */}
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<SignUpPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/error" element={<NotFoundPage />} />
         </Routes>
         {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={true} /> */}

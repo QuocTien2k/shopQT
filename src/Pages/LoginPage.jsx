@@ -49,7 +49,7 @@ const LoginPage = () => {
             //tìm user
             const user = users.find((u) => {
                 return (
-                    u.email === formData.identifier || u.phone === formData.identifier && u.password === formData.password
+                    (u.email === formData.identifier || u.phone === formData.identifier) && u.password === formData.password
                 )
             });
             console.log(user);

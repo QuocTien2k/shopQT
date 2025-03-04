@@ -73,14 +73,14 @@ const Header = () => {
                                         <img src={user.image} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
                                         <div>
                                             <Tooltip title={user.firstname}>
-                                                <h2 className="text-lg font-semibold inline-block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                                <h2 className="text-lg font-semibold inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
                                                     {user.firstname}
                                                 </h2>
                                             </Tooltip>
                                             <p className="text-sm text-gray-500">{user.phone}</p>
 
                                             <Tooltip title={user.email}>
-                                                <p className="text-sm text-gray-500 inline-block max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                                <p className="text-sm text-gray-500 inline-block max-w-[120px] overflow-hidden text-ellipsis whitespace-nowrap">
                                                     {user.email}
                                                 </p>
                                             </Tooltip>

@@ -1,309 +1,392 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "iPhone 14 Pro Max",
       "brand": "Apple",
       "category": "Smartphone",
       "price": 33000000,
       "discount": 5,
       "rating": 4.8,
-      "color": ["Purple", "Gold", "Silver"],
+      "color": [
+        "Purple",
+        "Gold",
+        "Silver"
+      ],
       "desc": "iPhone 14 Pro Max with A16 Bionic chip, 256GB storage, and 6.7-inch display.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Samsung Galaxy S23 Ultra",
       "brand": "Samsung",
       "category": "Smartphone",
       "price": 29000000,
       "discount": 7,
       "rating": 4.7,
-      "color": ["Black", "Green", "Red"],
+      "color": [
+        "Black",
+        "Green",
+        "Red"
+      ],
       "desc": "Samsung Galaxy S23 Ultra, Snapdragon 8 Gen 2, 12GB RAM, 512GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "OPPO Find X5 Pro",
       "brand": "OPPO",
       "category": "Smartphone",
       "price": 25000000,
       "discount": 10,
       "rating": 4.6,
-      "color": ["White", "Black"],
+      "color": [
+        "White",
+        "Black"
+      ],
       "desc": "OPPO Find X5 Pro, Snapdragon 8 Gen 1, 12GB RAM, 256GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Vivo X80 Pro",
       "brand": "Vivo",
       "category": "Smartphone",
       "price": 22000000,
       "discount": 8,
       "rating": 4.5,
-      "color": ["Blue", "Black"],
+      "color": [
+        "Blue",
+        "Black"
+      ],
       "desc": "Vivo X80 Pro with Zeiss optics, Snapdragon 8 Gen 1, 12GB RAM.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Xiaomi 12 Pro",
       "brand": "Xiaomi",
       "category": "Smartphone",
       "price": 18000000,
       "discount": 12,
       "rating": 4.4,
-      "color": ["Gray", "Blue"],
+      "color": [
+        "Gray",
+        "Blue"
+      ],
       "desc": "Xiaomi 12 Pro, Snapdragon 8 Gen 1, 12GB RAM, 256GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "iPad Pro 12.9 M2",
       "brand": "Apple",
       "category": "Tablet",
       "price": 35000000,
       "discount": 5,
       "rating": 4.9,
-      "color": ["Silver", "Space Gray"],
+      "color": [
+        "Silver",
+        "Space Gray"
+      ],
       "desc": "iPad Pro 12.9 inch with M2 chip, 512GB storage, 120Hz display.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Samsung Galaxy Tab S8 Ultra",
       "brand": "Samsung",
       "category": "Tablet",
       "price": 28000000,
       "discount": 6,
       "rating": 4.7,
-      "color": ["Gray", "Silver"],
+      "color": [
+        "Gray",
+        "Silver"
+      ],
       "desc": "Galaxy Tab S8 Ultra, 14.6-inch display, Snapdragon 8 Gen 1.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "iPhone 13 Mini",
       "brand": "Apple",
       "category": "Smartphone",
       "price": 18000000,
       "discount": 8,
       "rating": 4.6,
-      "color": ["Blue", "Pink", "Red"],
+      "color": [
+        "Blue",
+        "Pink",
+        "Red"
+      ],
       "desc": "iPhone 13 Mini, A15 Bionic, 128GB storage, compact 5.4-inch display.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Samsung Galaxy A73",
       "brand": "Samsung",
       "category": "Smartphone",
       "price": 12000000,
       "discount": 10,
       "rating": 4.4,
-      "color": ["Mint", "White", "Gray"],
+      "color": [
+        "Mint",
+        "White",
+        "Gray"
+      ],
       "desc": "Samsung Galaxy A73, Snapdragon 778G, 8GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Xiaomi Redmi Note 12",
       "brand": "Xiaomi",
       "category": "Smartphone",
       "price": 8500000,
       "discount": 15,
       "rating": 4.3,
-      "color": ["Green", "Blue", "Black"],
+      "color": [
+        "Green",
+        "Blue",
+        "Black"
+      ],
       "desc": "Xiaomi Redmi Note 12, MediaTek Dimensity 810, 6GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Realme GT 2 Pro",
       "brand": "Realme",
       "category": "Smartphone",
       "price": 16000000,
       "discount": 10,
       "rating": 4.3,
-      "color": ["White", "Green"],
+      "color": [
+        "White",
+        "Green"
+      ],
       "desc": "Realme GT 2 Pro, Snapdragon 8 Gen 1, 12GB RAM, 256GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Realme 9 Pro+",
       "brand": "Realme",
       "category": "Smartphone",
       "price": 10000000,
       "discount": 12,
       "rating": 4.2,
-      "color": ["Blue", "Black", "Green"],
+      "color": [
+        "Blue",
+        "Black",
+        "Green"
+      ],
       "desc": "Realme 9 Pro+, MediaTek Dimensity 920, 8GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Realme C35",
       "brand": "Realme",
       "category": "Smartphone",
       "price": 4500000,
       "discount": 15,
       "rating": 3.9,
-      "color": ["Green", "Black"],
+      "color": [
+        "Green",
+        "Black"
+      ],
       "desc": "Realme C35, Unisoc T616, 4GB RAM, 64GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Realme Narzo 50",
       "brand": "Realme",
       "category": "Smartphone",
       "price": 5500000,
       "discount": 10,
       "rating": 4.1,
-      "color": ["Blue", "Gray"],
+      "color": [
+        "Blue",
+        "Gray"
+      ],
       "desc": "Realme Narzo 50, MediaTek Helio G96, 6GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Realme 8i",
       "brand": "Realme",
       "category": "Smartphone",
       "price": 6000000,
       "discount": 8,
       "rating": 3.8,
-      "color": ["Black", "Purple"],
+      "color": [
+        "Black",
+        "Purple"
+      ],
       "desc": "Realme 8i, MediaTek Helio G96, 6GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "iPad Pro 12.9 (2022)",
       "brand": "Apple",
       "category": "Tablet",
       "price": 30000000,
       "discount": 5,
       "rating": 4.8,
-      "color": ["Silver", "Space Gray"],
+      "color": [
+        "Silver",
+        "Space Gray"
+      ],
       "desc": "iPad Pro 12.9 inch (2022), Apple M2 chip, 256GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "iPad Air 5",
       "brand": "Apple",
       "category": "Tablet",
       "price": 19000000,
       "discount": 4,
       "rating": 4.6,
-      "color": ["Blue", "Pink", "Gray"],
+      "color": [
+        "Blue",
+        "Pink",
+        "Gray"
+      ],
       "desc": "iPad Air 5, Apple M1 chip, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "iPad Mini 6",
       "brand": "Apple",
       "category": "Tablet",
       "price": 15000000,
       "discount": 3,
       "rating": 4.5,
-      "color": ["Purple", "Starlight"],
+      "color": [
+        "Purple",
+        "Starlight"
+      ],
       "desc": "iPad Mini 6, A15 Bionic, 64GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "iPad 10 (2022)",
       "brand": "Apple",
       "category": "Tablet",
       "price": 12000000,
       "discount": 6,
       "rating": 4.2,
-      "color": ["Yellow", "Blue", "Silver"],
+      "color": [
+        "Yellow",
+        "Blue",
+        "Silver"
+      ],
       "desc": "iPad 10 (2022), A14 Bionic, 64GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "Samsung Galaxy Tab S8",
       "brand": "Samsung",
       "category": "Tablet",
       "price": 22000000,
       "discount": 5,
       "rating": 4.7,
-      "color": ["Graphite", "Silver"],
+      "color": [
+        "Graphite",
+        "Silver"
+      ],
       "desc": "Samsung Galaxy Tab S8, Snapdragon 8 Gen 1, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 21,
+      "id": "21",
       "name": "Xiaomi Pad 5",
       "brand": "Xiaomi",
       "category": "Tablet",
       "price": 10000000,
       "discount": 2,
       "rating": 4.3,
-      "color": ["Black", "White"],
+      "color": [
+        "Black",
+        "White"
+      ],
       "desc": "Xiaomi Pad 5, Snapdragon 860, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 22,
+      "id": "22",
       "name": "Nokia G21",
       "brand": "Nokia",
       "category": "Smartphone",
       "price": 4500000,
       "discount": 0,
-      "rating": 4.0,
-      "color": ["Nordic Blue", "Dusk"],
+      "rating": 4,
+      "color": [
+        "Nordic Blue",
+        "Dusk"
+      ],
       "desc": "Nokia G21, Unisoc T606, 4GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 23,
+      "id": "23",
       "name": "Nokia X20",
       "brand": "Nokia",
       "category": "Smartphone",
       "price": 8000000,
       "discount": 0,
       "rating": 4.2,
-      "color": ["Midnight Sun", "Nordic Blue"],
+      "color": [
+        "Midnight Sun",
+        "Nordic Blue"
+      ],
       "desc": "Nokia X20, Snapdragon 480 5G, 8GB RAM, 128GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 24,
+      "id": "24",
       "name": "Itel Vision 3",
       "brand": "Itel",
       "category": "Smartphone",
       "price": 2500000,
       "discount": 0,
       "rating": 3.8,
-      "color": ["Deep Blue", "Gradient Green"],
+      "color": [
+        "Deep Blue",
+        "Gradient Green"
+      ],
       "desc": "Itel Vision 3, Unisoc SC9863A, 3GB RAM, 64GB storage.",
       "image": "https://via.placeholder.com/150"
     },
     {
-      "id": 25,
+      "id": "25",
       "name": "Itel A58",
       "brand": "Itel",
       "category": "Smartphone",
       "price": 1800000,
       "discount": 0,
       "rating": 3.5,
-      "color": ["Sky Blue", "Starry Black"],
+      "color": [
+        "Sky Blue",
+        "Starry Black"
+      ],
       "desc": "Itel A58, Unisoc SC7731E, 2GB RAM, 32GB storage.",
       "image": "https://via.placeholder.com/150"
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "firstname": "A",
       "lastname": "Nguyễn Văn",
       "fullname": "Nguyễn Văn A",
@@ -314,7 +397,7 @@
       "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
     },
     {
-      "id": 2,
+      "id": "2",
       "firstname": "B",
       "lastname": "Trần Thị",
       "fullname": "Trần Thị B",
@@ -325,7 +408,7 @@
       "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
     },
     {
-      "id": 3,
+      "id": "3",
       "firstname": "C",
       "lastname": "Lê Văn",
       "fullname": "Lê Văn C",
@@ -336,7 +419,7 @@
       "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
     },
     {
-      "id": 4,
+      "id": "4",
       "firstname": "D",
       "lastname": "Phạm Thị",
       "fullname": "Phạm Thị D",
@@ -347,7 +430,7 @@
       "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
     },
     {
-      "id": 5,
+      "id": "5",
       "firstname": "Hoành",
       "lastname": "Nguyễn Xuân",
       "fullname": "Nguyễn Xuân Hoành",
@@ -356,6 +439,27 @@
       "password": "123456",
       "phone": "0147852369",
       "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "firstname": "Phát",
+      "lastname": "Đoàn Vĩnh",
+      "fullname": "Đoàn Vĩnh Phát",
+      "phone": "0123456789",
+      "email": "phatdoan@gmail.com",
+      "password": "123456",
+      "confirmPassword": "",
+      "id": "1aab",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "firstname": "Hải",
+      "lastname": "Nguyễn Thành",
+      "fullname": "Nguyễn Thành Hải",
+      "phone": "0123456789",
+      "email": "hailong@gmail.com",
+      "password": "123456",
+      "confirmPassword": "",
+      "id": "2a69"
     }
   ]
 }
