@@ -1,18 +1,31 @@
 import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Search from "../Search";
 import Button from "../Button";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ModalUpdateInfo from "../Modal/ModalUpdateInfo";
 import { DataContext } from "../Context/DataContext";
+import { Tooltip } from "antd";
 
 const Header = () => {
-    let isAuthenticated = true; // Tạm thời chưa có logic đăng nhập
-    const handleLogout = () => {
-        isAuthenticated = false;
-    }
 
-    const { isModalOpen, handleOpenModal, handleCloseModal } = useContext(DataContext);
+    const { isModalOpen, handleOpenModal, handleCloseModal, isAuthenticated, setIsAuthenticated, user, setUser } = useContext(DataContext);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        setIsAuthenticated(false);
+        setUser(null);
+        Navigate("/");
+    };
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem("user");
+
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+            setIsAuthenticated(true);
+        }
+    }, []);
 
     return (
         <header className="h-[88px] flex gap-[50px] justify-between items-center header-bg shadow-md px-7 py-3 ml-auto mr-auto">
@@ -47,17 +60,30 @@ const Header = () => {
                             </Link>
                             <div className="group relative">
                                 {/* user name*/}
-                                <span className="font-semibold cursor-pointer">Xin chào, User</span>
+                                <Tooltip title={user.firstname}>
+                                    <span className="font-semibold cursor-pointer inline-block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                        Xin chào, {user.firstname}
+                                    </span>
+                                </Tooltip>
 
                                 {/* dropdown */}
                                 <div className="dropdown-menu">
                                     {/* User Info */}
                                     <div className="flex items-center gap-3 border-b pb-3">
-                                        <img src="user-avatar.jpg" alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
+                                        <img src={user.image} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
                                         <div>
-                                            <h2 className="text-lg font-semibold">User1</h2>
-                                            <p className="text-sm text-gray-500">SĐT: 0123456789</p>
-                                            <p className="text-sm text-gray-500">Email: user@example.com</p>
+                                            <Tooltip title={user.firstname}>
+                                                <h2 className="text-lg font-semibold inline-block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                                    {user.firstname}
+                                                </h2>
+                                            </Tooltip>
+                                            <p className="text-sm text-gray-500">{user.phone}</p>
+
+                                            <Tooltip title={user.email}>
+                                                <p className="text-sm text-gray-500 inline-block max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                                    {user.email}
+                                                </p>
+                                            </Tooltip>
                                         </div>
                                     </div>
 

@@ -12,10 +12,17 @@ const Button = ({ label, onClick, disabled, variant = "primary" }) => {
         }
     }, [label]);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         if (onClick && !disabled) {
             setLoading(true);
-            onClick();
+
+            // Kiểm tra onClick có nhận tham số hay không
+            if (onClick.length > 0) {
+                onClick(e); // Nếu onClick có tham số, truyền `e`
+            } else {
+                onClick(); // Nếu không, gọi bình thường
+            }
+
             setTimeout(() => setLoading(false), 1500);
         }
     };

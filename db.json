@@ -300,5 +300,62 @@
       "desc": "Itel A58, Unisoc SC7731E, 2GB RAM, 32GB storage.",
       "image": "https://via.placeholder.com/150"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstname": "A",
+      "lastname": "Nguyễn Văn",
+      "fullname": "Nguyễn Văn A",
+      "sex": "Male",
+      "email": "nguyenvana@gmail.com",
+      "password": "123456",
+      "phone": "0123456789",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "id": 2,
+      "firstname": "B",
+      "lastname": "Trần Thị",
+      "fullname": "Trần Thị B",
+      "sex": "Female",
+      "email": "tranthib@gmail.com",
+      "password": "123456",
+      "phone": "0987654321",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "id": 3,
+      "firstname": "C",
+      "lastname": "Lê Văn",
+      "fullname": "Lê Văn C",
+      "sex": "Male",
+      "email": "levanc@gmail.com",
+      "password": "123456",
+      "phone": "0369857412",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "id": 4,
+      "firstname": "D",
+      "lastname": "Phạm Thị",
+      "fullname": "Phạm Thị D",
+      "sex": "Female",
+      "email": "phamthid@gmail.com",
+      "password": "123456",
+      "phone": "0912345678",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    },
+    {
+      "id": 5,
+      "firstname": "Hoành",
+      "lastname": "Nguyễn Xuân",
+      "fullname": "Nguyễn Xuân Hoành",
+      "sex": "Male",
+      "email": "nguyenxuanhoanh@gmail.com",
+      "password": "123456",
+      "phone": "0147852369",
+      "image": "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"
+    }
   ]
 }
