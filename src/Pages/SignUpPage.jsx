@@ -1,9 +1,7 @@
 import { useState, useCallback } from "react";
-import { Input, Select, message } from "antd";
+import { Input, message, Radio } from "antd";
 import Button from "../component/Button";
 import { useNavigate } from "react-router-dom";
-
-const { Option } = Select;
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -12,7 +10,7 @@ const RegisterPage = () => {
         firstname: "",
         lastname: "",
         fullname: "",
-        sex: "",
+        sex: true,
         phone: "",
         email: "",
         password: "",
@@ -36,45 +34,82 @@ const RegisterPage = () => {
     // Hàm validate từng trường
     const validateField = (field, value) => {
         let error = "";
-        switch (field) {
-            case "firstname":
-                if (!value.match(/^[A-Za-zÀ-ỹ]{2,}$/)) {
-                    error = "Tên phải có ít nhất 2 ký tự và không chứa số";
-                }
-                break;
-            case "lastname":
-                if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
-                    error = "Họ phải có từ 4-25 ký tự và không chứa số";
-                }
-                break;
-            case "phone":
-                if (!value.match(/^0\d{9}$/)) {
-                    error = "Số điện thoại không hợp lệ";
-                }
-                break;
-            case "password":
-                if (!value || value.length < 6) {
-                    error = "Mật khẩu phải có ít nhất 6 ký tự";
-                }
-                break;
-            case "confirmPassword":
-                if (value !== formData.password) {
-                    error = "Mật khẩu nhập lại không khớp";
-                }
-                break;
-            default:
-                break;
+
+        if (!value) {
+            error = "Vui lòng nhập!";
+        } else {
+            switch (field) {
+                case "firstname":
+                    if (!value.match(/^[A-Za-zÀ-ỹ]{2,}$/)) {
+                        error = "Tên phải có ít nhất 2 ký tự và không chứa số";
+                    }
+                    break;
+                case "lastname":
+                    if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
+                        error = "Họ phải có từ 4-25 ký tự và không chứa số";
+                    }
+                    break;
+                case "phone":
+                    if (!value.match(/^0\d{9}$/)) {
+                        error = "Số điện thoại không hợp lệ";
+                    }
+                    break;
+                case "email":
+                    if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                        error = "Email không hợp lệ!";
+                    }
+                    break;
+                case "password":
+                    if (value.length < 6) {
+                        error = "Mật khẩu phải có ít nhất 6 ký tự";
+                    }
+                    break;
+                case "confirmPassword":
+                    if (value !== formData.password) {
+                        error = "Mật khẩu nhập lại không khớp";
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
+
         setErrors((prev) => ({ ...prev, [field]: error }));
+        return error;
     };
+
 
     // Xử lý đăng ký
     const handleSubmit = async () => {
-        // Kiểm tra có lỗi hay không
-        if (Object.values(errors).some((err) => err)) {
+        setErrors({}) // khi submit luôn là mảng rỗng
+
+        const newErrors = {}; // ạo mảng lưu
+
+        // Lặp qua tất cả các trường để kiểm tra lỗi
+        Object.keys(formData).forEach((field) => {// các field trong FormData
+            if (field !== "image") { //bỏ qua trường image
+                const error = validateField(field, formData[field]); // Gọi validate
+                if (error) {
+                    newErrors[field] = error;
+                }
+            }
+        });
+
+        setErrors(newErrors); // cập nhật lại State sau khi lặp
+
+        // Nếu có lỗi, không cho đăng ký
+        if (Object.keys(newErrors).length > 0) {
             message.error("Vui lòng kiểm tra lại thông tin!");
+            console.error("Lỗi xảy ra: ", errors)
             return;
         }
+
+        //  Kiểm tra lại fullname, đảm bảo luôn có giá trị
+        if (!formData.fullname.trim()) {
+            updateField("fullname", `${formData.lastname} ${formData.firstname}`.trim());
+        }
+
+        console.log("Dữ liệu gửi đi:", formData); // Debug kiểm tra
 
         try {
             const checkRes = await fetch("http://localhost:5000/users");
@@ -123,7 +158,7 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center box-shadow signup-bg">
+        <div className="min-h-screen flex justify-center items-center box-shadow signup-bg overflow-y-auto">
             <div className="max-w-md w-full bg-white p-6 rounded-md shadow-md">
                 <h2 className="text-xl font-semibold mb-4 text-center">Đăng Ký</h2>
                 <div className="mb-3">
@@ -154,15 +189,14 @@ const RegisterPage = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label>Giới tính</label>
-                    <Select
-                        className="w-full"
+                    <label className="mr-2">Giới tính</label>
+                    <Radio.Group
                         value={formData.sex}
-                        onChange={(value) => updateField("sex", value)}
+                        onChange={(e) => updateField("sex", e.target.value)}
                     >
-                        <Option value="Male">Nam</Option>
-                        <Option value="Female">Nữ</Option>
-                    </Select>
+                        <Radio value={true}>Nam</Radio>
+                        <Radio value={false}>Nữ</Radio>
+                    </Radio.Group>
                 </div>
 
                 <div className="mb-3">
@@ -181,7 +215,10 @@ const RegisterPage = () => {
                     <Input
                         value={formData.email}
                         onChange={(e) => updateField("email", e.target.value)}
+                        onBlur={(e) => validateField("email", e.target.value)}
+                        status={errors.email ? "error" : ""}
                     />
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </div>
 
                 <div className="mb-3">
