@@ -17,6 +17,7 @@ const RegisterPage = () => {
         email: "",
         password: "",
         confirmPassword: "",
+        image: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -76,6 +77,25 @@ const RegisterPage = () => {
         }
 
         try {
+            const checkRes = await fetch("http://localhost:5000/users");
+            const users = await checkRes.json();
+
+            //kiểm tra Email
+            const isEmailExist = users.some((user) => user.email === formData.email);
+
+            //kiểm tra số điện thoại
+            const isPhoneExist = users.some((user) => user.phone === formData.phone);
+
+            if (isEmailExist) {
+                message.error("Email đã tồn tại!");
+                return;
+            }
+
+            if (isPhoneExist) {
+                message.error("Số điện thoại đã tồn tại!");
+                return;
+            }
+
             const res = await fetch("http://localhost:5000/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -87,6 +107,7 @@ const RegisterPage = () => {
                     phone: formData.phone,
                     email: formData.email,
                     password: formData.password,
+                    image: formData.image
                 }),
             });
 
@@ -102,18 +123,9 @@ const RegisterPage = () => {
     };
 
     return (
-        <div
-            className="min-h-screen flex justify-center items-center box-shadow"
-            style={{
-                background: `linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%),
-        linear-gradient(264.03deg, rgb(220, 229, 251) -10.27%,
-        rgb(234, 236, 255) 35.65%,
-        rgb(213, 236, 253) 110.66%)`,
-            }}
-        >
+        <div className="min-h-screen flex justify-center items-center box-shadow signup-bg">
             <div className="max-w-md w-full bg-white p-6 rounded-md shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Đăng Ký</h2>
-
+                <h2 className="text-xl font-semibold mb-4 text-center">Đăng Ký</h2>
                 <div className="mb-3">
                     <label>Họ và tên lót</label>
                     <Input
@@ -202,6 +214,10 @@ const RegisterPage = () => {
                         buttonWidth="100%"
                     />
                 </div>
+                {/* Chuyển qua đăng nhập */}
+                <p className="text-center mt-3 text-sm">
+                    Chưa có tài khoản? <span className="text-blue-500 cursor-pointer" onClick={() => navigate("/login")}>Đăng nhập ngay</span>
+                </p>
             </div>
         </div>
     );

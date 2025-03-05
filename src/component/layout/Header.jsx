@@ -70,7 +70,7 @@ const Header = () => {
                                 <div className="dropdown-menu">
                                     {/* User Info */}
                                     <div className="flex items-center gap-3 border-b pb-3">
-                                        <img src={user.image} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
+                                        <img src={user.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
                                         <div>
                                             <Tooltip title={user.firstname}>
                                                 <h2 className="text-lg font-semibold inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">

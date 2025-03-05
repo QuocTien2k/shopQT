@@ -71,7 +71,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 login-bg">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[350px]">
                 <h2 className="text-2xl font-semibold text-center mb-4">Đăng nhập</h2>
                 <form onSubmit={handleSubmit}>

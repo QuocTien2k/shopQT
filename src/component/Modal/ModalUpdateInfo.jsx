@@ -5,6 +5,8 @@ import { DataContext } from "../Context/DataContext";
 
 const ModalUpdateInfo = ({ open, onClose }) => {
     const { setUser } = useContext(DataContext)
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState(null);
     const user = JSON.parse(localStorage.getItem("user")) || {}; //lấy thông tin từ localStorage
     const initialData = {
         firstname: user.firstname || "",
@@ -13,7 +15,8 @@ const ModalUpdateInfo = ({ open, onClose }) => {
         phone: user.phone || "",
         email: user.email || "",
         password: user.password || "",
-        confirmPassword: ""
+        confirmPassword: "",
+        image: user.image || "",
     };
 
     const [formData, setFormData] = useState(initialData);
@@ -34,7 +37,6 @@ const ModalUpdateInfo = ({ open, onClose }) => {
 
         validateField(field, value);
     };
-
 
     // Hàm validate từng trường
     const validateField = (field, value) => {
@@ -71,6 +73,60 @@ const ModalUpdateInfo = ({ open, onClose }) => {
         setErrors((prev) => ({ ...prev, [field]: error }));
     };
 
+    // Hàm kiểm tra file hợp lệ
+    const validateFile = (file) => {
+        if (!file) {
+            return "";
+        }
+
+        const validTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg", "image/webp"];
+        if (!validTypes) {
+            return "Chỉ chấp nhận file jpeg, jpg, png, gif, webp";
+        }
+
+        if (file.size > 2 * 1024 * 1024) { // Giới hạn 2MB
+            return "Ảnh không được vượt quá 2MB";
+        }
+        return "";
+    };
+
+    //Hàm chọn file
+    const onSelectFile = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const errorMsg = validateFile(file);
+        if (errorMsg) {
+            setErrors((prev) => ({ ...prev, image: errorMsg })); // Lưu lỗi vào state chung
+            return;
+        }
+
+        // Nếu hợp lệ, xóa lỗi và lưu ảnh mới
+        setErrors((prev) => {
+            const newErrors = { ...prev };
+            delete newErrors.image;
+
+            return newErrors;
+        });
+
+        setSelectedFile(file) // lưu file vào state
+
+        // Hiển thị ảnh trước khi lưu (blob URL)
+        const previewURL = URL.createObjectURL(file);
+        setPreview(previewURL);
+    }
+    //console.log(preview)
+
+    // Hàm chuyển file thành base64
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
     const handleSave = async () => {
         try {
             const updatedData = { ...formData };
@@ -81,11 +137,39 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                 return;
             }
 
+            // Kiểm tra lỗi trước khi gửi
+            if (Object.values(errors).some(err => err)) {
+                message.error("Vui lòng kiểm tra lại thông tin!");
+                return;
+            }
+
             // Lấy ID user hiện tại từ localStorage
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user || !user.id) {
                 message.error("Không tìm thấy thông tin người dùng!");
                 return;
+            }
+
+            //kiểm tra email + sđt
+            const checkRes = await fetch('http://localhost:5000/users');
+            const users = await checkRes.json();
+
+            const isEmailExist = users.some((u) => u.email === formData.email && u.id !== user.id);
+            const isPhoneExist = users.some((u) => u.phone === formData.phone && u.id !== user.id);
+
+            if (isEmailExist) {
+                message.error("Email đã tồn tại");
+                return;
+            }
+            if (isPhoneExist) {
+                message.error("Số điện thoại đã tồn tại");
+                return;
+            }
+
+            // Nếu có ảnh mới, chuyển thành base64 trước khi lưu
+            if (selectedFile) {
+                const base64 = await convertToBase64(selectedFile);
+                updatedData.image = base64;
             }
 
             // Gửi request cập nhật thông tin
@@ -96,11 +180,13 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             });
 
             if (!res.ok) throw new Error("Cập nhật thất bại!");
+
             // Cập nhật lại localStorage với thông tin mới
             localStorage.setItem("user", JSON.stringify(updatedData));
 
             message.success("Cập nhật thành công!");
             setUser(updatedData); //Cập nhật lại state user
+            setSelectedFile(null); // Reset ảnh sau khi lưu
 
             console.log("Dữ liệu cập nhật:", updatedData);
             onClose();
@@ -110,6 +196,7 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             message.error("Có lỗi xảy ra khi cập nhật!");
         }
     };
+
 
     const handleCancel = () => {
         setFormData(initialData);
@@ -162,6 +249,61 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                     <Form.Item label="Nhập lại mật khẩu">
                         <Input.Password name="confirmPassword" value={formData.confirmPassword} onChange={(e) => updateField("confirmPassword", e.target.value)} onBlur={(e) => validateField("confirmPassword", e.target.value)} />
                     </Form.Item>
+
+                    {/* Ảnh đại diện */}
+                    <Form.Item label="Ảnh đại diện" help={errors.image} validateStatus={errors.image ? "error" : ""}>
+                        <div className={`flex items-center ${preview ? "justify-between" : "justify-start"} gap-6`}>
+                            {/* Ảnh cũ */}
+                            <div className="flex flex-col items-center">
+                                <img
+                                    src={formData.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"}
+                                    alt="Old Avatar"
+                                    className="w-24 h-24 rounded-full object-cover border"
+                                />
+                            </div>
+
+                            {preview && (
+                                <div className="flex items-center">
+                                    <img
+                                        src="https://img.icons8.com/?size=100&id=fFqmaazlzntF&format=png&color=000000"
+                                        alt="arrow-right"
+                                        className="w-10 h-10 object-contain opacity-70"
+                                    />
+                                </div>
+                            )}
+
+                            {/* Ảnh mới (nếu có) */}
+                            {preview && (
+                                <div className="flex flex-col items-center">
+                                    <img
+                                        src={preview}
+                                        alt="New Avatar"
+                                        className="w-24 h-24 rounded-full object-cover border"
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                        {/*Nút avatar */}
+                        <div className="flex items-center justify-start mt-3">
+                            <label
+                                htmlFor="upload-avatar"
+                                className="mt-2 px-3 py-1 bg-orange-200 text-gray-700 text-sm rounded cursor-pointer hover:bg-orange-300"
+                            >
+                                Tải ảnh đại diện
+                            </label>
+                            <input
+                                id="upload-avatar"
+                                type="file"
+                                accept="image/*"
+                                hidden
+                                onChange={(e) => onSelectFile(e)}
+                            />
+                        </div>
+                    </Form.Item>
+
+                    {/* Đường kẻ ngăn cách */}
+                    <div className="border-t my-4"></div>
 
                     {/* Nút hành động */}
                     <div className="flex justify-end gap-2">
