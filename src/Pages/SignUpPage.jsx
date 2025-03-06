@@ -22,31 +22,33 @@ const RegisterPage = () => {
 
     // Cập nhật field nhưng không gây re-render toàn bộ form
     const updateField = useCallback((field, value) => {
+
         setFormData((prev) => {
-            const updatedData = { ...prev, [field]: value };
+            const updateData = { ...prev, [field]: value }; // updateData = field: value of formData
             if (field === "firstname" || field === "lastname") {
-                updatedData.fullname = `${updatedData.lastname} ${updatedData.firstname}`.trim();
+                updateData.fullname = `${updateData.firstname} ${updateData.lastname}`.trim();
             }
-            return updatedData;
-        });
+            return updateData;
+        })
+
+        setErrors((prev) => ({ ...prev, [field]: "" })) // khi đang update thì xóa bỏ lỗi cũ
     }, []);
 
     // Hàm validate từng trường
     const validateField = (field, value) => {
         let error = "";
-
         if (!value) {
-            error = "Vui lòng nhập!";
+            error = "Vui lòng nhập"
         } else {
             switch (field) {
-                case "firstname":
+                case "lastname":
                     if (!value.match(/^[A-Za-zÀ-ỹ]{2,}$/)) {
-                        error = "Tên phải có ít nhất 2 ký tự và không chứa số";
+                        error = "Tên phải có 2 ký tự và không có số";
                     }
                     break;
-                case "lastname":
+                case "firstname":
                     if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
-                        error = "Họ phải có từ 4-25 ký tự và không chứa số";
+                        error = "Họ và tên lót phải có từ 4-25 ký tự và không chứa số"
                     }
                     break;
                 case "phone":
@@ -61,7 +63,7 @@ const RegisterPage = () => {
                     break;
                 case "password":
                     if (value.length < 6) {
-                        error = "Mật khẩu phải có ít nhất 6 ký tự";
+                        error = "Mật khẩu ít nhất 6 ký tự";
                     }
                     break;
                 case "confirmPassword":
@@ -69,47 +71,46 @@ const RegisterPage = () => {
                         error = "Mật khẩu nhập lại không khớp";
                     }
                     break;
-                default:
-                    break;
+                default: break;
             }
         }
 
         setErrors((prev) => ({ ...prev, [field]: error }));
         return error;
-    };
+    }
 
 
     // Xử lý đăng ký
     const handleSubmit = async () => {
-        setErrors({}) // khi submit luôn là mảng rỗng
+        setErrors({}) // reset mảng 
 
-        const newErrors = {}; // ạo mảng lưu
+        const newErrors = {}; // tạo mảng lưu lỗi khi xảy ra
 
-        // Lặp qua tất cả các trường để kiểm tra lỗi
-        Object.keys(formData).forEach((field) => {// các field trong FormData
-            if (field !== "image") { //bỏ qua trường image
-                const error = validateField(field, formData[field]); // Gọi validate
+        //check lỗi ở các input
+        Object.keys(formData).forEach((field) => {
+            if (field !== "image") { // bỏ qua trường image
+                const error = validateField(field, formData[field]); // gọi hàm check các field từ formData[filed]
                 if (error) {
                     newErrors[field] = error;
                 }
             }
-        });
+        })
+        setErrors(newErrors); // cập nhật state sau khi kiem tra
 
-        setErrors(newErrors); // cập nhật lại State sau khi lặp
-
-        // Nếu có lỗi, không cho đăng ký
+        //Nếu vẫn còn lỗi thông báo và return
         if (Object.keys(newErrors).length > 0) {
             message.error("Vui lòng kiểm tra lại thông tin!");
-            console.error("Lỗi xảy ra: ", errors)
+            console.error("Lỗi: ", errors);
+
             return;
         }
 
-        //  Kiểm tra lại fullname, đảm bảo luôn có giá trị
+        // kiểm tra fullname 
         if (!formData.fullname.trim()) {
             updateField("fullname", `${formData.lastname} ${formData.firstname}`.trim());
         }
 
-        console.log("Dữ liệu gửi đi:", formData); // Debug kiểm tra
+        console.log("Dữ liệu gửi đi:", formData);
 
         try {
             const checkRes = await fetch("http://localhost:5000/users");
@@ -117,15 +118,13 @@ const RegisterPage = () => {
 
             //kiểm tra Email
             const isEmailExist = users.some((user) => user.email === formData.email);
-
-            //kiểm tra số điện thoại
-            const isPhoneExist = users.some((user) => user.phone === formData.phone);
-
             if (isEmailExist) {
                 message.error("Email đã tồn tại!");
                 return;
             }
 
+            //kiểm tra số điện thoại
+            const isPhoneExist = users.some((user) => user.phone === formData.phone);
             if (isPhoneExist) {
                 message.error("Số điện thoại đã tồn tại!");
                 return;
@@ -148,47 +147,59 @@ const RegisterPage = () => {
 
             if (!res.ok) throw new Error("Đăng ký thất bại!");
 
-            message.success("Đăng ký thành công!");
+            message.success("Đăng ký thành công");
             setTimeout(() => {
                 navigate("/login")
-            }, 1500)
+            }, 1000)
+
         } catch (error) {
             message.error(error.message);
         }
-    };
+    }
 
     return (
-        <div className="min-h-screen flex justify-center items-center box-shadow signup-bg overflow-y-auto">
+        <div className="min-h-screen flex justify-center items-center box-shadow signup-bg">
             <div className="max-w-md w-full bg-white p-6 rounded-md shadow-md">
                 <h2 className="text-xl font-semibold mb-4 text-center">Đăng Ký</h2>
-                <div className="mb-3">
+
+                {/* Họ và tên lót */}
+                <div className="mb-2">
                     <label>Họ và tên lót</label>
                     <Input
-                        value={formData.lastname}
-                        onChange={(e) => updateField("lastname", e.target.value)}
-                        onBlur={(e) => validateField("lastname", e.target.value)}
-                        status={errors.lastname ? "error" : ""}
-                    />
-                    {errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
-                </div>
-
-                <div className="mb-3">
-                    <label>Tên</label>
-                    <Input
                         value={formData.firstname}
-                        onChange={(e) => updateField("firstname", e.target.value)}
                         onBlur={(e) => validateField("firstname", e.target.value)}
+                        onChange={(e) => updateField("firstname", e.target.value)}
                         status={errors.firstname ? "error" : ""}
                     />
-                    {errors.firstname && <p className="text-red-500 text-sm">{errors.firstname}</p>}
+                    <div className="h-5">
+                        {errors.firstname && <p className="text-red-500 text-sm">{errors.firstname}</p>}
+                    </div>
                 </div>
 
-                <div className="mb-3">
+                {/* Tên */}
+                <div className="mb-2">
+                    <label>Tên</label>
+                    <Input
+                        value={formData.lastname}
+                        onBlur={(e) => validateField("lastname", e.target.value)}
+                        onChange={(e) => updateField("lastname", e.target.value)}
+                        status={errors.lastname ? "error" : ""}
+
+                    />
+                    <div className="h-5">
+                        {errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
+                    </div>
+
+                </div>
+
+                {/* Họ và tên */}
+                <div className="mb-2">
                     <label>Họ và Tên</label>
                     <Input value={formData.fullname} disabled />
                 </div>
 
-                <div className="mb-3">
+                {/* Giới tính */}
+                <div className="mb-2">
                     <label className="mr-2">Giới tính</label>
                     <Radio.Group
                         value={formData.sex}
@@ -199,56 +210,71 @@ const RegisterPage = () => {
                     </Radio.Group>
                 </div>
 
-                <div className="mb-3">
-                    <label>Số điện thoại</label>
-                    <Input
-                        value={formData.phone}
-                        onChange={(e) => updateField("phone", e.target.value)}
-                        onBlur={(e) => validateField("phone", e.target.value)}
-                        status={errors.phone ? "error" : ""}
-                    />
-                    {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                    {/* Số điện thoại */}
+                    <div>
+                        <label>Số điện thoại</label>
+                        <Input
+                            value={formData.phone}
+                            onBlur={(e) => validateField("phone", e.target.value)}
+                            onChange={(e) => updateField("phone", e.target.value)}
+                            status={errors.phone ? "error" : ""}
+                        />
+                        <div className="h-5">
+                            {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+                        </div>
+                    </div>
+                    {/* Email */}
+                    <div>
+                        <label>Email</label>
+                        <Input
+                            value={formData.email}
+                            onBlur={(e) => validateField("email", e.target.value)}
+                            onChange={(e) => updateField("email", e.target.value)}
+                            status={errors.email ? "error" : ""}
+                        />
+                        <div className="h-5">
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div className="mb-3">
-                    <label>Email</label>
-                    <Input
-                        value={formData.email}
-                        onChange={(e) => updateField("email", e.target.value)}
-                        onBlur={(e) => validateField("email", e.target.value)}
-                        status={errors.email ? "error" : ""}
-                    />
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                    {/* mật khẩu */}
+                    <div className="">
+                        <label>Mật khẩu</label>
+                        <Input.Password
+                            value={formData.password}
+                            onBlur={(e) => validateField("password", e.target.value)}
+                            onChange={(e) => updateField("password", e.target.value)}
+                            status={errors.password ? "error" : ""}
+                        />
+                        <div className="h-5">
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                        </div>
+                    </div>
+
+                    <div className="">
+                        <label>Nhập lại mật khẩu</label>
+                        <Input.Password
+                            value={formData.confirmPassword}
+                            onBlur={(e) => validateField("confirmPassword", e.target.value)}
+                            onChange={(e) => updateField("confirmPassword", e.target.value)}
+                            status={errors.confirmPassword ? "error" : ""}
+                        />
+                        <div className="h-5">
+                            {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="mb-3">
-                    <label>Mật khẩu</label>
-                    <Input.Password
-                        value={formData.password}
-                        onChange={(e) => updateField("password", e.target.value)}
-                        onBlur={(e) => validateField("password", e.target.value)}
-                        status={errors.password ? "error" : ""}
-                    />
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-                </div>
-
-                <div className="mb-3">
-                    <label>Nhập lại mật khẩu</label>
-                    <Input.Password
-                        value={formData.confirmPassword}
-                        onChange={(e) => updateField("confirmPassword", e.target.value)}
-                        onBlur={(e) => validateField("confirmPassword", e.target.value)}
-                        status={errors.confirmPassword ? "error" : ""}
-                    />
-                    {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
-                </div>
-
+                {/* Nút submit */}
                 <div className="flex justify-center">
                     <Button
-                        label="Đăng ký"
                         onClick={handleSubmit}
                         variant="primary"
-                        buttonWidth="100%"
+                        label="Đăng ký"
                     />
                 </div>
                 {/* Chuyển qua đăng nhập */}

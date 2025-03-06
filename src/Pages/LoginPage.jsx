@@ -84,7 +84,9 @@ const LoginPage = () => {
                         onBlur={handleBlur}
                         className={`mt-1 ${errors.identifier && "border-red-500"}`}
                     />
-                    {errors.identifier && <p className="text-red-500 text-sm">{errors.identifier}</p>}
+                    <div className="h-3">
+                        {errors.identifier && <p className="text-red-500 text-sm">{errors.identifier}</p>}
+                    </div>
 
                     {/* Mật khẩu */}
                     <label className="block font-medium mt-3">Mật khẩu:</label>
@@ -95,7 +97,9 @@ const LoginPage = () => {
                         onBlur={handleBlur}
                         className={`mt-1 ${errors.password && "border-red-500"}`}
                     />
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                    <div className="h-3">
+                        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                    </div>
 
                     {/* Button Đăng nhập */}
                     <div className="flex items-center justify-center mt-3">
