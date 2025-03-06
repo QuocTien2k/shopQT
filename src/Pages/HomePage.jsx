@@ -1,11 +1,12 @@
 import React from 'react'
-import Header from '../component/layout/Header'
+import Banner from '../component/Banner/Banner';
+import FeaturedProducts from '../component/FeaturedProducts/FeaturedProducts';
 
 const HomePage = () => {
     return (
         <div>
-            <h1>Trang chủ</h1>
-            {/* Các nội dung khác của HomePage */}
+            <Banner />
+            {/* <FeaturedProducts /> */}
         </div>
     );
 };
