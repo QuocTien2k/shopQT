@@ -1,47 +1,37 @@
-import { useEffect, useState } from "react";
-import { Carousel, Card, Rate, Spin } from "antd";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import Card from "../Card/Card";
 
-const FeaturedProducts = () => {
+
+const FeaturedProduct = () => {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const { data } = await axios.get("http://localhost:5000/products");
-                const filtered = data.filter((p) => p.rating >= 4.0); // Lọc sản phẩm rating >= 4.0
-                setProducts(filtered);
-            } catch (error) {
-                console.error("Lỗi khi lấy sản phẩm:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
+        axios.get("http://localhost:5000/products")
+            .then((res) => setProducts(res.data))
+            .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, []);
 
-    if (loading) return <Spin size="large" className="flex justify-center mt-10" />;
-
     return (
-        <div className="max-w-4xl mx-auto mt-10">
-            <h2 className="text-2xl font-semibold mb-4">🔥 Sản phẩm nổi bật</h2>
-            <Carousel autoplay autoplaySpeed={3000} dots>
-                {products.map((product) => (
-                    <div key={product.id} className="p-4">
-                        <Card
-                            hoverable
-                            cover={<img alt={product.name} src={product.image} className="h-60 object-cover" />}
-                        >
-                            <h3 className="text-lg font-semibold">{product.name}</h3>
-                            <p className="text-gray-600">{product.price.toLocaleString()}đ</p>
-                            <Rate allowHalf disabled defaultValue={product.rating} />
-                        </Card>
-                    </div>
+        <div className="container mt-4 mx-auto">
+            <h2>Sản phẩm nổi bật</h2>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-3 mt-6">
+                {products.slice(0, 9).map((product) => (
+                    <Card
+                        key={product.id}
+                        name={product.name}
+                        image={product.image}
+                        price={product.price}
+                        discount={product.discount}
+                        rating={product.rating}
+                        quantity={product.quantity}
+                        onBuy={() => console.log("Mua", product.name)}
+                        onDetail={() => console.log("Chi tiết", product.name)}
+                    />
                 ))}
-            </Carousel>
+            </div>
         </div>
     );
 };
 
-export default FeaturedProducts;
+export default FeaturedProduct;
