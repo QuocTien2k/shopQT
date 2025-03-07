@@ -1,8 +1,8 @@
-import { HomeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { CloseOutlined, HomeOutlined, MenuOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link, Navigate } from "react-router-dom";
 import Search from "../Search";
 import Button from "../Button";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalUpdateInfo from "../Modal/ModalUpdateInfo";
 import { DataContext } from "../Context/DataContext";
 import { Tooltip } from "antd";
@@ -10,7 +10,12 @@ import { Tooltip } from "antd";
 const Header = () => {
 
     const { isModalOpen, handleOpenModal, handleCloseModal, isAuthenticated, setIsAuthenticated, user, setUser } = useContext(DataContext);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    const toggleMenu = (event) => {
+        event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+        setIsMobileMenuOpen((prev) => !prev);
+    };
     const handleLogout = () => {
         localStorage.removeItem("user");
         setIsAuthenticated(false);
@@ -18,6 +23,7 @@ const Header = () => {
         Navigate("/");
     };
 
+    //handle save
     useEffect(() => {
         const savedUser = localStorage.getItem("user");
 
@@ -27,30 +33,54 @@ const Header = () => {
         }
     }, []);
 
+    //handle menu navbar
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (!event.target.closest(".mobile-menu") && !event.target.closest(".menu-button")) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        const handleScroll = () => {
+            setIsMobileMenuOpen(false);
+        };
+
+        document.addEventListener("click", handleOutsideClick);
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            document.removeEventListener("click", handleOutsideClick);
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [isMobileMenuOpen]);
+
+
+
     return (
-        <header className="h-[88px] flex gap-[50px] justify-between items-center header-bg shadow-md px-7 py-3 ml-auto mr-auto">
+        <header className="h-[70px] md:h-[88px] flex items-center justify-between px-3 gap-1 md:px-7 shadow-md header-bg">
             {/* Logo */}
-            <div className="w-32 font-extrabold text-4xl tracking-wide ">
+            <div className="w-26 md:w-32 font-extrabold text-3xl md:text-4xl tracking-wide">
                 <Link to="/" className="text-gray-900 border-none outline-none">
                     <span className="font-[Italiana] italic font-light">Shop</span>
                     <span className="font-[Italiana] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QT</span>
                 </Link>
             </div>
 
-            <div className="w-full flex items-center gap-5 p-2 flex-1 justify-around text-[16px]">
+            {/* Header Content on PC */}
+            <div className="hidden md:flex items-center gap-3 md:gap-5 w-full justify-around">
                 {/* Search Bar */}
-                <div className="max-w-[880px] flex-1 h-[40px]">
+                <div className="max-w-full md:max-w-[880px] flex-1 h-[40px]">
                     <Search />
                 </div>
 
                 {/* Navbar */}
-                <nav className="flex items-center space-x-6">
+                <nav className="flex items-center space-x-4 lg:space-x-6">
                     <Link to="/" className="flex items-center gap-1 text-gray-700 font-medium">
                         <HomeOutlined /> Trang chủ
                     </Link>
 
                     {isAuthenticated ? (
-                        <div className="flex items-center space-x-6">
+                        <div className="flex items-center space-x-4 lg:space-x-6">
                             {/* Giỏ hàng */}
                             <Link to="/cart" className="relative">
                                 <ShoppingCartOutlined className="text-2xl text-gray-700" />
@@ -58,27 +88,27 @@ const Header = () => {
                                     1
                                 </span>
                             </Link>
-                            <div className="group relative">
-                                {/* user name*/}
+
+                            {/* User Dropdown */}
+                            <div className="group relative z-50">
                                 <Tooltip title={user.firstname}>
-                                    <span className="font-semibold cursor-pointer inline-block max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                    <span className="bridge font-semibold cursor-pointer inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
                                         Xin chào, {user.firstname}
                                     </span>
                                 </Tooltip>
 
-                                {/* dropdown */}
+                                {/* Dropdown Menu */}
                                 <div className="dropdown-menu">
-                                    {/* User Info */}
                                     <div className="flex items-center gap-3 border-b pb-3">
-                                        <img src={user.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"} alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
+                                        <img src={user.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"}
+                                            alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
                                         <div>
-                                            <Tooltip title={user.firstname}>
+                                            <Tooltip title={user.fullname}>
                                                 <h2 className="text-lg font-semibold inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-                                                    {user.firstname}
+                                                    {user.fullname}
                                                 </h2>
                                             </Tooltip>
                                             <p className="text-sm text-gray-500">{user.phone}</p>
-
                                             <Tooltip title={user.email}>
                                                 <p className="text-sm text-gray-500 inline-block max-w-[120px] overflow-hidden text-ellipsis whitespace-nowrap">
                                                     {user.email}
@@ -97,7 +127,7 @@ const Header = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-3">
                             <Link to="/register">
                                 <Button label="Đăng ký" variant="primary" />
                             </Link>
@@ -106,11 +136,42 @@ const Header = () => {
                             </Link>
                         </div>
                     )}
-
                 </nav>
             </div>
 
-        </header >
+            {/* Search on mobile-tablet */}
+            <div className="w-full sm:w-[180px] md:w-[880px] flex-1 h-[32px] md:h-[40px] md:hidden">
+                <Search />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button className="block md:hidden text-2xl p-2 focus:outline-none menu-button" onClick={toggleMenu}>
+                {isMobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
+            </button>
+
+            {/* Mobile Menu */}
+            {console.log(isMobileMenuOpen)}
+            <div className={`z-30 absolute top-[4.6rem] right-2 w-[200px] bg-white shadow-lg rounded-lg p-3 transition-all duration-300 md:hidden
+            ${isMobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}>
+                <nav className="flex flex-col gap-4 text-lg font-medium text-[13px]">
+                    <Link to="/" className="text-gray-700" onClick={toggleMenu}>Trang chủ</Link>
+
+                    {!isAuthenticated ? (
+                        <>
+                            <Link to="/register" onClick={() => setIsMobileMenuOpen(false)}>Đăng ký</Link>
+                            <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>Đăng nhập</Link>
+                        </>
+                    ) : (
+                        <>
+                            <span className="text-gray-700">Xin chào, {user.firstname}</span>
+                            <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" customStyle={{ paddingTop: "4px", paddingBottom: "4px" }} />
+                            <Button onClick={handleLogout} label="Đăng xuất" variant="primary" customStyle={{ paddingTop: "4px", paddingBottom: "4px" }} />
+                        </>
+                    )}
+                </nav>
+            </div>
+
+        </header>
     );
 };
 

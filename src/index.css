@@ -131,4 +131,14 @@ h4 {
   .bg-slide {
     background: rgba(0, 96, 255, 0.05);
   }
+
+  .bridge::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 4px;
+    background: transparent;
+    width: 120px;
+    height: 20px;
+  }
 }

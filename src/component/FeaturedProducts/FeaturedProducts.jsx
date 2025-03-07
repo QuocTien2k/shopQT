@@ -4,6 +4,7 @@ import Card from "../Card/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Clock from "../Clock/Clock";
 //import { FaFire } from "react-icons/fa";
 
 const FeaturedProduct = () => {
@@ -32,12 +33,12 @@ const FeaturedProduct = () => {
 
     return (
         <div className="background-white container rounded-t pt-4">
-            <div className="mt-3 flex items-center gap-2">
+            <div className="mt-3 flex items-center justify-between">
                 <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1">
                     Sản phẩm nổi bật
-                    {/* <FaFire className="text-red-500 text-lg animate-pulse" /> */}
                     <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-6 h-6 animate-pulse" />
                 </h2>
+                <Clock />
             </div>
 
 
