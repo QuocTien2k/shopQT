@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { useEffect, useRef, useState } from "react";
 
-const Button = ({ label, onClick, disabled, variant = "primary" }) => {
+const Button = ({ label, onClick, disabled, variant = "primary", customStyle }) => {
     const [loading, setLoading] = useState(false);
     const labelRef = useRef(null);
     const [buttonWidth, setButtonWidth] = useState("auto");
@@ -32,7 +32,7 @@ const Button = ({ label, onClick, disabled, variant = "primary" }) => {
             onClick={handleClick}
             disabled={disabled || loading}
             className={`custom-btn ${variant} ${loading ? "loading" : ""}`}
-            style={{ width: buttonWidth }}
+            style={{ width: buttonWidth, ...customStyle }}
         >
             <span ref={labelRef} style={{ visibility: loading ? "hidden" : "visible" }}>
                 {label}

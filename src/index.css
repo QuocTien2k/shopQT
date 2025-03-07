@@ -13,6 +13,8 @@
 body {
   @apply font-sans text-sm bg-gray-100 text-gray-900;
   font-family: 'Be Vietnam Pro', sans-serif;
+  scroll-behavior: smooth;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E5ECF8 100%);
 }
 
 /* Button */
@@ -71,6 +73,10 @@ h4 {
 }
 
 @layer components {
+  .background-white {
+    background-color: rgb(255, 255, 255);
+  }
+
   .header-bg {
     background: linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%),
       linear-gradient(264.03deg, rgb(220, 229, 251) -10.27%,
@@ -118,4 +124,11 @@ h4 {
         rgb(213, 236, 253) 110.66%);
   }
 
+  .featured-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%), linear-gradient(264.03deg, rgb(220, 229, 251) -10.27%, rgb(234, 236, 255) 35.65%, rgb(213, 236, 253) 110.66%);
+  }
+
+  .bg-slide {
+    background: rgba(0, 96, 255, 0.05);
+  }
 }
