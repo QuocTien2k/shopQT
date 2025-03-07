@@ -9,7 +9,7 @@ const Card = ({ name, image, price, discount, rating, quantity, onBuy, onDetail 
     }).format(price);
 
     return (
-        <div className="w-[180px] h-[345px] box-shadow border rounded-lg p-3 bg-white flex flex-col gap-1 overflow-hidden">
+        <div className="w-full h-[345px] box-shadow border rounded-lg p-3 bg-white flex flex-col gap-1 overflow-hidden">
             {/* Hình ảnh */}
             <div className="w-full h-[130px] flex justify-center">
                 <img src={image} alt={name} className="w-full h-full object-cover rounded-md" />

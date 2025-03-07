@@ -11,7 +11,7 @@ const FeaturedProduct = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/products")
+        axios.get("http://192.168.100.11:5000/products")
             .then((res) => setProducts(res.data))
             .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, []);
@@ -24,25 +24,49 @@ const FeaturedProduct = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5, // Hiển thị 4 card mỗi slide
-        slidesToScroll: 5, // Cuộn 4 sản phẩm mỗi lần
+        slidesToShow: 6, // Hiển thị 4 card mỗi slide
+        slidesToScroll: 6, // Cuộn 4 sản phẩm mỗi lần
         autoplay: true,
         autoplaySpeed: 4000,
         arrows: false,
+        responsive: [
+            {
+                breakpoint: 1024, // Tablet
+                settings: {
+                    slidesToShow: 4, // Hiển thị 3 card
+                    slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 768, // Mobile lớn (iPhone Pro, Pixel, etc.)
+                settings: {
+                    slidesToShow: 2, // Hiển thị 2 card
+                    slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 480, // Mobile nhỏ
+                settings: {
+                    slidesToShow: 1, // Hiển thị 1 card
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "0px"
+                }
+            }
+        ]
     };
 
     return (
         <div className="background-white container rounded-t pt-4">
-            <div className="mt-3 flex items-center justify-between">
-                <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1">
+            <div className="mt-3 flex flex-col items-center md:flex-row md:items-center md:justify-between">
+                <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 sm:text-[14px]">
                     Sản phẩm nổi bật
-                    <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-6 h-6 animate-pulse" />
+                    <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-6 h-6 sm:w-4 sm:h-4 animate-pulse" />
                 </h2>
                 <Clock />
             </div>
 
-
-            <div className="w-full max-w-[1060px] mx-auto mt-4 bg-slide">
+            <div className="mx-auto bg-slide mt-4 overflow-hidden p-6">
                 <Slider {...settings}>
                     {featuredProducts.map((product) => (
                         <div key={product.id} className="p-2">
@@ -60,6 +84,7 @@ const FeaturedProduct = () => {
                     ))}
                 </Slider>
             </div>
+
         </div>
     );
 };

@@ -151,7 +151,7 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             }
 
             //kiểm tra email + sđt
-            const checkRes = await fetch('http://localhost:5000/users');
+            const checkRes = await fetch('http://192.168.100.11:5000/users');
             const users = await checkRes.json();
 
             const isEmailExist = users.some((u) => u.email === formData.email && u.id !== user.id);
