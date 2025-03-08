@@ -57,11 +57,11 @@ const FeaturedProduct = () => {
     };
 
     return (
-        <div className="background-white container rounded-t pt-4">
+        <div className="background-white container rounded-md pt-4">
             <div className="mt-3 flex flex-col items-center md:flex-row md:items-center md:justify-between">
-                <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 sm:text-[14px]">
+                <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 md:text-[24px]">
                     Sản phẩm nổi bật
-                    <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-6 h-6 sm:w-4 sm:h-4 animate-pulse" />
+                    <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-4 h-4 md:w-7 md:h-7 animate-pulse" />
                 </h2>
                 <Clock />
             </div>

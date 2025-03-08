@@ -14,7 +14,7 @@ body {
   @apply font-sans text-sm bg-gray-100 text-gray-900;
   font-family: 'Be Vietnam Pro', sans-serif;
   scroll-behavior: smooth;
-  background: linear-gradient(180deg, #FFFFFF 0%, #E5ECF8 100%);
+  background: black;
 }
 
 /* Button */
