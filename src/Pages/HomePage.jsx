@@ -7,16 +7,20 @@ import ListProducts from '../component/ListProducts';
 const HomePage = () => {
     const [filteredBrands, setFilteredBrands] = useState([]);
     //console.log("Đã nhận prop từ FilterProducts: ", filteredBrands);
+
+    const [filteredPrice, setFilteredPrice] = useState([]);
+    console.log("Đã nhận prop từ FilterProducts: ", filteredPrice);
+
     return (
         <>
             <Banner />
             <FeaturedProducts />
             <div className="grid grid-cols-12 gap-4 px-6 py-4 md:px-8 md:py-6">
-                <div className="col-span-3">
-                    <FilterProducts onFilterChange={setFilteredBrands} />
+                <div className="col-span-2">
+                    <FilterProducts onFilterChange={setFilteredBrands} onFilterPrice={setFilteredPrice} />
                 </div>
-                <div className="col-span-9">
-                    <ListProducts filteredBrands={filteredBrands} />
+                <div className="col-span-10">
+                    <ListProducts filteredBrands={filteredBrands} filterPrice={filteredPrice} />
                 </div>
             </div>
         </>
