@@ -1,21 +1,25 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import axios from "axios";
 import Card from "./Card/Card";
 import NotProduct from "./Filter/NotProduct";
+import { DataContext } from "./Context/DataContext";
+import { Pagination } from "antd";
 
 const ListProducts = ({ filteredBrands, filteredPrice }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
+    const { currentPage, setCurrentPage, itemsPerPage } = useContext(DataContext);
 
     useEffect(() => {
-        console.log("ListProducts nhận props:", { filteredBrands, filteredPrice });
+        //console.log("ListProducts nhận props:", { filteredBrands, filteredPrice });
     }, [filteredBrands, filteredPrice]);
 
     useEffect(() => {
         axios
             .get("http://localhost:5000/products")
             .then((response) => {
-                setProducts(response.data.slice(10, 20)); // Hiển thị 10 sản phẩm đầu tiên
+                setProducts(response.data);
+                //setProducts(response.data.slice(10, 20)); // Hiển thị 10 sản phẩm đầu tiên
             })
             .catch((error) => console.error("Lỗi khi fetch sản phẩm:", error))
             .finally(() => setLoading(false)); // Kết thúc loading
@@ -35,13 +39,18 @@ const ListProducts = ({ filteredBrands, filteredPrice }) => {
         });
     }, [products, filteredBrands, filteredPrice]);
 
+    //Xác định danh sách sản phẩm theo trang
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
     return (
         <div className="bg-gradient-to-r from-blue-100 via-white to-purple-100 p-4 rounded-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {loading ? (
                     <div className="col-span-full text-center">Đang tải sản phẩm...</div>
-                ) : filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
+                ) : currentProducts.length > 0 ? (
+                    currentProducts.map((product) => (
                         <div key={product.id} className="p-2">
                             <Card
                                 name={product.name}
@@ -60,6 +69,16 @@ const ListProducts = ({ filteredBrands, filteredPrice }) => {
                         <NotProduct />
                     </div>
                 )}
+
+                {/* Pagination */}
+                <div className="col-span-full mt-4 flex justify-center">
+                    <Pagination
+                        current={currentPage}
+                        pageSize={itemsPerPage}
+                        total={filteredProducts.length}
+                        onChange={(page) => setCurrentPage(page)}
+                    />
+                </div>
             </div>
         </div>
     );

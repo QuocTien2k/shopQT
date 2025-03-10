@@ -7,6 +7,10 @@ const ContextProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
 
+    // State cho Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10; // Số sản phẩm trên mỗi trang
+
     // Hàm đăng nhập
     const login = (userData) => {
         setIsAuthenticated(true);
@@ -30,7 +34,8 @@ const ContextProvider = ({ children }) => {
         <DataContext.Provider
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
-                handleCloseModal, isAuthenticated, login, logout, user, setUser
+                handleCloseModal, isAuthenticated, login, logout, user, setUser,
+                currentPage, setCurrentPage, itemsPerPage
             }}>
             {children}
         </DataContext.Provider>

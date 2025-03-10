@@ -24,10 +24,8 @@ const HomePage = () => {
                     <FilterProducts onFilterChange={setFilteredBrands} onFilterPrice={setFilteredPrice} />
                 </div>
                 <div className="col-span-10">
-                    {console.log("Truyền vào ListProducts:", { filteredBrands, filteredPrice })}
+                    {/* {console.log("Truyền vào ListProducts:", { filteredBrands, filteredPrice })} */}
                     <ListProducts filteredBrands={filteredBrands} filteredPrice={filteredPrice} />
-
-                    {/* <ListProducts filteredBrands={filteredBrands} filterPrice={filteredPrice} /> */}
                 </div>
             </div>
         </>
