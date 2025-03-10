@@ -40,7 +40,7 @@ const Card = ({ name, image, price, discount, rating, quantity, onBuy, onDetail 
             {/* Nút bấm */}
             <div className="mt-2 flex justify-center gap-2 text-[11px]">
                 <Button label="Mua ngay" variant="primary" onClick={onBuy} />
-                <Button label="Xem chi tiết" variant="normal" customStyle={{ background: "#28a745", color: "white" }} onClick={onDetail} />
+                <Button label="Chi tiết" variant="normal" customStyle={{ background: "#28a745", color: "white" }} onClick={onDetail} />
             </div>
 
             {/* Số lượng */}

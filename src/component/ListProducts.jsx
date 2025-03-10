@@ -5,14 +5,14 @@ import NotProduct from "./Filter/NotProduct";
 import { DataContext } from "./Context/DataContext";
 import { Pagination } from "antd";
 
-const ListProducts = ({ filteredBrands, filteredPrice }) => {
+const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
     const { currentPage, setCurrentPage, itemsPerPage } = useContext(DataContext);
 
     useEffect(() => {
-        //console.log("ListProducts nhận props:", { filteredBrands, filteredPrice });
-    }, [filteredBrands, filteredPrice]);
+        //console.log("ListProducts nhận props:", { filteredBrands, filteredPrice, filterCategory });
+    }, [filteredBrands, filteredPrice, filterCategory]);
 
     useEffect(() => {
         axios
@@ -26,18 +26,16 @@ const ListProducts = ({ filteredBrands, filteredPrice }) => {
     }, []);
 
 
-    //lọc sản phẩm theo thương hiệu
+    //lọc sản phẩm theo thương hiệu, giá, danh mục
     const filteredProducts = useMemo(() => {
-        return products.filter((product) => {
-            const matchesBrand = filteredBrands.length > 0 ? filteredBrands.includes(product.brand) : true;
-            const matchesPrice = filteredPrice?.min !== undefined
-                ? product.price >= filteredPrice.min && product.price <= filteredPrice.max
-                : true;
+        return products.filter((product) =>
+            //Nếu có giá trị thì lọc
+            (!filteredBrands.length || filteredBrands.includes(product.brand)) &&
+            (!filteredPrice?.min || (product.price >= filteredPrice.min && product.price <= filteredPrice.max)) &&
+            (!filterCategory.length || filterCategory.includes(product.category))
+        );
+    }, [products, filteredBrands, filteredPrice, filterCategory]);
 
-
-            return matchesBrand && matchesPrice;
-        });
-    }, [products, filteredBrands, filteredPrice]);
 
     //Xác định danh sách sản phẩm theo trang
     const indexOfLastProduct = currentPage * itemsPerPage;
