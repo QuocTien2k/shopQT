@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Banner from '../component/Banner/Banner';
 import FeaturedProducts from '../component/FeaturedProducts/FeaturedProducts';
 import FilterProducts from '../component/Filter/FilterProducts';
@@ -9,7 +9,11 @@ const HomePage = () => {
     //console.log("Đã nhận prop từ FilterProducts: ", filteredBrands);
 
     const [filteredPrice, setFilteredPrice] = useState([]);
-    console.log("Đã nhận prop từ FilterProducts: ", filteredPrice);
+    //console.log("Đã nhận prop từ FilterProducts: ", filteredPrice);
+
+    useEffect(() => {
+        //console.log("HomePage nhận filteredPrice:", filteredPrice);
+    }, [filteredPrice]);
 
     return (
         <>
@@ -20,7 +24,10 @@ const HomePage = () => {
                     <FilterProducts onFilterChange={setFilteredBrands} onFilterPrice={setFilteredPrice} />
                 </div>
                 <div className="col-span-10">
-                    <ListProducts filteredBrands={filteredBrands} filterPrice={filteredPrice} />
+                    {console.log("Truyền vào ListProducts:", { filteredBrands, filteredPrice })}
+                    <ListProducts filteredBrands={filteredBrands} filteredPrice={filteredPrice} />
+
+                    {/* <ListProducts filteredBrands={filteredBrands} filterPrice={filteredPrice} /> */}
                 </div>
             </div>
         </>

@@ -11,7 +11,7 @@ const FeaturedProduct = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://192.168.100.11:5000/products")
+        axios.get("http://192.168.100.15:5000/products")
             .then((res) => setProducts(res.data))
             .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, []);

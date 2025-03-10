@@ -11,7 +11,8 @@ const FilterPrice = ({ onPriceChange }) => {
     ];
 
     const handleChange = (min, max) => {
-        setSelectedPrice(`${min}-${max}`);
+        const value = `${min}-${max}`;
+        setSelectedPrice(value);
         onPriceChange({ min, max }); // Gửi dữ liệu lên FilterProducts
     };
 
@@ -19,18 +20,22 @@ const FilterPrice = ({ onPriceChange }) => {
         <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Giá</h3>
             <div className="flex flex-col space-y-2">
-                {priceRanges.map((range, index) => (
-                    <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                            type="radio"
-                            name="price"
-                            value={selectedPrice}
-                            onChange={() => handleChange(range.min, range.max)}
-                            className="accent-blue-500"
-                        />
-                        <span>{range.label}</span>
-                    </label>
-                ))}
+                {priceRanges.map((range, index) => {
+                    const value = `${range.min}-${range.max}`;
+                    return (
+                        <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                            <input
+                                type="radio"
+                                name="price"
+                                value={value}
+                                checked={selectedPrice === value} // So sánh để xác định radio nào đang được chọn
+                                onChange={() => handleChange(range.min, range.max)}
+                                className="accent-blue-500"
+                            />
+                            <span>{range.label}</span>
+                        </label>
+                    );
+                })}
             </div>
         </div>
     );

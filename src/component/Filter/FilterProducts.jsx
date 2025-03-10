@@ -11,7 +11,7 @@ const FilterProducts = ({ onFilterChange, onFilterPrice }) => {
     };
 
     const handlePriceChange = (priceRange) => {
-        console.log(priceRange);
+        //console.log(priceRange);
         onFilterPrice(priceRange); // Gửi lên ListProduct
     }
     return (
