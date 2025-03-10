@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Banner from '../component/Banner/Banner';
 import FeaturedProducts from '../component/FeaturedProducts/FeaturedProducts';
 import FilterProducts from '../component/Filter/FilterProducts';
+import FilterMobile from '../component/Filter/FilterMobile';
 import ListProducts from '../component/ListProducts';
+import { DataContext } from '../component/Context/DataContext';
 
 const HomePage = () => {
     const [filteredBrands, setFilteredBrands] = useState([]);
@@ -18,20 +20,35 @@ const HomePage = () => {
         //console.log("HomePage nhận filteredPrice:", filteredPrice);
     }, [filteredPrice]);
 
+    const { isMobile } = useContext(DataContext); // Lấy state từ DataContext
+
     return (
         <>
             <Banner />
             <FeaturedProducts />
             <div className="grid grid-cols-12 gap-4 px-6 py-4 md:px-8 md:py-6">
-                <div className="col-span-2">
-                    <FilterProducts
-                        onFilterChange={setFilteredBrands}
-                        onFilterPrice={setFilteredPrice}
-                        onCategoryChange={setFilteredCategory}
-                    />
-                </div>
-                <div className="col-span-10">
+                {/* Hiển thị bộ lọc trên màn hình lớn */}
+                {!isMobile && (
+                    <div className="col-span-2">
+                        <FilterProducts
+                            onFilterChange={setFilteredBrands}
+                            onFilterPrice={setFilteredPrice}
+                            onCategoryChange={setFilteredCategory}
+                        />
+                    </div>
+                )}
+                <div className="col-span-12 md:col-span-10">
                     {/*console.log("Truyền vào ListProducts:", { filteredBrands, filteredPrice, filteredCategory })*/}
+                    {/* FilterMobile chỉ xuất hiện trên màn hình nhỏ */}
+                    {isMobile && (
+                        <div className="mb-4">
+                            <FilterMobile
+                                onFilterChange={setFilteredBrands}
+                                onFilterPrice={setFilteredPrice}
+                                onCategoryChange={setFilteredCategory}
+                            />
+                        </div>
+                    )}
                     <ListProducts
                         filteredBrands={filteredBrands}
                         filteredPrice={filteredPrice}

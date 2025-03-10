@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 // Tạo context
 export const DataContext = createContext();
@@ -10,6 +10,17 @@ const ContextProvider = ({ children }) => {
     // State cho Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // Số sản phẩm trên mỗi trang
+
+    //State on Mobile
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 820); // Xác định màn hình nhỏ
+    // Theo dõi thay đổi kích thước màn hình
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     // Hàm đăng nhập
     const login = (userData) => {
@@ -35,7 +46,7 @@ const ContextProvider = ({ children }) => {
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
                 handleCloseModal, isAuthenticated, login, logout, user, setUser,
-                currentPage, setCurrentPage, itemsPerPage
+                currentPage, setCurrentPage, itemsPerPage, isMobile
             }}>
             {children}
         </DataContext.Provider>

@@ -24,8 +24,8 @@ const FeaturedProduct = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 6, // Hiển thị 4 card mỗi slide
-        slidesToScroll: 6, // Cuộn 4 sản phẩm mỗi lần
+        slidesToShow: 5, // Hiển thị 5 card mỗi slide
+        slidesToScroll: 5, // Cuộn 5 sản phẩm mỗi lần
         autoplay: true,
         autoplaySpeed: 4000,
         arrows: false,
@@ -35,6 +35,15 @@ const FeaturedProduct = () => {
                 settings: {
                     slidesToShow: 4, // Hiển thị 3 card
                     slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 820, // iPad Air (fix bóp layout)
+                settings: {
+                    slidesToShow: 3, // Hiển thị 3 card thay vì 5
+                    slidesToScroll: 3,
+                    centerMode: true,
+                    centerPadding: "20px",
                 }
             },
             {
