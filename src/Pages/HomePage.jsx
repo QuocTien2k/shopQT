@@ -26,6 +26,7 @@ const HomePage = () => {
         <>
             <Banner />
             <FeaturedProducts />
+            {/* Filter and ListProduct */}
             <div className="grid grid-cols-12 gap-4 px-6 py-4 md:px-8 md:py-6">
                 {/* Hiển thị bộ lọc trên màn hình lớn */}
                 {!isMobile && (

@@ -6,12 +6,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Clock from "../Clock/Clock";
 //import { FaFire } from "react-icons/fa";
+import Fire from "../../assets/fire.gif"
 
 const FeaturedProduct = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://192.168.100.15:5000/products")
+        axios.get("http://localhost:5000/products")
             .then((res) => setProducts(res.data))
             .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, []);
@@ -70,7 +71,7 @@ const FeaturedProduct = () => {
             <div className="mt-3 flex flex-col items-center md:flex-row md:items-center md:justify-between">
                 <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 md:text-[24px]">
                     Sản phẩm nổi bật
-                    <img src="https://media1.tenor.com/m/bH5qXUAuk4kAAAAd/fire.gif" alt="Fire" className="w-4 h-4 md:w-7 md:h-7 animate-pulse" />
+                    <img src={Fire} alt="Fire" className="w-4 h-4 md:w-7 md:h-7 animate-pulse" />
                 </h2>
                 <Clock />
             </div>

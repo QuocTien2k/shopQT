@@ -3,11 +3,11 @@ import HomePage from './Pages/HomePage'
 import LoginPage from './Pages/LoginPage'
 import RegisterPage from './Pages/SignUpPage'
 import NotFoundPage from './Pages/NotFoundPage'
-import Button from "./component/Button";
 import Footer from './component/layout/Footer'
 import ShoppingCart from './Pages/ShoppingCart'
 import MainLayout from './Router/MainLayout'
 import ContextProvider from './component/Context/DataContext'
+import ProductDetail from './Pages/ProductDetail'
 function App() {
 
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/cart" element={<ShoppingCart />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
           </Route>
 
           {/* Layout KHÔNG có Header */}
@@ -25,7 +26,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/error" element={<NotFoundPage />} />
         </Routes>
-        {/* <ButtonJSX label="Click me" onClick={() => console.log("Click")} variant="default" disabled={true} /> */}
+
         {/* <Footer /> */}
       </ContextProvider>
     </>

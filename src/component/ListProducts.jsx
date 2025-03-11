@@ -4,8 +4,10 @@ import Card from "./Card/Card";
 import NotProduct from "./Filter/NotProduct";
 import { DataContext } from "./Context/DataContext";
 import { Pagination } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
     const { currentPage, setCurrentPage, itemsPerPage } = useContext(DataContext);
@@ -14,6 +16,7 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
         //console.log("ListProducts nhận props:", { filteredBrands, filteredPrice, filterCategory });
     }, [filteredBrands, filteredPrice, filterCategory]);
 
+    // call api
     useEffect(() => {
         axios
             .get("http://localhost:5000/products")
@@ -58,7 +61,7 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
                                 rating={product.rating}
                                 quantity={product.quantity}
                                 onBuy={() => console.log("Mua", product.name)}
-                                onDetail={() => console.log("Chi tiết", product.name)}
+                                onDetail={() => navigate(`/product/${product.id}`)} // chuyển hướng trang detail
                             />
                         </div>
                     ))
