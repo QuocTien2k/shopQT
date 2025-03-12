@@ -31,7 +31,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
         infinite: true,
         speed: 500,
         slidesToShow: 5, // Hiển thị 5 card mỗi slide
-        slidesToScroll: 1, // Cuộn 5 sản phẩm mỗi lần
+        slidesToScroll: 4, // Cuộn 4 sản phẩm mỗi lần
         autoplay: true,
         autoplaySpeed: 4000,
         arrows: false,
@@ -87,6 +87,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
                     {filteredProducts.map((product) => (
                         <div key={product.id} className="p-2">
                             <Card
+                                id={product.id}
                                 name={product.name}
                                 image={product.image}
                                 price={product.price}

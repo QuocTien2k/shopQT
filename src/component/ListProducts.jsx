@@ -4,10 +4,8 @@ import Card from "./Card/Card";
 import NotProduct from "./Filter/NotProduct";
 import { DataContext } from "./Context/DataContext";
 import { Pagination } from "antd";
-import { useNavigate } from "react-router-dom";
 
 const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
-    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
     const { currentPage, setCurrentPage, itemsPerPage } = useContext(DataContext);
@@ -54,6 +52,7 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
                     currentProducts.map((product) => (
                         <div key={product.id} className="p-2">
                             <Card
+                                id={product.id}
                                 name={product.name}
                                 image={product.image}
                                 price={product.price}
@@ -61,7 +60,6 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
                                 rating={product.rating}
                                 quantity={product.quantity}
                                 onBuy={() => console.log("Mua", product.name)}
-                                onDetail={() => navigate(`/product/${product.id}`)} // chuyển hướng trang detail
                             />
                         </div>
                     ))
