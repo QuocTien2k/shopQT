@@ -32,9 +32,13 @@ const Card = ({ name, image, price, discount, rating, quantity, onBuy, onDetail 
             </div>
 
             {/* Giá và discount */}
-            <div className="flex items-center justify-between text-xs sm:text-[8px]">
+            <div className="flex items-center justify-between text-[12px] md:text-[14px] sm:text-[8px]">
                 <p className="text-red-500 font-semibold">{formattedPrice}</p>
-                <span className="text-gray-500 text-xs"><strong>-</strong>{discount}% OFF</span>
+                {discount > 0 && (
+                    <span className="text-gray-500 text-xs">
+                        <strong>-</strong> {discount}% OFF
+                    </span>
+                )}
             </div>
 
             {/* Nút bấm */}

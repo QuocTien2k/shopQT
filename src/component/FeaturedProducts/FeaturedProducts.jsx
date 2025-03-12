@@ -8,7 +8,7 @@ import Clock from "../Clock/Clock";
 //import { FaFire } from "react-icons/fa";
 import Fire from "../../assets/fire.gif"
 
-const FeaturedProduct = () => {
+const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "", showClock = true }) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -17,8 +17,13 @@ const FeaturedProduct = () => {
             .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, []);
 
-    // Lọc sản phẩm có rating > 4.0 và lấy tối đa 16 sản phẩm
-    const featuredProducts = products.filter(p => p.rating > 4.0).slice(0, 15);
+    let filteredProducts = [];
+
+    if (filterType === "featured") {
+        filteredProducts = products.filter(p => p.rating > 4.0).slice(5, 19);
+    } else if (filterType === "sameBrand" && currentBrand) {
+        filteredProducts = products.filter(p => p.brand === currentBrand && p.rating > 3.0);
+    }
 
     // Cấu hình cho react-slick
     const settings = {
@@ -26,7 +31,7 @@ const FeaturedProduct = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 5, // Hiển thị 5 card mỗi slide
-        slidesToScroll: 5, // Cuộn 5 sản phẩm mỗi lần
+        slidesToScroll: 1, // Cuộn 5 sản phẩm mỗi lần
         autoplay: true,
         autoplaySpeed: 4000,
         arrows: false,
@@ -70,15 +75,16 @@ const FeaturedProduct = () => {
         <div className="background-white container rounded-md pt-4">
             <div className="mt-3 flex flex-col items-center md:flex-row md:items-center md:justify-between">
                 <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 md:text-[24px]">
-                    Sản phẩm nổi bật
+                    Sản phẩm {title}
                     <img src={Fire} alt="Fire" className="w-4 h-4 md:w-7 md:h-7 animate-pulse" />
                 </h2>
-                <Clock />
+                {/* Hiển thị clock */}
+                {showClock && (<Clock />)}
             </div>
 
             <div className="mx-auto bg-slide mt-4 overflow-hidden p-6">
                 <Slider {...settings}>
-                    {featuredProducts.map((product) => (
+                    {filteredProducts.map((product) => (
                         <div key={product.id} className="p-2">
                             <Card
                                 name={product.name}

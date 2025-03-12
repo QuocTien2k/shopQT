@@ -1,18 +1,23 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../component/Button";
+import { DataContext } from "../component/Context/DataContext";
+import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(""); // Màu được chọn
+    const [selectedImage, setSelectedImage] = useState([]);
+    const [selectedColor, setSelectedColor] = useState([]); // Mặc định chọn màu đầu tiên
+    const { getColorCode } = useContext(DataContext)
 
     useEffect(() => {
         axios.get(`http://localhost:5000/products/${id}`)
             .then((res) => {
                 setProduct(res.data);
-                setSelectedColor(res.data.color[0]); // Mặc định chọn màu đầu tiên
+                setSelectedColor(res.data.color[0]);
+                setSelectedImage(res.data.image);
             })
             .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
     }, [id]);
@@ -21,39 +26,81 @@ const ProductDetail = () => {
 
     return (
         <div className="p-6 bg-white">
-            <h1 className="text-xl font-bold">{product.name}</h1>
-            <img src={product.image} alt={product.name} className="w-[300px] h-[300px] object-cover" />
-            <p className="text-gray-500">{product.desc}</p>
-            <p className="text-red-500 text-lg font-semibold">
-                {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(product.price)}
-            </p>
+            <div className="md:grid md:grid-cols-12 md:gap-4 flex flex-col gap-6">
+                {/* Hình ảnh sản phẩm */}
+                <div className="md:col-span-4 flex flex-col items-center">
+                    {/* Ảnh chính */}
+                    <img
+                        src={selectedImage}
+                        alt={product.name}
+                        className="w-[350px] h-[350px] object-cover rounded-lg"
+                    />
 
-            {/* Chọn màu sắc */}
-            <div className="mt-4">
-                <p className="text-sm font-semibold">Màu sắc:</p>
-                <div className="flex gap-2 mt-2">
-                    {product.color.map((color, index) => (
-                        <button
-                            key={index}
-                            className={`px-3 py-1 border rounded-md text-sm ${selectedColor === color ? "bg-blue-500 text-white" : "bg-gray-200"
-                                }`}
-                            onClick={() => setSelectedColor(color)}
-                        >
-                            {color}
-                        </button>
-                    ))}
+                    {/* Thumbnail */}
+                    <div className="flex gap-2 mt-3">
+                        {[product.image, product.image_sp_01, product.image_sp_02, product.image_sp_03]
+                            .filter(img => img) // Loại bỏ ảnh bị thiếu
+                            .map((img, index) => (
+                                <img
+                                    key={index}
+                                    src={img}
+                                    alt={`Thumbnail ${index}`}
+                                    className={`w-16 h-16 object-cover cursor-pointer rounded-md border-2 transition
+                        ${selectedImage === img ? "border-blue-500 shadow-md" : "border-transparent"}`}
+                                    onClick={() => setSelectedImage(img)}
+                                />
+                            ))}
+                    </div>
+                </div>
+
+                {/* Đường kẻ */}
+                <div className="md:col-span-1 flex justify-center my-4 md:my-0">
+                    <div className="border border-gray-300 h-auto w-[1px] mx-2 hidden md:block"></div>
+                    <div className="border border-gray-300 w-full h-[1px] my-2 block md:hidden"></div>
+                </div>
+
+                {/* Thông tin sản phẩm */}
+                <div className="md:col-span-7">
+                    <h1 className="text-2xl font-bold">{product.name}</h1>
+                    <p className="text-gray-500 text-sm">⭐ {product.rating} / 5</p>
+                    <p className="text-red-500 text-lg font-semibold">
+                        {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(product.price)}
+                    </p>
+
+                    {/* Chọn màu sắc */}
+                    <div className="mt-4">
+                        <p className="text-sm font-semibold">Màu sắc:</p>
+                        <div className="flex gap-2 mt-2">
+                            {product.color.map((color, index) => (
+                                <button
+                                    key={index}
+                                    className={`w-6 h-6 rounded-full border-2 ${selectedColor === color ? "shadow-md shadow-gray-500" : ""}`}
+                                    style={{ backgroundColor: getColorCode(color) }}
+                                    onClick={() => setSelectedColor(color)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Nút bấm */}
+                    <div className="flex gap-4 mt-4">
+                        <Button label="Mua ngay" variant="primary" />
+                        <Button
+                            label="Thêm vào giỏ hàng"
+                            variant="normal"
+                            customStyle={{ background: "#28a745", color: "white" }}
+                            onClick={() => console.log(`Thêm vào giỏ hàng: ${product.name} - Màu: ${selectedColor}`)}
+                        />
+                    </div>
+                    {/* Mô tả sản phẩm */}
+                    <div className="mt-6">
+                        <h2 className="text-lg font-semibold">Mô tả sản phẩm</h2>
+                        <p className="text-gray-600 text-sm">{product.desc}</p>
+                    </div>
                 </div>
             </div>
-
-            {/* Nút bấm */}
-            <div className="flex gap-4 mt-4">
-                <Button label="Mua ngay" variant="primary" />
-                <Button
-                    label="Thêm vào giỏ hàng"
-                    variant="normal"
-                    customStyle={{ background: "#28a745", color: "white" }}
-                    onClick={() => console.log(`Thêm vào giỏ hàng: ${product.name} - Màu: ${selectedColor}`)}
-                />
+            <div className="mt-8">
+                <FeaturedProduct filterType="sameBrand" currentBrand={product.brand} title="tương tự" showClock={false} />
             </div>
         </div>
     );
