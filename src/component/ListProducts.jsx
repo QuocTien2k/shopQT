@@ -62,7 +62,6 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
                                 discount={product.discount}
                                 rating={product.rating}
                                 quantity={product.quantity}
-                                onBuy={() => console.log("Mua", product.name)}
                             />
                         </div>
                     ))

@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React, { createContext, useEffect, useState } from 'react'
 
 // Tạo context
@@ -21,6 +22,35 @@ const ContextProvider = ({ children }) => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    // State giỏ hàng
+    const [cart, setCart] = useState([]);
+    const addToCart = (product) => {
+        const user = JSON.parse(localStorage.getItem("user")); // Lấy thông tin user
+
+        if (!user) {
+            return message.warning("Bạn cần đăng nhập để mua hàng!");
+        }
+
+        setCart((prevCart) => {
+            console.log("📌 Giỏ hàng trước khi thêm:", prevCart);
+            const isExist = prevCart.find((item) => item.id === product.id); //check trùng lặp
+            if (isExist) {
+                message.info("Sản phẩm đã có trong giỏ hàng!");
+                return prevCart;
+            }
+
+            // Gán màu mặc định nếu sản phẩm chưa có màu
+            const defaultColor = "Black"; // hoặc lấy từ danh sách có sẵn
+            const productWithColor = { ...product, color: product.color || defaultColor };
+            console.log("✅ Sản phẩm thêm vào giỏ hàng:", productWithColor);
+
+            const newCart = [...prevCart, productWithColor];
+            console.log("🛒 Giỏ hàng sau khi thêm:", newCart);
+
+            return newCart;
+        });
+    };
 
     //màu sắc
     const getColorCode = (color) => {
@@ -49,19 +79,6 @@ const ContextProvider = ({ children }) => {
         return colorMap[color] || "#D3D3D3"; // Mặc định là màu xám nhạt nếu không có trong danh sách
     };
 
-
-    // Hàm đăng nhập
-    const login = (userData) => {
-        setIsAuthenticated(true);
-        setUser(userData);
-    };
-
-    // Hàm đăng xuất
-    const logout = () => {
-        setIsAuthenticated(false);
-        setUser(null);
-    };
-
     const handleOpenModal = () => {
         setIsModalOpen(true);
     }
@@ -69,11 +86,13 @@ const ContextProvider = ({ children }) => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     }
+
+
     return (
         <DataContext.Provider
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
-                handleCloseModal, isAuthenticated, login, logout, user, setUser,
+                handleCloseModal, isAuthenticated, user, setUser, addToCart, cart,
                 currentPage, setCurrentPage, itemsPerPage, isMobile, getColorCode
             }}>
             {children}

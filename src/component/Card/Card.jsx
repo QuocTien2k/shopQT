@@ -1,10 +1,19 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DataContext } from "../Context/DataContext";
 
 
-const Card = ({ id, name, image, price, discount, rating, quantity, onBuy }) => {
+const Card = ({ id, name, image, price, discount, rating, quantity }) => {
     const navigate = useNavigate();
+
+    //xử lý Click mua hàng
+    const { addToCart } = useContext(DataContext);
+    const handleBuy = () => {
+        addToCart({ id, name, image, price, discount, rating, quantity });
+    };
+
     const formattedPrice = new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -45,7 +54,7 @@ const Card = ({ id, name, image, price, discount, rating, quantity, onBuy }) => 
 
             {/* Nút bấm */}
             <div className="mt-2 flex justify-center gap-2 text-[11px]">
-                <Button label="Mua ngay" variant="primary" onClick={onBuy} />
+                <Button label="Mua ngay" variant="primary" onClick={handleBuy} />
                 <Button
                     label="Chi tiết"
                     variant="normal"

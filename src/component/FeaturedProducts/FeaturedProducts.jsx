@@ -108,7 +108,6 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
                                     discount={product.discount}
                                     rating={product.rating}
                                     quantity={product.quantity}
-                                    onBuy={() => console.log("Mua", product.name)}
                                 />
                             </div>
                         ))}

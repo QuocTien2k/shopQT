@@ -44,7 +44,7 @@ const LoginPage = () => {
 
             const res = await fetch(`http://localhost:5000/users`);
             const users = await res.json();
-            console.log(users);
+            //console.log(users);
 
             //tìm user
             const user = users.find((u) => {
@@ -52,7 +52,8 @@ const LoginPage = () => {
                     (u.email === formData.identifier || u.phone === formData.identifier) && u.password === formData.password
                 )
             });
-            console.log(user);
+            //console.log(user);
+
             if (!user) {
                 message.error("Email/SĐT hoặc mật khẩu không đúng!");
             } else {
