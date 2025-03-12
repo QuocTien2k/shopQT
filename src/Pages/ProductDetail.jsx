@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "../component/Button";
 import { DataContext } from "../component/Context/DataContext";
 import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
+import Loading from "../component/Loading/Loading";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -11,6 +12,7 @@ const ProductDetail = () => {
     const [selectedImage, setSelectedImage] = useState([]);
     const [selectedColor, setSelectedColor] = useState([]); // Mặc định chọn màu đầu tiên
     const { getColorCode } = useContext(DataContext)
+    const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
 
     useEffect(() => {
         axios.get(`http://localhost:5000/products/${id}`)
@@ -18,11 +20,19 @@ const ProductDetail = () => {
                 setProduct(res.data);
                 setSelectedColor(res.data.color[0]);
                 setSelectedImage(res.data.image);
+                setLoading(false);
             })
-            .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
+            .catch((err) => {
+                console.error("Lỗi khi lấy sản phẩm:", err);
+            })
+            .finally(() => {
+                setLoading(false); // Đảm bảo luôn tắt loading
+            });
     }, [id]);
 
-    if (!product) return <p>Đang tải...</p>;
+    if (loading) return <Loading tip="Đang tải sản phẩm..." />; //Hiển thị loading
+
+    if (!product) return <p className="text-center text-red-500">Sản phẩm không tồn tại!</p>; //Nếu lỗi AP
 
     return (
         <div className="p-6 bg-white">

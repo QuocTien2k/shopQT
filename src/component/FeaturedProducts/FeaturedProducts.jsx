@@ -7,14 +7,23 @@ import "slick-carousel/slick/slick-theme.css";
 import Clock from "../Clock/Clock";
 //import { FaFire } from "react-icons/fa";
 import Fire from "../../assets/fire.gif"
+import Loading from "../Loading/Loading";
 
 const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "", showClock = true }) => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true); //Quản lý loading tại đây
 
+    // call api
     useEffect(() => {
         axios.get("http://localhost:5000/products")
-            .then((res) => setProducts(res.data))
-            .catch((err) => console.error("Lỗi khi lấy sản phẩm:", err));
+            .then((res) => {
+                setProducts(res.data)
+                setLoading(false);  // ✅ Khi có dữ liệu, tắt loading
+            })
+            .catch((err) => {
+                console.error("Lỗi khi lấy sản phẩm:", err)
+                setLoading(false);  // ✅ Dù lỗi cũng phải tắt loading
+            });
     }, []);
 
     let filteredProducts = [];
@@ -83,23 +92,28 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
             </div>
 
             <div className="mx-auto bg-slide mt-4 overflow-hidden p-6">
-                <Slider {...settings}>
-                    {filteredProducts.map((product) => (
-                        <div key={product.id} className="p-2">
-                            <Card
-                                id={product.id}
-                                name={product.name}
-                                image={product.image}
-                                price={product.price}
-                                discount={product.discount}
-                                rating={product.rating}
-                                quantity={product.quantity}
-                                onBuy={() => console.log("Mua", product.name)}
-                                onDetail={() => console.log("Chi tiết", product.name)}
-                            />
-                        </div>
-                    ))}
-                </Slider>
+                {loading ? (
+                    <div className="col-span-full">
+                        <Loading tip="Đang tải sản phẩm..." />
+                    </div>
+                ) : (
+                    <Slider {...settings}>
+                        {filteredProducts.map((product) => (
+                            <div key={product.id} className="p-2">
+                                <Card
+                                    id={product.id}
+                                    name={product.name}
+                                    image={product.image}
+                                    price={product.price}
+                                    discount={product.discount}
+                                    rating={product.rating}
+                                    quantity={product.quantity}
+                                    onBuy={() => console.log("Mua", product.name)}
+                                />
+                            </div>
+                        ))}
+                    </Slider>
+                )}
             </div>
 
         </div>

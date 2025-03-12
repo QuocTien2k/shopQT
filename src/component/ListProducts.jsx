@@ -4,6 +4,7 @@ import Card from "./Card/Card";
 import NotProduct from "./Filter/NotProduct";
 import { DataContext } from "./Context/DataContext";
 import { Pagination } from "antd";
+import Loading from "./Loading/Loading";
 
 const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
     const [products, setProducts] = useState([]);
@@ -47,7 +48,9 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
         <div className="bg-gradient-to-r from-blue-100 via-white to-purple-100 p-4 rounded-lg">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {loading ? (
-                    <div className="col-span-full text-center">Đang tải sản phẩm...</div>
+                    <div className="col-span-full">
+                        <Loading tip="Đang tải sản phẩm..." />
+                    </div>
                 ) : currentProducts.length > 0 ? (
                     currentProducts.map((product) => (
                         <div key={product.id} className="p-2">
