@@ -51,6 +51,10 @@ const ContextProvider = ({ children }) => {
             return newCart;
         });
     };
+    const removeFromCart = (productId) => {
+        setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    };
+
 
     //màu sắc
     const getColorCode = (color) => {
@@ -93,7 +97,8 @@ const ContextProvider = ({ children }) => {
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
                 handleCloseModal, isAuthenticated, user, setUser, addToCart, cart,
-                currentPage, setCurrentPage, itemsPerPage, isMobile, getColorCode
+                removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
+                getColorCode
             }}>
             {children}
         </DataContext.Provider>

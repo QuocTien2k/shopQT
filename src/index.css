@@ -149,9 +149,9 @@ h4 {
   .dropdown-cart::after {
     position: absolute;
     content: "";
-    top: -10px;
+    top: -14px;
     right: 0;
-    width: 160px;
+    width: 200px;
     height: 20px;
     background: transparent;
   }

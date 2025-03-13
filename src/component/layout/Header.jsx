@@ -10,7 +10,7 @@ import { Tooltip } from "antd";
 const Header = () => {
 
     const { isModalOpen, handleOpenModal, handleCloseModal,
-        isAuthenticated, setIsAuthenticated, user, setUser, cart } = useContext(DataContext);
+        isAuthenticated, setIsAuthenticated, user, setUser, cart, removeFromCart } = useContext(DataContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -101,15 +101,20 @@ const Header = () => {
                                 </div>
                                 {/* Hiển thị giỏ hàng khi hover */}
                                 {cart.length > 0 && (
-                                    <div className="dropdown-cart opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto">
+                                    <div className="dropdown-cart w-[400px] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto">
                                         <div className="max-h-60 overflow-y-auto">
                                             {cart.map((item) => (
                                                 <div key={item.id} className="flex items-center gap-2 border-b py-2">
                                                     <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded" />
                                                     <div className="flex-1">
                                                         <p className="text-sm font-semibold">{item.name}</p>
-                                                        <p className="text-xs text-gray-500">{item.price} đ</p>
+                                                        <p className="text-xs text-gray-500">{item.price.toLocaleString("vi-VN")} đ</p>
                                                     </div>
+                                                    {/* Icon xóa */}
+                                                    <CloseOutlined
+                                                        className="text-red-500 hover:text-red-700 cursor-pointer border border-gray-300 rounded-full p-1"
+                                                        onClick={() => removeFromCart(item.id)}
+                                                    />
                                                 </div>
                                             ))}
                                         </div>
