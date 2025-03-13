@@ -141,4 +141,19 @@ h4 {
     width: 120px;
     height: 20px;
   }
+
+  .dropdown-cart {
+    @apply absolute right-0 mt-2 w-64 bg-white shadow-lg p-3 rounded-md border z-50 transition-opacity duration-300 pointer-events-none;
+  }
+
+  .dropdown-cart::after {
+    position: absolute;
+    content: "";
+    top: -10px;
+    right: 0;
+    width: 160px;
+    height: 20px;
+    background: transparent;
+  }
+
 }

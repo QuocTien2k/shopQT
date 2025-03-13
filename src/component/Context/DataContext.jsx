@@ -33,7 +33,7 @@ const ContextProvider = ({ children }) => {
         }
 
         setCart((prevCart) => {
-            console.log("📌 Giỏ hàng trước khi thêm:", prevCart);
+            //console.log("📌 Giỏ hàng trước khi thêm:", prevCart);
             const isExist = prevCart.find((item) => item.id === product.id); //check trùng lặp
             if (isExist) {
                 message.info("Sản phẩm đã có trong giỏ hàng!");
@@ -43,10 +43,10 @@ const ContextProvider = ({ children }) => {
             // Gán màu mặc định nếu sản phẩm chưa có màu
             const defaultColor = "Black"; // hoặc lấy từ danh sách có sẵn
             const productWithColor = { ...product, color: product.color || defaultColor };
-            console.log("✅ Sản phẩm thêm vào giỏ hàng:", productWithColor);
+            //console.log("✅ Sản phẩm thêm vào giỏ hàng:", productWithColor);
 
             const newCart = [...prevCart, productWithColor];
-            console.log("🛒 Giỏ hàng sau khi thêm:", newCart);
+            //console.log("🛒 Giỏ hàng sau khi thêm:", newCart);
 
             return newCart;
         });

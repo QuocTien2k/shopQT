@@ -1,5 +1,5 @@
 import { CloseOutlined, HomeOutlined, MenuOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Search from "../Search";
 import Button from "../Button";
 import { useContext, useEffect, useState } from "react";
@@ -9,8 +9,10 @@ import { Tooltip } from "antd";
 
 const Header = () => {
 
-    const { isModalOpen, handleOpenModal, handleCloseModal, isAuthenticated, setIsAuthenticated, user, setUser } = useContext(DataContext);
+    const { isModalOpen, handleOpenModal, handleCloseModal,
+        isAuthenticated, setIsAuthenticated, user, setUser, cart } = useContext(DataContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = (event) => {
         event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
@@ -82,12 +84,45 @@ const Header = () => {
                     {isAuthenticated ? (
                         <div className="flex items-center space-x-4 lg:space-x-6">
                             {/* Giỏ hàng */}
-                            <Link to="/cart" className="relative">
-                                <ShoppingCartOutlined className="text-2xl text-gray-700" />
-                                <span className="absolute -top-[8px] -right-[10px] bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                                    1
-                                </span>
-                            </Link>
+                            <div
+                                className="relative group"
+                            >
+                                <div className="cursor-pointer" onClick={() => navigate('/cart')}>
+                                    <ShoppingCartOutlined className="text-2xl text-gray-700" />
+                                    {cart.length > 0 ? (
+                                        <span className="absolute -top-[8px] -right-[10px] bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                            {cart.length}
+                                        </span>
+                                    ) : (
+                                        <span className="absolute -top-[8px] -right-[10px] bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                            0
+                                        </span>
+                                    )}
+                                </div>
+                                {/* Hiển thị giỏ hàng khi hover */}
+                                {cart.length > 0 && (
+                                    <div className="dropdown-cart opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto">
+                                        <div className="max-h-60 overflow-y-auto">
+                                            {cart.map((item) => (
+                                                <div key={item.id} className="flex items-center gap-2 border-b py-2">
+                                                    <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded" />
+                                                    <div className="flex-1">
+                                                        <p className="text-sm font-semibold">{item.name}</p>
+                                                        <p className="text-xs text-gray-500">{item.price} đ</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="flex justify-center mt-4">
+                                            <Button
+                                                onClick={() => navigate("/cart")}
+                                                label="Xác nhận mua"
+                                                variant="primary"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
                             {/* User Dropdown */}
                             <div className="group relative z-50">
