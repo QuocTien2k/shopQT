@@ -20,7 +20,7 @@ const Card = ({ id, name, image, price, discount, rating, quantity, color }) => 
             discount,
             rating,
             quantity,
-            color, // Tất cả màu của sản phẩm
+            availableColors: color, // Danh sách tất cả màu
         }, color[0]); // Mặc định chọn màu đầu tiên
     };
 

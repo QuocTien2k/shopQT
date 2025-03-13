@@ -32,27 +32,38 @@ const ContextProvider = ({ children }) => {
             return message.warning("Bạn cần đăng nhập để mua hàng!");
         }
 
+        // Kiểm tra dữ liệu trước khi xử lý
+        //console.log("🎨 product.availableColors ban đầu:", product.availableColors, "| Kiểu dữ liệu:", typeof product.availableColors);
+        if (!Array.isArray(product.availableColors)) {
+            console.warn("⚠️ product.availableColors không phải mảng! Kiểm tra dữ liệu.");
+        }
+
         setCart((prevCart) => {
-            const isExist = prevCart.find((item) => item.id === product.id && item.color);
+            //console.log("🛒 Giỏ hàng trước khi thêm:", prevCart);
+            //console.log("📌 product.availableColors khi thêm vào giỏ hàng:", product.availableColors);
+
+            const isExist = prevCart.find((item) => item.id === product.id && item.color === selectedColor);
 
             if (isExist) {
                 message.info("Sản phẩm này đã có trong giỏ hàng!");
                 return prevCart;
             }
 
-            // 🛠 Chuẩn hóa dữ liệu khi thêm vào giỏ hàng
+            // ✅ Fix: Dùng `availableColors` thay vì `color`
             const newCartItem = {
                 ...product,
-                color: selectedColor || product.color[0], // Nếu chưa có, lấy màu đầu tiên
-                availableColors: Array.isArray(product.color) ? product.color : [], // Lưu danh sách tất cả màu
+                color: selectedColor || product.availableColors[0], // Lấy màu đầu tiên nếu chưa có
+                availableColors: product.availableColors, // ✅ Lưu danh sách tất cả màu
             };
+            //console.log("📌 color đã chọn của sản phẩm mới trong giỏ hàng:", newCartItem.color);
+            //console.log("📌 availableColors của sản phẩm mới trong giỏ hàng:", newCartItem.availableColors);
 
             const newCart = [...prevCart, newCartItem];
             message.success("Đã thêm vào giỏ hàng!");
-            return newCart;
+
+            return newCart; //set cart
         });
     };
-
 
     const removeFromCart = (productId) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
@@ -64,8 +75,15 @@ const ContextProvider = ({ children }) => {
             )
         );
     };
+    const updateCartItemQuantity = (productId, newQuantity) => {
+        setCart((prevCart) =>
+            prevCart.map((item) =>
+                item.id === productId ? { ...item, quantity: newQuantity } : item
+            )
+        );
+    };
 
-    //màu sắc
+
     const getColorCode = (color) => {
         const colorMap = {
             Blue: "#007BFF",
@@ -88,9 +106,12 @@ const ContextProvider = ({ children }) => {
             Yellow: "#FFD700",
             "Copper Gold": "#B87333",
             Starlight: "#F5EFE6",
+            Orange: "#FFA500", // 🟠 Thêm màu cam
+            White: "#FFFFFF", // ⚪ Thêm màu trắng
         };
         return colorMap[color] || "#D3D3D3"; // Mặc định là màu xám nhạt nếu không có trong danh sách
     };
+
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -106,7 +127,7 @@ const ContextProvider = ({ children }) => {
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
                 handleCloseModal, isAuthenticated, user, setUser, addToCart, cart, updateCartItemColor,
-                removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
+                updateCartItemQuantity, removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
                 getColorCode
             }}>
             {children}

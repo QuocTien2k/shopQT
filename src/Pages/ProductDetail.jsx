@@ -19,6 +19,9 @@ const ProductDetail = () => {
         if (!selectedColor) {
             return message.warning("Vui lòng chọn màu!");
         }
+        // console.log("🛒 Thêm vào giỏ hàng từ ProductDetail:");
+        // console.log("📌 product.color:", product.color);
+        // console.log("🎨 selectedColor:", selectedColor);
         addToCart({
             id: product.id,
             name: product.name,
@@ -99,11 +102,11 @@ const ProductDetail = () => {
                     <div className="mt-4">
                         <p className="text-sm font-semibold">Màu sắc:</p>
                         <div className="flex gap-2 mt-2">
-                            {console.log("📌 product.color từ ProductDetail:", product.color)}
+                            {/* {console.log("📌 product.color từ ProductDetail:", product.color)} */}
                             {product.color.map((color, index) => (
                                 <button
                                     key={index}
-                                    className={`w-6 h-6 rounded-full border-2 ${selectedColor === color ? "shadow-md shadow-gray-500" : ""}`}
+                                    className={`w-6 h-6 rounded-full border-2 ${selectedColor === color ? "box-shadow" : ""}`}
                                     style={{ backgroundColor: getColorCode(color) }}
                                     onClick={() => setSelectedColor(color)}
                                 />
