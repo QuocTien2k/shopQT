@@ -25,7 +25,7 @@ const ContextProvider = ({ children }) => {
 
     // State giỏ hàng
     const [cart, setCart] = useState([]);
-    const addToCart = (product) => {
+    const addToCart = (product, selectedColor = "") => {
         const user = JSON.parse(localStorage.getItem("user")); // Lấy thông tin user
 
         if (!user) {
@@ -33,28 +33,37 @@ const ContextProvider = ({ children }) => {
         }
 
         setCart((prevCart) => {
-            //console.log("📌 Giỏ hàng trước khi thêm:", prevCart);
-            const isExist = prevCart.find((item) => item.id === product.id); //check trùng lặp
+            const isExist = prevCart.find((item) => item.id === product.id && item.color);
+
             if (isExist) {
-                message.info("Sản phẩm đã có trong giỏ hàng!");
+                message.info("Sản phẩm này đã có trong giỏ hàng!");
                 return prevCart;
             }
 
-            // Gán màu mặc định nếu sản phẩm chưa có màu
-            const defaultColor = "Black"; // hoặc lấy từ danh sách có sẵn
-            const productWithColor = { ...product, color: product.color || defaultColor };
-            //console.log("✅ Sản phẩm thêm vào giỏ hàng:", productWithColor);
+            // 🛠 Chuẩn hóa dữ liệu khi thêm vào giỏ hàng
+            const newCartItem = {
+                ...product,
+                color: selectedColor || product.color[0], // Nếu chưa có, lấy màu đầu tiên
+                availableColors: Array.isArray(product.color) ? product.color : [], // Lưu danh sách tất cả màu
+            };
 
-            const newCart = [...prevCart, productWithColor];
-            //console.log("🛒 Giỏ hàng sau khi thêm:", newCart);
-
+            const newCart = [...prevCart, newCartItem];
+            message.success("Đã thêm vào giỏ hàng!");
             return newCart;
         });
     };
+
+
     const removeFromCart = (productId) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
     };
-
+    const updateCartItemColor = (id, newColor) => {
+        setCart((prevCart) =>
+            prevCart.map((item) =>
+                item.id === id ? { ...item, color: newColor } : item
+            )
+        );
+    };
 
     //màu sắc
     const getColorCode = (color) => {
@@ -96,7 +105,7 @@ const ContextProvider = ({ children }) => {
         <DataContext.Provider
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
-                handleCloseModal, isAuthenticated, user, setUser, addToCart, cart,
+                handleCloseModal, isAuthenticated, user, setUser, addToCart, cart, updateCartItemColor,
                 removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
                 getColorCode
             }}>

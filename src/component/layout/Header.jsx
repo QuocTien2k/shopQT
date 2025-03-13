@@ -18,6 +18,8 @@ const Header = () => {
         event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
         setIsMobileMenuOpen((prev) => !prev);
     };
+
+    //console.log("📌 Giỏ hàng trong Header:", cart);
     const handleLogout = () => {
         localStorage.removeItem("user");
         setIsAuthenticated(false);
@@ -202,6 +204,15 @@ const Header = () => {
                         </>
                     ) : (
                         <>
+                            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/cart")}>
+                                <ShoppingCartOutlined className="text-[18px] text-gray-700" />
+                                <p className="flex items-center gap-2 m-0">
+                                    Giỏ hàng
+                                    <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                        {cart.length}
+                                    </span>
+                                </p>
+                            </div>
                             <span className="text-gray-700">Xin chào, {user.firstname}</span>
                             <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" customStyle={{ paddingTop: "4px", paddingBottom: "4px" }} />
                             <Button onClick={handleLogout} label="Đăng xuất" variant="primary" customStyle={{ paddingTop: "4px", paddingBottom: "4px" }} />

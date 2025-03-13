@@ -46,7 +46,7 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
 
     return (
         <div className="bg-gradient-to-r from-blue-100 via-white to-purple-100 p-4 rounded-lg">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {loading ? (
                     <div className="col-span-full">
                         <Loading tip="Đang tải sản phẩm..." />
@@ -62,6 +62,7 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
                                 discount={product.discount}
                                 rating={product.rating}
                                 quantity={product.quantity}
+                                color={product.color}
                             />
                         </div>
                     ))

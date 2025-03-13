@@ -108,6 +108,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
                                     discount={product.discount}
                                     rating={product.rating}
                                     quantity={product.quantity}
+                                    color={product.color}
                                 />
                             </div>
                         ))}

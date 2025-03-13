@@ -5,14 +5,32 @@ import Button from "../component/Button";
 import { DataContext } from "../component/Context/DataContext";
 import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
 import Loading from "../component/Loading/Loading";
+import { message } from "antd";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState([]);
     const [selectedColor, setSelectedColor] = useState([]); // Mặc định chọn màu đầu tiên
-    const { getColorCode } = useContext(DataContext)
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
+    const { getColorCode, addToCart } = useContext(DataContext);
+
+    const handleAddToCartOnDetail = () => {
+        if (!selectedColor) {
+            return message.warning("Vui lòng chọn màu!");
+        }
+        addToCart({
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            discount: product.discount,
+            rating: product.rating,
+            quantity: product.quantity,
+            availableColors: Array.isArray(product.color) ? product.color : [product.color], // Thêm danh sách màu sản phẩm
+        }, selectedColor);
+    };
+
 
     useEffect(() => {
         axios.get(`http://localhost:5000/products/${id}`)
@@ -32,7 +50,7 @@ const ProductDetail = () => {
 
     if (loading) return <Loading tip="Đang tải sản phẩm..." />; //Hiển thị loading
 
-    if (!product) return <p className="text-center text-red-500">Sản phẩm không tồn tại!</p>; //Nếu lỗi AP
+    if (!product) return <p className="text-center text-red-500">Sản phẩm không tồn tại!</p>; //Nếu lỗi API
 
     return (
         <div className="p-6 bg-white">
@@ -81,6 +99,7 @@ const ProductDetail = () => {
                     <div className="mt-4">
                         <p className="text-sm font-semibold">Màu sắc:</p>
                         <div className="flex gap-2 mt-2">
+                            {console.log("📌 product.color từ ProductDetail:", product.color)}
                             {product.color.map((color, index) => (
                                 <button
                                     key={index}
@@ -94,12 +113,11 @@ const ProductDetail = () => {
 
                     {/* Nút bấm */}
                     <div className="flex gap-4 mt-4">
-                        <Button label="Mua ngay" variant="primary" />
                         <Button
                             label="Thêm vào giỏ hàng"
                             variant="normal"
                             customStyle={{ background: "#28a745", color: "white" }}
-                            onClick={() => console.log(`Thêm vào giỏ hàng: ${product.name} - Màu: ${selectedColor}`)}
+                            onClick={handleAddToCartOnDetail}
                         />
                     </div>
                     {/* Mô tả sản phẩm */}
