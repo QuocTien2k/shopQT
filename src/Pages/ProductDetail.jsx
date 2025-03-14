@@ -6,6 +6,7 @@ import { DataContext } from "../component/Context/DataContext";
 import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
 import Loading from "../component/Loading/Loading";
 import { message } from "antd";
+import { formatCurrency } from "../utils/helpers";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -15,6 +16,7 @@ const ProductDetail = () => {
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
     const { getColorCode, addToCart } = useContext(DataContext);
 
+    //thêm giỏ hàng trang detail
     const handleAddToCartOnDetail = () => {
         if (!selectedColor) {
             return message.warning("Vui lòng chọn màu!");
@@ -34,7 +36,7 @@ const ProductDetail = () => {
         }, selectedColor);
     };
 
-
+    // call api = id 
     useEffect(() => {
         axios.get(`http://localhost:5000/products/${id}`)
             .then((res) => {
@@ -95,7 +97,7 @@ const ProductDetail = () => {
                     <h1 className="text-2xl font-bold">{product.name}</h1>
                     <p className="text-gray-500 text-sm">⭐ {product.rating} / 5</p>
                     <p className="text-red-500 text-lg font-semibold">
-                        {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(product.price)}
+                        {formatCurrency(product.price)}
                     </p>
 
                     {/* Chọn màu sắc */}

@@ -1,72 +1,79 @@
 import { useContext } from "react";
-import { Button, Image, InputNumber } from "antd";
-import { DataContext } from "../component/Context/DataContext";
-import { formatCurrency } from "../utils/helpers";
+import { DataContext } from "../component/Context/DataContext"
+import { Image, Button, Tooltip } from "antd";
+import { formatCurrency } from "../utils/helpers"
 
 const ShoppingCart = () => {
-    const { cart, removeFromCart, updateCartItemColor, getColorCode, updateCartItemQuantity } = useContext(DataContext);
+    const { cart, removeFromCart, updateCartItemColor, updateCartQuantity, getColorCode } = useContext(DataContext);
 
     return (
-        <div className="shopping-cart bg-white">
-            <h2>Giỏ hàng của bạn</h2>
-
-            {cart.length === 0 ? (
+        cart.length === 0 ? (
+            <div className="bg-white text-lg">
                 <p>Giỏ hàng của bạn đang trống.</p>
-            ) : (
-                <div className="cart-items">
-                    {cart.map((item) => {
-                        const colors = Array.isArray(item.availableColors) ? item.availableColors : [];
-                        console.log("🎨 Màu đã chọn của sản phẩm:", item.name, "| color:", item.color);
-                        console.log("🎨 Danh sách availableColors:", item.availableColors);
+            </div>
+        ) : (
+            <div className="bg-white">
+                <table className="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr className="bg-gray-100">
 
-                        return (
-                            <div key={item.id} className="cart-item">
-                                {/* Hình ảnh */}
-                                <Image src={item.image} alt={item.name} width={80} />
-
-                                {/* Thông tin sản phẩm */}
-                                <div className="cart-info">
-                                    <h3>{item.name}</h3>
-                                    <p>Giá: {formatCurrency(item.price)}</p>
-                                    <p>Giảm giá: {item.discount}%</p>
-
-                                    {/* Màu sắc */}
-                                    <div className="flex gap-2">
-                                        <span>Màu: </span>
-                                        {colors.map((color) => {
-                                            console.log("🎨 Mã màu cho", color, "là:", getColorCode(color));
-                                            return (
-                                                <button
-                                                    key={color}
-                                                    className={`w-5 h-5 rounded-full border-2 ${item.color === color ? "shadow-lg shadow-gray-800 scale-110" : ""}`}
-                                                    style={{ backgroundColor: getColorCode(color) }}
-                                                    onClick={() => updateCartItemColor(item.id, color)}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-
-                                    {/* Chọn số lượng */}
-                                    <div className="mt-2 flex items-center gap-2">
-                                        <span>Số lượng:</span>
-                                        <InputNumber
-                                            min={1}
-                                            max={item.quantity} // Giới hạn số lượng theo kho
-                                            value={item.cartQuantity} // Giá trị hiện tại
-                                            onChange={(value) => updateCartItemQuantity(item.id, value)}
+                            <th className="border border-gray-300 px-2 py-2 w-20">Hình ảnh</th>
+                            <th className="border border-gray-300 px-2 py-2 w-1/4">
+                                Tên sản phẩm
+                            </th>
+                            <th className="border border-gray-300 px-2 py-2 w-20">Màu sắc</th>
+                            <th className="border border-gray-300 px-2 py-2 w-24">Giá</th>
+                            <th className="border border-gray-300 px-2 py-2 w-20">Số lượng</th>
+                            <th className="border border-gray-300 px-2 py-2 w-24">Thành tiền</th>
+                            <th className="border border-gray-300 px-2 py-2 w-12">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cart.map((item) => (
+                            <tr key={item.id} className="text-center">
+                                <td className="border border-gray-300 px-2 py-2">
+                                    <Image src={item.image} alt={item.name} width={50} height={50} />
+                                </td>
+                                <td className="border border-gray-300 px-2 py-2 max-w-56 truncate">
+                                    <Tooltip title={item.name} placement="top">
+                                        {item.name}
+                                    </Tooltip>
+                                </td>
+                                <td className="border border-gray-300 px-2 py-2 w-20">
+                                    {item.availableColors.map((color) => (
+                                        <button
+                                            key={color}
+                                            className={`w-5 h-5 rounded-full border-2 ${item.color === color ? "shadow-lg scale-110" : ""}`}
+                                            style={{ backgroundColor: getColorCode(color) }}
+                                            onClick={() => updateCartItemColor(item.id, color)}
                                         />
+                                    ))}
+                                </td>
+                                <td className="border border-gray-300 px-2 py-2">{formatCurrency(item.price)}</td>
+                                <td className="border border-gray-300 px-2 py-2 w-20">
+                                    <div className="flex justify-center items-center">
+                                        <button onClick={() => updateCartQuantity(item.id, item.cartQuantity - 1)}>-</button>
+                                        <span className="mx-2">{item.cartQuantity}</span>
+                                        <button onClick={() => updateCartQuantity(item.id, item.cartQuantity + 1)}>+</button>
                                     </div>
-                                </div>
-
-                                {/* Nút xóa */}
-                                <Button danger onClick={() => removeFromCart(item.id)}>Xóa</Button>
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
-        </div>
-    );
+                                </td>
+                                <td className="border border-gray-300 px-2 py-2">{formatCurrency(item.price * item.cartQuantity)}</td>
+                                <td className="border border-gray-300 px-2 py-2">
+                                    <Button danger onClick={() => removeFromCart(item.id)}>X</Button>
+                                </td>
+                            </tr>
+                        ))}
+                        {/* Tổng tiền */}
+                        <tr>
+                            <td colSpan={7} className="border border-gray-300 px-4 py-2 text-center font-bold">
+                                Tổng tiền: {formatCurrency(cart.reduce((acc, item) => acc + item.price * item.cartQuantity, 0))}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        )
+    )
 };
 
 export default ShoppingCart;

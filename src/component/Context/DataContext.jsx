@@ -40,7 +40,7 @@ const ContextProvider = ({ children }) => {
 
         setCart((prevCart) => {
             //console.log("🛒 Giỏ hàng trước khi thêm:", prevCart);
-            //console.log("📌 product.availableColors khi thêm vào giỏ hàng:", product.availableColors);
+            //console.log("product.availableColors khi thêm vào giỏ hàng:", product.availableColors);
 
             const isExist = prevCart.find((item) => item.id === product.id && item.color === selectedColor);
 
@@ -49,14 +49,15 @@ const ContextProvider = ({ children }) => {
                 return prevCart;
             }
 
-            // ✅ Fix: Dùng `availableColors` thay vì `color`
+            // Fix: Dùng `availableColors` thay vì `color`
             const newCartItem = {
                 ...product,
                 color: selectedColor || product.availableColors[0], // Lấy màu đầu tiên nếu chưa có
-                availableColors: product.availableColors, // ✅ Lưu danh sách tất cả màu
+                availableColors: product.availableColors, // Lưu danh sách tất cả màu
+                cartQuantity: 1, // Thêm số lượng mặc định khi thêm vào giỏ hàng
             };
-            //console.log("📌 color đã chọn của sản phẩm mới trong giỏ hàng:", newCartItem.color);
-            //console.log("📌 availableColors của sản phẩm mới trong giỏ hàng:", newCartItem.availableColors);
+            //console.log("color đã chọn của sản phẩm mới trong giỏ hàng:", newCartItem.color);
+            //console.log("availableColors của sản phẩm mới trong giỏ hàng:", newCartItem.availableColors);
 
             const newCart = [...prevCart, newCartItem];
             message.success("Đã thêm vào giỏ hàng!");
@@ -75,14 +76,13 @@ const ContextProvider = ({ children }) => {
             )
         );
     };
-    const updateCartItemQuantity = (productId, newQuantity) => {
+    const updateCartQuantity = (productId, newQuantity) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === productId ? { ...item, quantity: newQuantity } : item
+                item.id === productId ? { ...item, cartQuantity: newQuantity } : item
             )
         );
     };
-
 
     const getColorCode = (color) => {
         const colorMap = {
@@ -127,7 +127,7 @@ const ContextProvider = ({ children }) => {
             value={{
                 isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
                 handleCloseModal, isAuthenticated, user, setUser, addToCart, cart, updateCartItemColor,
-                updateCartItemQuantity, removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
+                updateCartQuantity, removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
                 getColorCode
             }}>
             {children}

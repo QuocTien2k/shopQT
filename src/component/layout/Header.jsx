@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import ModalUpdateInfo from "../Modal/ModalUpdateInfo";
 import { DataContext } from "../Context/DataContext";
 import { Tooltip } from "antd";
+import { formatCurrency } from "../../utils/helpers";
 
 const Header = () => {
 
@@ -58,8 +59,6 @@ const Header = () => {
         };
     }, [isMobileMenuOpen]);
 
-
-
     return (
         <header className="h-[70px] md:h-[88px] flex items-center justify-between px-3 gap-1 md:px-7 shadow-md header-bg">
             {/* Logo */}
@@ -110,7 +109,7 @@ const Header = () => {
                                                     <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded" />
                                                     <div className="flex-1">
                                                         <p className="text-sm font-semibold">{item.name}</p>
-                                                        <p className="text-xs text-gray-500">{item.price.toLocaleString("vi-VN")} đ</p>
+                                                        <p className="text-sm text-gray-500">{formatCurrency(item.price)}</p>
                                                     </div>
                                                     {/* Icon xóa */}
                                                     <CloseOutlined

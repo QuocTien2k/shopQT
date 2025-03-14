@@ -3,6 +3,7 @@ import Button from "../Button";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import { formatCurrency } from "../../utils/helpers";
 
 
 const Card = ({ id, name, image, price, discount, rating, quantity, color }) => {
@@ -23,11 +24,6 @@ const Card = ({ id, name, image, price, discount, rating, quantity, color }) => 
             availableColors: color, // Danh sách tất cả màu
         }, color[0]); // Mặc định chọn màu đầu tiên
     };
-
-    const formattedPrice = new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-    }).format(price);
 
     return (
         <div className="w-full h-[345px] box-shadow border rounded-lg p-3 bg-white flex flex-col gap-1 overflow-hidden">
@@ -54,7 +50,7 @@ const Card = ({ id, name, image, price, discount, rating, quantity, color }) => 
 
             {/* Giá và discount */}
             <div className="flex items-center justify-between text-[12px] md:text-[14px] sm:text-[8px]">
-                <p className="text-red-500 font-semibold">{formattedPrice}</p>
+                <p className="text-red-500 font-semibold">{formatCurrency(price)}</p>
                 {discount > 0 && (
                     <span className="text-gray-500 text-xs">
                         <strong>-</strong> {discount}% OFF
