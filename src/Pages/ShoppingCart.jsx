@@ -14,7 +14,7 @@ const ShoppingCart = () => {
                 <p>Giỏ hàng của bạn đang trống.</p>
             </div>
         ) : (
-            <div className="background-white container mt-3 p-4 rounded-lg">
+            <div className="shopping-cart-bg container mt-3 p-4 rounded-lg">
                 {/*Table for Screen >= 768px */}
                 <div className="hidden md:block">
                     <table className="w-full border-collapse border border-gray-300">

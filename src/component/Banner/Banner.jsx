@@ -10,7 +10,7 @@ const bannerImages = [
 
 const Banner = () => {
     return (
-        <div className="max-h-[480px] sm:max-h-[340px] md:max-h-[410px] max-w-4xl mx-auto overflow-hidden">
+        <div className="mt-4 mb-4 rounded-sm max-h-[480px] sm:max-h-[340px] md:max-h-[410px] max-w-5xl mx-auto overflow-hidden">
             {/* Slideshow */}
             <Carousel autoplay effect="fade">
                 {bannerImages.map((img, index) => (

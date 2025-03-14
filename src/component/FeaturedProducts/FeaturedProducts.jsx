@@ -81,7 +81,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
     };
 
     return (
-        <div className="background-white container rounded-md pt-4">
+        <div className="bg-white container rounded-md pt-4 shadow-gradient">
             <div className="mt-3 flex flex-col items-center md:flex-row md:items-center md:justify-between">
                 <h2 className="mb-3 font-bold text-[16px] flex items-center gap-1 md:text-[24px]">
                     Sản phẩm {title}

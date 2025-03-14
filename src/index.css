@@ -14,7 +14,10 @@ body {
   @apply font-sans text-sm bg-gray-100 text-gray-900;
   font-family: 'Be Vietnam Pro', sans-serif;
   scroll-behavior: smooth;
-  background: black;
+  background: rgb(245, 245, 250);
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Button */
@@ -88,6 +91,10 @@ h4 {
     box-shadow: rgb(0 0 0 / 28%) 0px 6px 12px 0px;
   }
 
+  .shadow-gradient {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 6px, rgba(0, 0, 0, 0.08) 0px 2px 4px;
+  }
+
   .dropdown-menu {
     @apply absolute top-[20px] right-0 w-[220px] bg-white rounded-md box-shadow p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform scale-95 origin-bottom-right transition-all duration-300;
   }
@@ -124,10 +131,6 @@ h4 {
         rgb(213, 236, 253) 110.66%);
   }
 
-  .featured-bg {
-    background: linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%), linear-gradient(264.03deg, rgb(220, 229, 251) -10.27%, rgb(234, 236, 255) 35.65%, rgb(213, 236, 253) 110.66%);
-  }
-
   .bg-slide {
     background: rgba(0, 96, 255, 0.05);
   }
@@ -154,6 +157,20 @@ h4 {
     width: 200px;
     height: 20px;
     background: transparent;
+  }
+
+  .filter-bg {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    /* Màu viền xám nhạt */
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .shopping-cart-bg {
+    background: linear-gradient(to right, #f3f4f6, #ffffff);
+    border-radius: 8px;
+    padding: 16px;
   }
 
 }

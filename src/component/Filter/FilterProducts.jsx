@@ -23,7 +23,7 @@ const FilterProducts = ({ onFilterChange, onFilterPrice, onCategoryChange }) => 
         onFilterPrice(priceRange); // Gửi lên ListProduct
     }
     return (
-        <div className="p-4 bg-white shadow rounded-lg">
+        <div className="p-4 filter-bg shadow rounded-lg">
             <h2 className="text-lg font-semibold mb-4">Lọc sản phẩm</h2>
 
             {/* Lọc theo danh mục */}
