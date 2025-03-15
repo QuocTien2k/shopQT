@@ -96,19 +96,17 @@ h4 {
   }
 
   .dropdown-menu {
-    @apply absolute top-[20px] right-0 w-[220px] bg-white rounded-md box-shadow p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transform scale-95 origin-bottom-right transition-all duration-300;
+    @apply absolute md:top-[32px] right-0 w-[220px] bg-white rounded-md box-shadow p-4 opacity-100 visible transform scale-95 origin-top-right transition-all duration-300
   }
 
   .dropdown-menu::before {
     content: "";
     position: absolute;
     top: -13px;
-    /* Nhích lên để làm viền */
     right: 14px;
     border-left: 11px solid transparent;
     border-right: 11px solid transparent;
     border-bottom: 12px solid rgba(220, 229, 251, 0.9);
-    /* Màu gần giống header */
     z-index: 19;
   }
 

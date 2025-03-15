@@ -85,19 +85,31 @@ const ShoppingCart = () => {
                                     <td className="border border-gray-300 px-2 py-2">{formatCurrency(item.price)}</td>
                                     <td className="border border-gray-300 px-2 py-2 w-20">
                                         <div className="flex justify-center items-center">
-                                            <button onClick={() => updateCartQuantity(item.id, item.cartQuantity - 1)}>-</button>
+                                            <button
+                                                onClick={() => item.cartQuantity > 1 && updateCartQuantity(item.id, item.cartQuantity - 1)}
+                                                disabled={item.cartQuantity <= 1}
+                                            >
+                                                -
+                                            </button>
                                             <span className="mx-2">{item.cartQuantity}</span>
-                                            <button onClick={() => updateCartQuantity(item.id, item.cartQuantity + 1)}>+</button>
+                                            <button
+                                                onClick={() => item.cartQuantity < item.quantity && updateCartQuantity(item.id, item.cartQuantity + 1)}
+                                                disabled={item.cartQuantity >= item.quantity}
+                                            >
+                                                +
+                                            </button>
                                         </div>
                                     </td>
                                     <td className="border border-gray-300 px-2 py-2">{formatCurrency(item.price * item.cartQuantity)}</td>
                                     <td className="border border-gray-300 px-2 py-2">
-                                        <Button
-                                            label="Xóa"
-                                            variant="normal"
-                                            onClick={() => removeFromCart(item.id)}
-                                            customStyle={{ background: "rgb(239, 68, 68)", color: "white" }}
-                                        />
+                                        <div className="flex justify-center items-center">
+                                            <Button
+                                                label="Xóa"
+                                                variant="normal"
+                                                onClick={() => removeFromCart(item.id)}
+                                                customStyle={{ background: "rgb(239, 68, 68)", color: "white" }}
+                                            />
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

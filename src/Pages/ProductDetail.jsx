@@ -99,7 +99,7 @@ const ProductDetail = () => {
                     <p className="text-red-500 text-lg font-semibold">
                         {formatCurrency(product.price)}
                     </p>
-
+                    <p className="text-gray-500 text-lg"><strong>Đã giảm: {product.discount}%</strong></p>
                     {/* Chọn màu sắc */}
                     <div className="mt-4">
                         <p className="text-sm font-semibold">Màu sắc:</p>

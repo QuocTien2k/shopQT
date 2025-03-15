@@ -14,6 +14,7 @@ const Header = () => {
         isAuthenticated, setIsAuthenticated, user, setUser, cart, removeFromCart } = useContext(DataContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const toggleMenu = (event) => {
         event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
@@ -131,40 +132,43 @@ const Header = () => {
                             </div>
 
                             {/* User Dropdown */}
-                            <div className="group relative z-50">
-                                <Tooltip title={user.firstname}>
-                                    <span className="bridge font-semibold cursor-pointer inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-                                        Xin chào, {user.firstname}
-                                    </span>
-                                </Tooltip>
+                            <div
+                                className="relative z-50 bridge"
+                                onMouseEnter={() => setIsDropdownOpen(true)}
+                                onMouseLeave={() => setIsDropdownOpen(false)}
+                            >
+                                <span className="font-semibold cursor-pointer inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                    Xin chào, {user.firstname}
+                                </span>
 
                                 {/* Dropdown Menu */}
-                                <div className="dropdown-menu">
-                                    <div className="flex items-center gap-3 border-b pb-3">
-                                        <img src={user.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"}
-                                            alt="User Avatar" className="w-12 h-12 rounded-full object-cover" />
-                                        <div>
-                                            <Tooltip title={user.fullname}>
-                                                <h2 className="text-lg font-semibold inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                                {isDropdownOpen && (
+                                    <div className="dropdown-menu">
+                                        <div className="flex items-center gap-3 border-b pb-3">
+                                            <img
+                                                src={user.image || "https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000"}
+                                                alt="User Avatar"
+                                                className="w-12 h-12 rounded-full object-cover"
+                                            />
+                                            <div>
+                                                <h2 title={user.fullname} className="text-lg font-semibold inline-block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
                                                     {user.fullname}
                                                 </h2>
-                                            </Tooltip>
-                                            <p className="text-sm text-gray-500">{user.phone}</p>
-                                            <Tooltip title={user.email}>
+                                                <p className="text-sm text-gray-500">{user.phone}</p>
                                                 <p className="text-sm text-gray-500 inline-block max-w-[120px] overflow-hidden text-ellipsis whitespace-nowrap">
                                                     {user.email}
                                                 </p>
-                                            </Tooltip>
+                                            </div>
+                                        </div>
+
+                                        {/* Buttons */}
+                                        <div className="flex flex-col gap-2 mt-3 items-center">
+                                            <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" />
+                                            <ModalUpdateInfo open={isModalOpen} onClose={handleCloseModal} />
+                                            <Button onClick={handleLogout} label="Đăng xuất" variant="primary" />
                                         </div>
                                     </div>
-
-                                    {/* Buttons */}
-                                    <div className="flex flex-col gap-2 mt-3 items-center">
-                                        <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" />
-                                        <ModalUpdateInfo open={isModalOpen} onClose={handleCloseModal} />
-                                        <Button onClick={handleLogout} label="Đăng xuất" variant="primary" />
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     ) : (
