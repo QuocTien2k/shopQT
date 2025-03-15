@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "../component/Context/DataContext"
-import { Image, Tooltip } from "antd";
+import { Image, message, Modal, Tooltip } from "antd";
 import { formatCurrency } from "../utils/helpers"
 import CartCardMobile from "./CartCardMobile";
 import Button from "../component/Button";
@@ -8,13 +8,42 @@ import Button from "../component/Button";
 const ShoppingCart = () => {
     const { cart, removeFromCart, updateCartItemColor, updateCartQuantity, getColorCode } = useContext(DataContext);
 
+    //Xử lý nút thanh toán
+    const handleCheckout = () => {
+        if (cart.length === 0) return;
+
+        Modal.confirm({
+            title: "Xác nhận thanh toán",
+            content: "Bạn có chắc chắn muốn thanh toán giỏ hàng không?",
+            okText: "Đồng ý",
+            cancelText: "Hủy",
+            onOk() {
+                const checkoutData = {
+                    cart: cart.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        image: item.image,
+                        color: item.color,
+                        price: item.price,
+                        cartQuantity: item.cartQuantity,
+                        totalPrice: item.price * item.cartQuantity
+                    })),
+                    totalAmount: cart.reduce((acc, item) => acc + item.price * item.cartQuantity, 0)
+                };
+
+                localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+                message.success("Thanh toán thành công!");
+            }
+        });
+    };
+
     return (
         cart.length === 0 ? (
             <div className="bg-white text-lg">
                 <p>Giỏ hàng của bạn đang trống.</p>
             </div>
         ) : (
-            <div className="shopping-cart-bg container mt-3 p-4 rounded-lg">
+            <div className="shopping-cart-bg container mt-3 p-8 rounded-lg shadow-gradient">
                 {/*Table for Screen >= 768px */}
                 <div className="hidden md:block">
                     <table className="w-full border-collapse border border-gray-300">
@@ -81,8 +110,16 @@ const ShoppingCart = () => {
                         </tbody>
                     </table>
                     {/* Nút thanh toán */}
-                    <div className="flex justify-center mt-2">
-                        <Button label="Thanh toán" variant="primary" />
+                    <div className="flex justify-end mt-2">
+                        <Button
+                            label="Thanh toán"
+                            variant="primary"
+                            onClick={() => {
+                                if (cart.length > 0) {
+                                    handleCheckout();
+                                };
+                            }}
+                        />
                     </div>
                 </div>
                 {/* Card cho màn hình < 768px */}
