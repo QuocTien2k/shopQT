@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../component/Button";
 import Title from "../component/Title/Title";
+import { AiOutlineTruck } from "react-icons/ai";
+import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
+    const navigate = useNavigate();
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
@@ -15,10 +19,30 @@ const CheckoutForm = () => {
         fullname: "",
         phone: "",
         addressDetail: "",
-        note: ""
+        note: "",
     });
 
     const [errors, setErrors] = useState({});
+
+    const [discounts, setDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(null);
+    const delivery = 30000;
+
+    // Get checkoutData từ localStorage
+    const checkoutData = JSON.parse(localStorage.getItem("checkoutData")) || { cart: [], totalAmount: 0 };
+
+    // Tính toán lại totalAmount (lấy từ checkoutData)
+    const totalAmount = checkoutData.totalAmount;
+    const finalTotal = totalAmount - (selectedDiscount?.amount || 0) + delivery;
+
+    // Fetch danh sách mã giảm giá từ API
+    useEffect(() => {
+        axios.get("http://localhost:5000/discounts")
+            .then((res) => {
+                setDiscounts(res.data);
+            })
+            .catch((err) => console.error("Lỗi khi fetch discount:", err));
+    }, []);
 
     //khi component mount lấy fulllname-phone từ localStorage
     useEffect(() => {
@@ -105,19 +129,45 @@ const CheckoutForm = () => {
             ...formData,
             province: provinceName,
             district: districtName,
-            ward: wardName
+            ward: wardName,
+            cart: checkoutData.cart, // Lưu toàn bộ danh sách sản phẩm
+            totalAmount: finalTotal, // Tổng tiền cuối cùng (đã tính giảm giá & phí ship)
+            createdAt: new Date().toISOString(), // Lưu timestamp đặt hàng
         };
 
         console.log("Dữ liệu form:", finalData);
+
+        // 🛑 Xóa checkoutData khỏi localStorage
+        localStorage.removeItem("checkoutData");
+
+        // 🚀 Reset form
+        setSelectedProvince("");
+        setSelectedDistrict("");
+        setSelectedWard("");
+        setFormData({
+            fullname: "",
+            phone: "",
+            addressDetail: "",
+            note: "",
+        });
+
+        // Hiển thị thông báo đặt hàng thành công
+        message.success({
+            content: "🚀 Đặt hàng thành công! Cảm ơn bạn đã trải nghiệm Website",
+            duration: 2,
+            onClose: () => navigate(0) //tải lại trang
+        });
+
     };
 
     return (
         <>
-            {/*Title */}
-            <Title text="Đặt hàng" />
-
             <div className="bg-white px-6">
-                <div className="md:grid md:grid-cols-12 gap-4 p-4 mx-auto">
+                {/* Title */}
+                <Title text="Đặt hàng" />
+
+                {/*Form */}
+                <div className="md:grid md:grid-cols-12 gap-6 p-4 mx-auto">
                     <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
                         {/* Infor */}
                         <div className="flex justify-between gap-4">
@@ -241,12 +291,70 @@ const CheckoutForm = () => {
                             />
                         </div>
                     </div>
-                    {/* Đường kẻ */}
-                    <div className="md:col-span-1 flex justify-center my-4 md:my-0">
-                        <div className="border border-gray-300 h-auto w-[1px] mx-2 hidden md:block"></div>
-                        <div className="border border-gray-300 w-full h-[1px] my-2 block md:hidden"></div>
+
+                    <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
+                        <div className="p-4">
+                            <h2 className="text-xl font-semibold mb-3">Thông tin sản phẩm</h2>
+
+                            {/* Danh sách sản phẩm */}
+                            <div className="max-h-60 overflow-y-auto space-y-3">
+                                {checkoutData.cart.map((item) => (
+                                    <div key={item.id} className="flex items-center justify-between border-b pb-2">
+                                        <div>
+                                            <p className="font-medium">{item.name}</p>
+                                            <p className="text-sm text-gray-600">Màu: {item.color}</p>
+                                            <p className="text-sm">Số lượng: {item.cartQuantity}</p>
+                                        </div>
+                                        <p className="font-semibold">{item.totalPrice.toLocaleString()}đ</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Phí vận chuyển */}
+                            <div className="flex items-center justify-between border-t py-3">
+                                <div className="flex items-center gap-2">
+                                    <AiOutlineTruck className="w-5 h-5 text-blue-500" />
+                                    <p>Phí vận chuyển:</p>
+                                </div>
+                                <p className="font-semibold">{delivery.toLocaleString()}đ</p>
+                            </div>
+
+                            {/* Chọn mã giảm phí vận chuyển */}
+                            <div className="mt-3">
+                                <p className="font-medium mb-1">Mã giảm phí vận chuyển</p>
+                                <select
+                                    className="border p-2 w-full rounded-md cursor-pointer"
+                                    value={selectedDiscount?.id || ""}
+                                    onChange={(e) => {
+                                        const discount = discounts.find(d => d.id === Number(e.target.value));
+                                        setSelectedDiscount(discount);
+                                    }}
+                                >
+                                    <option value="">Chọn mã giảm</option>
+                                    {discounts.map((d) => (
+                                        <option
+                                            key={d.id}
+                                            value={d.id}
+                                            disabled={totalAmount < d.minTotal}
+                                            className={totalAmount < d.minTotal ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
+                                        >
+                                            {d.name} ({d.amount.toLocaleString()}đ)
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Tổng tiền thanh toán */}
+                            <div className="flex justify-between text-lg font-semibold border-t pt-3">
+                                <p>Tổng thanh toán:</p>
+                                <p>{finalTotal.toLocaleString()}đ</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+                {/* Button */}
                 <div className="flex justify-center">
                     <Button label="Đặt hàng" variant="primary" onClick={() => handleSubmit()} />
                 </div>

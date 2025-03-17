@@ -605,5 +605,37 @@
       "password": "123456",
       "image": ""
     }
+  ],
+  "discounts": [
+    {
+      "id": 1,
+      "name": "Giảm phí vận chuyển 200k",
+      "amount": 200000,
+      "minOrderAmount": 8000000
+    },
+    {
+      "id": 2,
+      "name": "Giảm phí vận chuyển 150k",
+      "amount": 150000,
+      "minOrderAmount": 6000000
+    },
+    {
+      "id": 3,
+      "name": "Giảm phí vận chuyển 100k",
+      "amount": 100000,
+      "minOrderAmount": 4000000
+    },
+    {
+      "id": 4,
+      "name": "Giảm phí vận chuyển 70k",
+      "amount": 70000,
+      "minOrderAmount": 1000000
+    },
+    {
+      "id": 5,
+      "name": "Giảm phí vận chuyển 35k",
+      "amount": 35000,
+      "minOrderAmount": 0
+    }
   ]
 }
