@@ -327,18 +327,23 @@ const CheckoutForm = () => {
                                     value={selectedDiscount?.id || ""}
                                     onChange={(e) => {
                                         const discount = discounts.find(d => d.id === Number(e.target.value));
-                                        setSelectedDiscount(discount);
+                                        if (discount && totalAmount >= discount.minOrderAmount) {
+                                            setSelectedDiscount(discount);
+                                        }
                                     }}
                                 >
                                     <option value="">Chọn mã giảm</option>
                                     {discounts.map((d) => (
-                                        <option
-                                            key={d.id}
-                                            value={d.id}
-                                            disabled={totalAmount < d.minTotal}
-                                            className={totalAmount < d.minTotal ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
-                                        >
-                                            {d.name} ({d.amount.toLocaleString()}đ)
+                                        // <option
+                                        //     key={d.id}
+                                        //     value={d.id}
+                                        //     disabled={totalAmount < d.minOrderAmount}
+                                        //     className={totalAmount < d.minOrderAmount ? "cursor-not-allowed opacity-50 line-through" : "cursor-pointer"}
+                                        // >
+                                        //     {d.name} ({d.amount.toLocaleString()}đ)
+                                        // </option>
+                                        <option key={d.id} value={d.id} disabled={totalAmount < d.minOrderAmount}>
+                                            {totalAmount < d.minOrderAmount ? `🚫${d.name} (${d.amount.toLocaleString()}đ)🚫` : `${d.name} (${d.amount.toLocaleString()}đ)`}
                                         </option>
                                     ))}
                                 </select>
