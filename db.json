@@ -8,7 +8,12 @@
       "price": 20000000,
       "discount": 5,
       "rating": 4.8,
-      "color": ["Blue", "Pink", "Green", "Black"],
+      "color": [
+        "Blue",
+        "Pink",
+        "Green",
+        "Black"
+      ],
       "desc": "iPhone 15 Plus 128GB sở hữu màn hình Super Retina XDR 6.7 inch, cho trải nghiệm hiển thị sắc nét và sống động. Máy được trang bị chip A16 Bionic mạnh mẽ, mang lại hiệu suất vượt trội và tiết kiệm năng lượng. Camera kép 48MP cải tiến giúp chụp ảnh chuyên nghiệp với độ chi tiết cao, hỗ trợ quay video 4K sắc nét. Dung lượng pin lớn cùng cổng sạc USB-C tiện lợi, giúp sạc nhanh và kết nối linh hoạt. Thiết kế sang trọng với khung viền nhôm bền bỉ, mang đến cảm giác cầm nắm thoải mái và đẳng cấp.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9z74yim456_tn.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llm05p5nq0r39c@resize_w900_nl.webp",
@@ -24,7 +29,12 @@
       "price": 26000000,
       "discount": 7,
       "rating": 4.7,
-      "color": ["Purple", "Grey", "Black", "Yellow"],
+      "color": [
+        "Purple",
+        "Grey",
+        "Black",
+        "Yellow"
+      ],
       "desc": "Samsung Galaxy S24 Ultra là siêu phẩm flagship với màn hình Dynamic AMOLED 2X 6.8 inch, độ phân giải QHD+ và tần số quét 120Hz, mang lại trải nghiệm hiển thị siêu mượt. Máy được trang bị chip Snapdragon 8 Gen 3 mạnh mẽ, tối ưu hiệu suất và tiết kiệm pin. Hệ thống camera 200MP cải tiến, hỗ trợ zoom quang học lên đến 10x, giúp chụp ảnh sắc nét trong mọi điều kiện. Viên pin dung lượng lớn 5000mAh, hỗ trợ sạc nhanh 45W. Thiết kế sang trọng với khung viền titanium bền bỉ, tích hợp bút S Pen, mang đến sự tiện lợi cho công việc và sáng tạo.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/ca/e3/2b/5c0842a80b5b0dc7cda2dacadd6c03c5.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/c1/77/a8/e76ba6015520031ffcec09dd392480c3.jpg.webp",
@@ -40,7 +50,10 @@
       "price": 2304895,
       "discount": 10,
       "rating": 4.4,
-      "color": ["Blue", "Purple"],
+      "color": [
+        "Blue",
+        "Purple"
+      ],
       "desc": "OPPO A58 8GB là chiếc smartphone tầm trung với thiết kế trẻ trung, màn hình IPS LCD 6.72 inch Full HD+, mang đến trải nghiệm hiển thị sắc nét và sống động. Máy được trang bị vi xử lý MediaTek Helio G85, kết hợp với RAM 8GB, giúp xử lý mượt mà các tác vụ hàng ngày và chơi game ổn định. Camera chính 50MP chụp ảnh rõ nét, hỗ trợ AI tối ưu hình ảnh. Viên pin 5000mAh cùng sạc nhanh 33W đảm bảo thời gian sử dụng dài lâu. Với thiết kế mỏng nhẹ và màu sắc thời trang, OPPO A58 là lựa chọn lý tưởng cho người dùng trẻ năng động.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m0yfonrpyh4d7c@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/sg-11134201-7rdye-lzykoh65jlt48a@resize_w900_nl.webp",
@@ -55,7 +68,10 @@
       "price": 4790000,
       "discount": 8,
       "rating": 4.5,
-      "color": ["Silver", "Black"],
+      "color": [
+        "Silver",
+        "Black"
+      ],
       "desc": "Vivo Y19s là smartphone tầm trung với thiết kế hiện đại, màn hình IPS LCD 6.5 inch HD+ cho trải nghiệm hiển thị rõ nét. Máy được trang bị vi xử lý MediaTek Helio G85, kết hợp RAM 6GB giúp xử lý mượt mà các tác vụ hàng ngày. Camera kép 50MP hỗ trợ AI, chụp ảnh sắc nét trong nhiều điều kiện ánh sáng. Dung lượng pin 5000mAh cùng sạc nhanh 18W giúp sử dụng lâu dài. Với thiết kế mỏng nhẹ, màu sắc trẻ trung, Vivo Y19s là lựa chọn phù hợp cho người dùng yêu thích sự tiện lợi và hiệu năng ổn định.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/43/d4/da/94f3770c196ece20550529d9856768ba.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/f1/fe/e0/f2e7e696a51244c3f3451d357da7a87f.png.webp",
@@ -70,7 +86,11 @@
       "price": 6132000,
       "discount": 12,
       "rating": 4.4,
-      "color": ["Black", "Blue", "Green"],
+      "color": [
+        "Black",
+        "Blue",
+        "Green"
+      ],
       "desc": "Xiaomi Redmi Note 12S (8GB/256GB) sở hữu màn hình AMOLED 6.43 inch Full HD+ với tần số quét 90Hz, mang đến trải nghiệm hiển thị mượt mà và sắc nét. Máy được trang bị vi xử lý MediaTek Helio G96, kết hợp với RAM 8GB giúp xử lý đa nhiệm tốt. Camera chính 108MP chụp ảnh chi tiết, hỗ trợ quay video 4K. Viên pin 5000mAh cùng sạc nhanh 33W giúp duy trì thời gian sử dụng lâu dài. Với bộ nhớ trong 256GB, Redmi Note 12S cung cấp không gian lưu trữ rộng rãi, phù hợp cho người dùng cần hiệu năng ổn định và dung lượng lớn.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/47/ce/a1/12297e0c98ec3e3404c9e5c432454767.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/81/95/91/1bf083e6916d50f4fedce4fa778ea10d.png.webp",
@@ -85,7 +105,11 @@
       "price": 21790000,
       "discount": 5,
       "rating": 4.9,
-      "color": ["Blue", "Purple", "Space Grey"],
+      "color": [
+        "Blue",
+        "Purple",
+        "Space Grey"
+      ],
       "desc": "iPad Air (Gen 6) M2 13 inch là chiếc máy tính bảng mạnh mẽ với màn hình Liquid Retina 13 inch sắc nét, mang lại trải nghiệm hiển thị sống động. Được trang bị chip Apple M2, iPad Air Gen 6 có hiệu suất vượt trội, xử lý nhanh chóng các tác vụ từ giải trí đến công việc sáng tạo. Hỗ trợ Apple Pencil và Magic Keyboard, giúp nâng cao trải nghiệm ghi chú, vẽ và làm việc linh hoạt. Camera 12MP hỗ trợ quay video 4K, FaceTime rõ nét. Dung lượng pin bền bỉ, thiết kế mỏng nhẹ, iPad Air Gen 6 là lựa chọn lý tưởng cho học tập, công việc và giải trí di động.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwgmaqczv5qz42@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwgmaqd04zq3e3@resize_w900_nl.webp",
@@ -101,7 +125,10 @@
       "price": 28900000,
       "discount": 6,
       "rating": 4.7,
-      "color": ["Moonstone Grey", "Silver Platinum"],
+      "color": [
+        "Moonstone Grey",
+        "Silver Platinum"
+      ],
       "desc": "Samsung Galaxy Tab S10 Plus 5G là máy tính bảng cao cấp với màn hình Dynamic AMOLED 12.4 inch, độ phân giải QHD+ và tần số quét 120Hz, mang đến trải nghiệm hiển thị mượt mà và sống động. Được trang bị vi xử lý Snapdragon 8 Gen 3 mạnh mẽ, kết hợp RAM lên đến 12GB, máy đảm bảo hiệu năng vượt trội cho đa nhiệm và giải trí. Camera sau 13MP, camera trước 12MP hỗ trợ gọi video sắc nét. Viên pin 10.090mAh cùng sạc nhanh 45W giúp sử dụng bền bỉ cả ngày. Hỗ trợ bút S Pen và kết nối 5G, Tab S10 Plus 5G là lựa chọn lý tưởng cho công việc và giải trí di động.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m0s4dmst8q6n97@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m0s4dmsta4r3c9@resize_w900_nl.webp",
@@ -116,7 +143,9 @@
       "price": 11990000,
       "discount": 8,
       "rating": 4.6,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "Apple iPhone 13 sở hữu màn hình Super Retina XDR 6.1 inch với độ sáng cao, mang đến trải nghiệm hiển thị sắc nét và sống động. Máy được trang bị chip A15 Bionic mạnh mẽ, giúp xử lý mượt mà mọi tác vụ, từ chơi game đến quay video. Hệ thống camera kép 12MP cải tiến, hỗ trợ chụp ảnh sắc nét, chế độ chụp ban đêm và quay video chuẩn điện ảnh. Pin dung lượng lớn hơn thế hệ trước, cho thời gian sử dụng kéo dài. Thiết kế sang trọng với mặt kính Ceramic Shield bền bỉ, cùng nhiều tùy chọn màu sắc hiện đại, phù hợp với mọi phong cách.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/42/64/87/0ba88c34c1d968042af407fb9e4e9029.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/6a/ff/b8/58aba2228f802ff70736368ccae00ade.jpg.webp",
@@ -131,7 +160,11 @@
       "price": 4329000,
       "discount": 8,
       "rating": 4.4,
-      "color": ["Navy blue", "Steel blue", "Charcoal Grey"],
+      "color": [
+        "Navy blue",
+        "Steel blue",
+        "Charcoal Grey"
+      ],
       "desc": "Samsung Galaxy M15 5G là smartphone tầm trung với màn hình Super AMOLED 6.5 inch Full HD+, tần số quét 90Hz cho trải nghiệm mượt mà. Máy được trang bị vi xử lý MediaTek Dimensity 6100+, kết hợp RAM 6GB giúp xử lý ổn định các tác vụ hàng ngày. Hệ thống 3 camera sau với cảm biến chính 50MP, hỗ trợ AI chụp ảnh sắc nét. Viên pin 6000mAh cực khủng, sạc nhanh 25W, đảm bảo thời gian sử dụng lâu dài. Thiết kế trẻ trung, hiện đại, hỗ trợ kết nối 5G tốc độ cao, phù hợp cho người dùng thích hiệu năng bền bỉ và kết nối nhanh chóng.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/e6/ca/6a/ee0d87ed5271c4aed88953fa5a11bf1d.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/d5/48/72/0fd9d5e76b404e29e79aace83e0ca982.jpg.webp",
@@ -147,7 +180,11 @@
       "price": 7500000,
       "discount": 15,
       "rating": 4.3,
-      "color": ["Green", "Purple", "Black"],
+      "color": [
+        "Green",
+        "Purple",
+        "Black"
+      ],
       "desc": "Xiaomi Redmi Note 14 Pro 8GB/256GB là smartphone tầm trung với màn hình AMOLED 6.67 inch Full HD+, tần số quét 120Hz, mang lại trải nghiệm hiển thị mượt mà và sắc nét. Máy được trang bị vi xử lý Snapdragon 7 Gen 2 mạnh mẽ, kết hợp RAM 8GB giúp xử lý đa nhiệm tốt. Hệ thống camera 200MP hỗ trợ chống rung OIS, chụp ảnh sắc nét trong mọi điều kiện ánh sáng. Viên pin 5000mAh cùng sạc nhanh 67W giúp sử dụng cả ngày dài mà không lo gián đoạn. Thiết kế hiện đại, khung viền kim loại cao cấp, phù hợp với người dùng cần hiệu năng mạnh mẽ và thiết kế sang trọng.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m6u232g6csbc9b@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4yfuwbuvsfsb3@resize_w900_nl.webp",
@@ -163,7 +200,10 @@
       "price": 2974000,
       "discount": 10,
       "rating": 4.3,
-      "color": ["Copper Gold", "Emerald Green"],
+      "color": [
+        "Copper Gold",
+        "Emerald Green"
+      ],
       "desc": "Realme V60 (6GB/128GB) 5G là smartphone tầm trung với màn hình IPS LCD 6.6 inch Full HD+, tần số quét 120Hz cho trải nghiệm mượt mà. Máy trang bị vi xử lý MediaTek Dimensity 700 5G, kết hợp RAM 6GB giúp xử lý ổn định các tác vụ hàng ngày. Camera chính 50MP hỗ trợ AI, chụp ảnh sắc nét và quay video Full HD. Dung lượng pin 5000mAh cùng sạc nhanh 33W đảm bảo thời gian sử dụng dài lâu. Hỗ trợ kết nối 5G tốc độ cao, thiết kế trẻ trung với mặt lưng ánh gương hiện đại, phù hợp cho người dùng yêu thích hiệu năng ổn định và công nghệ tiên tiến.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/23/cc/4d/4e8dc54b550ca5438b8f3b4d5e786f7e.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/4a/81/96/07457477dcf009a0f4dd859bb8d53439.png.webp",
@@ -178,7 +218,11 @@
       "price": 14700000,
       "discount": 12,
       "rating": 4.2,
-      "color": ["Orange", "White", "Titanium Grey"],
+      "color": [
+        "Orange",
+        "White",
+        "Titanium Grey"
+      ],
       "desc": "Realme GT7 Pro 5G là flagship mạnh mẽ với màn hình AMOLED 6.78 inch 1.5K, tần số quét 144Hz, mang lại trải nghiệm hiển thị siêu mượt. Máy được trang bị vi xử lý Snapdragon 8 Gen 3, kết hợp RAM lên đến 16GB giúp xử lý nhanh chóng mọi tác vụ nặng. Hệ thống camera 50MP với cảm biến Sony cao cấp, hỗ trợ chống rung OIS, chụp ảnh sắc nét trong mọi điều kiện. Viên pin 5400mAh hỗ trợ sạc nhanh 120W, giúp nạp đầy năng lượng chỉ trong vài phút. Thiết kế cao cấp, khung viền kim loại, hỗ trợ 5G, Realme GT7 Pro là lựa chọn hoàn hảo cho hiệu năng và trải nghiệm hàng đầu.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4ocs7e8g8w71e@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4ocs7e8dg8gef@resize_w900_nl.webp",
@@ -194,7 +238,10 @@
       "price": 3069000,
       "discount": 15,
       "rating": 3.9,
-      "color": ["Green", "Yellow"],
+      "color": [
+        "Green",
+        "Yellow"
+      ],
       "desc": "Realme V60 (6GB/128GB) 5G là smartphone tầm trung với màn hình IPS LCD 6.6 inch Full HD+, tần số quét 120Hz cho trải nghiệm hiển thị mượt mà. Máy được trang bị vi xử lý MediaTek Dimensity 700 5G, kết hợp RAM 6GB giúp xử lý đa nhiệm ổn định. Hệ thống camera kép với cảm biến chính 50MP, hỗ trợ AI giúp chụp ảnh sắc nét. Viên pin 5000mAh cùng sạc nhanh 33W đảm bảo thời gian sử dụng dài lâu. Hỗ trợ kết nối 5G tốc độ cao, thiết kế trẻ trung, phù hợp với người dùng cần hiệu năng tốt và công nghệ hiện đại.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m1c4b1axxr8c23@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m1c4aj8kex5kc6@resize_w900_nl.webp",
@@ -209,7 +256,10 @@
       "price": 10250000,
       "discount": 10,
       "rating": 4.1,
-      "color": ["White", "Purple"],
+      "color": [
+        "White",
+        "Purple"
+      ],
       "desc": "Realme GT6 5G AI là smartphone cao cấp với màn hình AMOLED 6.78 inch 1.5K, tần số quét 144Hz mang lại trải nghiệm hiển thị siêu mượt. Máy được trang bị vi xử lý Snapdragon 8 Gen 2, kết hợp RAM 12GB giúp xử lý tác vụ nhanh chóng. Hệ thống camera 50MP hỗ trợ AI, chống rung OIS, chụp ảnh sắc nét trong mọi điều kiện. Viên pin 5500mAh cùng sạc nhanh 100W giúp sạc đầy trong thời gian ngắn. Thiết kế hiện đại, hỗ trợ 5G tốc độ cao, Realme GT6 5G AI là lựa chọn lý tưởng cho người dùng cần hiệu năng mạnh mẽ và công nghệ tiên tiến.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m1tjw3fyjf7j81@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/sg-11134201-7repo-m1saibqe7j25ca@resize_w900_nl.webp",
@@ -224,7 +274,10 @@
       "price": 32500000,
       "discount": 8,
       "rating": 3.9,
-      "color": ["Black", "Silver"],
+      "color": [
+        "Black",
+        "Silver"
+      ],
       "desc": "Sony Xperia 1 VI là flagship cao cấp với màn hình OLED 6.5 inch 4K HDR, tần số quét 120Hz mang đến trải nghiệm hiển thị sắc nét và chân thực. Máy được trang bị vi xử lý Snapdragon 8 Gen 3, kết hợp RAM 12GB giúp xử lý tác vụ mượt mà. Hệ thống camera 48MP với công nghệ Zeiss Optics, hỗ trợ zoom quang học liên tục, quay video 4K HDR chuyên nghiệp. Viên pin 5000mAh cùng sạc nhanh 30W đảm bảo thời gian sử dụng dài lâu. Thiết kế sang trọng, khả năng chống nước IP68, hỗ trợ 5G, Xperia 1 VI là lựa chọn hoàn hảo cho người dùng yêu thích nhiếp ảnh và giải trí cao cấp.",
       "image": "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-m5wr813n97x368@resize_w900_nl.webp",
       "image_sp_01": "https://down-vn.img.susercontent.com/file/vn-11134201-7ras8-m5wr813x8uygae@resize_w900_nl.webp",
@@ -239,7 +292,10 @@
       "price": 13850000,
       "discount": 5,
       "rating": 4.8,
-      "color": ["Purple", "Starlight"],
+      "color": [
+        "Purple",
+        "Starlight"
+      ],
       "desc": "Apple iPad mini 7 (A17 Pro) là máy tính bảng nhỏ gọn nhưng mạnh mẽ, sở hữu màn hình Liquid Retina 8.3 inch với True Tone, mang lại trải nghiệm hiển thị sắc nét. Được trang bị chip A17 Pro, hiệu năng vượt trội giúp xử lý mượt mà các tác vụ từ công việc đến giải trí. Camera chính 12MP hỗ trợ quay video 4K, camera trước 12MP với Center Stage giúp gọi video sắc nét. Hỗ trợ Apple Pencil thế hệ 2, Touch ID tích hợp nút nguồn, pin bền bỉ cả ngày. Thiết kế mỏng nhẹ, kết nối 5G và Wi-Fi 6E, iPad mini 7 là lựa chọn lý tưởng cho người dùng yêu thích sự linh hoạt.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/ac/3f/d0/b3d49213440c1b8c3ec10ca97ef6630e.jpeg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/1e/31/48/e1ab129e417bd1d1f38a4dc45b7819fe.jpeg.webp",
@@ -254,7 +310,10 @@
       "price": 6990000,
       "discount": 4,
       "rating": 4.6,
-      "color": ["Silver", "Space Grey"],
+      "color": [
+        "Silver",
+        "Space Grey"
+      ],
       "desc": "Apple iPad 10.2-inch (9th Gen)",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/44/84/b5/99190012171edee77674793a61c5a7e8.png.webp",
       "quantity": 8
@@ -267,7 +326,10 @@
       "price": 7000000,
       "discount": 3,
       "rating": 4.5,
-      "color": ["Purple", "Starlight"],
+      "color": [
+        "Purple",
+        "Starlight"
+      ],
       "desc": "iPad 10.9-inch là máy tính bảng phổ thông với màn hình Liquid Retina 10.9 inch sắc nét, hỗ trợ True Tone cho trải nghiệm hiển thị chân thực. Máy được trang bị chip A14 Bionic mạnh mẽ, giúp xử lý nhanh chóng các tác vụ từ học tập, làm việc đến giải trí. Camera sau 12MP, camera trước 12MP hỗ trợ Center Stage, tối ưu cho gọi video. Hỗ trợ Apple Pencil và Magic Keyboard, kết nối USB-C tiện lợi. Viên pin bền bỉ, thiết kế mỏng nhẹ với nhiều tùy chọn màu sắc, iPad 10.9-inch là lựa chọn phù hợp cho mọi nhu cầu sử dụng hàng ngày.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/ba/76/5b/3a6f121cb64e208aa6b2934454fa8fed.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/9c/54/65/7067ae27fb47677d1fc8b1d334ca810d.jpg.webp",
@@ -282,7 +344,9 @@
       "price": 12000000,
       "discount": 6,
       "rating": 4.2,
-      "color": ["Grey"],
+      "color": [
+        "Grey"
+      ],
       "desc": "OPPO Pad 3 8GB/256GB là máy tính bảng cao cấp với màn hình LCD 12.1 inch 3K, tần số quét 144Hz cho trải nghiệm mượt mà và sắc nét. Máy được trang bị vi xử lý Snapdragon 8 Gen 2 mạnh mẽ, kết hợp RAM 8GB giúp xử lý đa nhiệm nhanh chóng. Hệ thống âm thanh 4 loa Dolby Atmos mang đến âm thanh sống động. Camera sau 13MP, camera trước 8MP hỗ trợ gọi video chất lượng cao. Viên pin 9500mAh cùng sạc nhanh 67W đảm bảo thời gian sử dụng lâu dài. Thiết kế sang trọng, hỗ trợ bút cảm ứng OPPO Pencil, OPPO Pad 3 là lựa chọn lý tưởng cho công việc và giải trí.",
       "image": "https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/522/333917/oppo-pad-3-bac-thumb-638725440842878647-600x600.jpg",
       "image_sp_01": "https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/522/333917/oppo-pad-3-bac-4-638752291553445509-750x500.jpg",
@@ -297,7 +361,9 @@
       "price": 17000000,
       "discount": 5,
       "rating": 4.7,
-      "color": ["Blue Grey"],
+      "color": [
+        "Blue Grey"
+      ],
       "desc": "OPPO Pad 3 Pro 12GB/256GB là máy tính bảng cao cấp với màn hình LCD 12.6 inch 3K, tần số quét 144Hz, mang đến trải nghiệm hiển thị siêu mượt. Máy được trang bị vi xử lý Snapdragon 8 Gen 2 mạnh mẽ, kết hợp RAM 12GB giúp xử lý đa nhiệm nhanh chóng. Hệ thống âm thanh 4 loa Dolby Atmos cho chất lượng âm thanh sống động. Camera sau 13MP, camera trước 8MP hỗ trợ gọi video sắc nét. Viên pin 10000mAh cùng sạc nhanh 67W đảm bảo thời gian sử dụng dài lâu. Thiết kế hiện đại, hỗ trợ bút cảm ứng OPPO Pencil, OPPO Pad 3 Pro là lựa chọn lý tưởng cho công việc và giải trí di động.",
       "image": "https://cdn.tgdd.vn/Products/Images/522/332555/oppo-pad-3-pro-thumb-600x600.jpg",
       "image_sp_01": "https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/522/332555/oppo-pad-3-pro-1-638696204249303590-750x500.jpg",
@@ -312,7 +378,9 @@
       "price": 13500000,
       "discount": 2,
       "rating": 4.3,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "Asus ExpertBook B1502 - B1502CV là laptop doanh nhân với thiết kế bền bỉ, trọng lượng nhẹ, phù hợp cho công việc di động. Máy sở hữu màn hình 15.6 inch Full HD, viền mỏng, tối ưu không gian hiển thị. Được trang bị vi xử lý Intel Core thế hệ 12, kết hợp RAM lên đến 16GB, giúp xử lý đa nhiệm hiệu quả. Ổ cứng SSD 512GB cho tốc độ truy xuất dữ liệu nhanh chóng. Hệ thống bảo mật vân tay, webcam có màn che bảo vệ quyền riêng tư. Pin bền bỉ, cổng kết nối đa dạng, ExpertBook B1502 là lựa chọn lý tưởng cho doanh nghiệp và người dùng cần hiệu suất ổn định.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/c3/38/e0/78676b0c573733c58a097aaa70a97d37.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/54/7d/55/61fcb6c2768443a9afd32fd087ab3776.png.webp",
@@ -327,7 +395,9 @@
       "price": 19789000,
       "discount": 0,
       "rating": 4,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "ASUS TUF Gaming F15 là laptop gaming mạnh mẽ với thiết kế hầm hố, đạt chuẩn độ bền quân đội MIL-STD-810H. Máy sở hữu màn hình 15.6 inch Full HD, tần số quét 144Hz cho trải nghiệm chơi game mượt mà. Được trang bị vi xử lý Intel Core i7 thế hệ 12, kết hợp GPU RTX 3050/3060, mang lại hiệu suất đồ họa mạnh mẽ. RAM lên đến 16GB, SSD 512GB giúp load game nhanh chóng. Hệ thống tản nhiệt tối ưu với quạt Arc Flow, bàn phím RGB chống ghosting. Pin dung lượng cao, hỗ trợ sạc nhanh, ASUS TUF Gaming F15 là lựa chọn lý tưởng cho game thủ và người dùng cần hiệu năng cao.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/05/dd/00/87a99e299d7c1c78935921ba1cf92fe0.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/52/13/fe/fdfbf8119694e1536906e44924445fc8.jpg.webp",
@@ -343,7 +413,9 @@
       "price": 28960000,
       "discount": 0,
       "rating": 4.2,
-      "color": ["Silver"],
+      "color": [
+        "Silver"
+      ],
       "desc": "HP Envy X360 14-fc0092TU (A19C2PA) là laptop 2-in-1 cao cấp với thiết kế sang trọng, linh hoạt gập 360 độ, phù hợp cho cả công việc và giải trí. Máy sở hữu màn hình 14 inch OLED 2.8K, hỗ trợ cảm ứng, độ sáng cao, hiển thị sắc nét. Được trang bị vi xử lý Intel Core i7-1355U, kết hợp RAM 16GB giúp xử lý đa nhiệm mượt mà. Ổ cứng SSD 512GB mang lại tốc độ truy xuất dữ liệu nhanh. Hỗ trợ bút cảm ứng, bàn phím có đèn nền, cảm biến vân tay, loa Bang & Olufsen. Pin bền bỉ, sạc nhanh 65W, HP Envy X360 14 là lựa chọn lý tưởng cho người dùng sáng tạo và chuyên nghiệp.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/3c/4c/04/a1657a8e1ce5aea876d4f477b7b056c5.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/3f/17/26/8aefd977ed61d28a744e67d7eb53daca.jpg.webp",
@@ -359,7 +431,9 @@
       "price": 24700000,
       "discount": 0,
       "rating": 3.8,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "Lenovo ThinkPad T14s Gen 4 21F600A9VA là laptop doanh nhân cao cấp với thiết kế mỏng nhẹ, khung máy bền bỉ từ hợp kim nhôm và carbon. Máy sở hữu màn hình 14 inch WUXGA (1920x1200) với tỷ lệ 16:10, viền mỏng, chống chói, mang lại trải nghiệm hiển thị rõ nét. Được trang bị vi xử lý Intel Core i5-1335U, RAM 16GB LPDDR5, cùng SSD 512GB NVMe tốc độ cao, giúp xử lý đa nhiệm mượt mà. Bàn phím ThinkPad huyền thoại, bảo mật vân tay, webcam Full HD có màn che. Thời lượng pin dài, sạc nhanh 65W, Lenovo ThinkPad T14s Gen 4 là lựa chọn lý tưởng cho doanh nhân và người dùng chuyên nghiệp.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/ed/74/fb/3e5504b162b3b42c26036ad1a06b098f.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/8f/94/7b/aedbeb9fb365192a132a308d99542930.jpg.webp",
@@ -374,7 +448,9 @@
       "price": 9900000,
       "discount": 0,
       "rating": 3.5,
-      "color": ["Silver"],
+      "color": [
+        "Silver"
+      ],
       "desc": "Laptop HP 15s fq5231TU 8U241PA",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/49/78/6b/2337fd39e162bd507d37682c64bfea5c.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/0e/21/87/5d98adf684fd5d14d46649deea6e15f0.jpg.webp",
@@ -389,7 +465,10 @@
       "price": 9800000,
       "discount": 0,
       "rating": 3.5,
-      "color": ["Sky Blue", "Starry Black"],
+      "color": [
+        "Sky Blue",
+        "Starry Black"
+      ],
       "desc": "Lenovo ThinkPad X1 Carbon Gen 6 là laptop doanh nhân cao cấp với thiết kế siêu mỏng nhẹ, bền bỉ nhờ khung carbon và hợp kim magie. Máy sở hữu màn hình 14 inch Full HD, viền mỏng, cho trải nghiệm hiển thị sắc nét. Được trang bị vi xử lý Intel Core i7-8550U, kết hợp RAM 16GB và SSD 512GB, giúp xử lý công việc nhanh chóng và đa nhiệm mượt mà. Bàn phím ThinkPad cao cấp, bảo mật vân tay, webcam có màn che bảo vệ quyền riêng tư. Pin dung lượng lớn, hỗ trợ sạc nhanh, ThinkPad X1 Carbon Gen 6 là lựa chọn lý tưởng cho doanh nhân và người dùng cần sự linh hoạt.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/04/cb/33/731cc5c338a591a42275106a1dc72986.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/04/cb/33/731cc5c338a591a42275106a1dc72986.png.webp",
@@ -404,7 +483,10 @@
       "price": 13600000,
       "discount": 0,
       "rating": 3.5,
-      "color": ["Sky Blue", "Starry Black"],
+      "color": [
+        "Sky Blue",
+        "Starry Black"
+      ],
       "desc": "MSI Modern 15 F13MG-082VN là laptop văn phòng hiện đại với thiết kế mỏng nhẹ, vỏ kim loại sang trọng, phù hợp cho công việc và giải trí. Máy sở hữu màn hình 15.6 inch Full HD, viền mỏng, mang lại trải nghiệm hiển thị sắc nét. Được trang bị vi xử lý Intel Core i5-1335U, RAM 16GB và SSD 512GB, giúp xử lý đa nhiệm nhanh chóng, khởi động máy và ứng dụng mượt mà. Bàn phím full-size thoải mái, hỗ trợ đèn nền tiện lợi khi làm việc ban đêm. Cài sẵn Windows 11 bản quyền, pin bền bỉ, MSI Modern 15 là lựa chọn lý tưởng cho học sinh, sinh viên và dân văn phòng.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/72/68/fb/40b9375370ed438185512da2699c287a.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/24/7a/2c/91ff56691da82d4a030dddb6b95d9c5e.jpg.webp",
@@ -419,7 +501,9 @@
       "price": 2260000,
       "discount": 0,
       "rating": 3.5,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "MSI Katana 15 B13UDXK-2270VN là laptop gaming mạnh mẽ với thiết kế hiện đại, tông màu đen cá tính, phù hợp cho game thủ và người dùng cần hiệu năng cao. Máy sở hữu màn hình 15.6 inch Full HD, tần số quét 144Hz, mang lại trải nghiệm chơi game mượt mà. Được trang bị vi xử lý Intel Core i5-13500H cùng card đồ họa RTX 3050 6GB, máy xử lý tốt các tựa game và tác vụ đồ họa. RAM 8GB, SSD 1TB NVMe cho tốc độ truy xuất nhanh. Bàn phím có đèn nền RGB, tản nhiệt Cooler Boost tối ưu hiệu suất. Cài sẵn Windows 11 Home, MSI Katana 15 là lựa chọn lý tưởng cho game thủ đam mê hiệu suất.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/89/0f/ab/9fe489d3d7465a278e3d91580d6c3a04.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/89/09/af/2ad5a82918da61fa6d64e1d977ecd32e.jpg.webp",
@@ -434,7 +518,9 @@
       "price": 49400000,
       "discount": 5,
       "rating": 4.5,
-      "color": ["Black"],
+      "color": [
+        "Black"
+      ],
       "desc": "MacBook Pro M4 14 inch là dòng laptop cao cấp của Apple, sở hữu thiết kế sang trọng với màu Space Black hiện đại. Máy được trang bị chip M4 Pro mạnh mẽ, mang lại hiệu suất vượt trội cho các tác vụ đồ họa, chỉnh sửa video và lập trình. Màn hình Liquid Retina XDR 14 inch cho độ sáng cao, màu sắc chân thực. RAM 24GB cùng SSD 512GB đảm bảo khả năng đa nhiệm mượt mà và lưu trữ rộng rãi. Hệ thống loa 6 chiếc, bàn phím Magic Keyboard với Touch ID, thời lượng pin ấn tượng. MacBook Pro M4 là lựa chọn lý tưởng cho người dùng sáng tạo và chuyên nghiệp.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/64/7b/be/c5a4976d727fbb29e78e7b722c769d93.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/86/5b/75/32c1dadb1c8de6d7fab6d2db15347a16.jpg.webp",
@@ -450,7 +536,9 @@
       "price": 25700000,
       "discount": 28,
       "rating": 4.5,
-      "color": ["Silver"],
+      "color": [
+        "Silver"
+      ],
       "desc": "MacBook Air M3 2024 (13 inch) là dòng laptop siêu mỏng nhẹ của Apple, sở hữu thiết kế tinh tế với màu Space Grey sang trọng. Máy được trang bị chip Apple M3 mạnh mẽ, giúp xử lý mượt mà các tác vụ từ văn phòng đến sáng tạo nội dung. Màn hình Liquid Retina 13 inch hiển thị sắc nét, hỗ trợ dải màu rộng P3 và True Tone. RAM 16GB cùng SSD 256GB đảm bảo đa nhiệm tốt và tốc độ lưu trữ nhanh. Bàn phím Magic Keyboard với Touch ID, hệ thống loa sống động, thời lượng pin ấn tượng. MacBook Air M3 2024 là lựa chọn hoàn hảo cho học tập, làm việc và giải trí.",
       "image": "https://salt.tikicdn.com/cache/280x280/ts/product/51/03/fc/06e8de92fa86d0af000a0029eae9e7a8.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/77/52/fd/8e4affcb483ef37a0deb40e029b346a8.jpg.webp",
@@ -465,7 +553,9 @@
       "price": 8860000,
       "discount": 28,
       "rating": 4.5,
-      "color": ["Silver"],
+      "color": [
+        "Silver"
+      ],
       "desc": "Laptop Acer Aspire 3 A315-59-381E là mẫu laptop văn phòng phổ thông với thiết kế thanh lịch, màu bạc sang trọng, phù hợp cho học sinh, sinh viên và nhân viên văn phòng. Máy được trang bị màn hình 15.6 inch Full HD, viền mỏng, cho trải nghiệm hiển thị rộng rãi và sắc nét. Sử dụng vi xử lý Intel Core i3-1215U, RAM 8GB và SSD 512GB, giúp xử lý tốt các tác vụ học tập, làm việc và giải trí nhẹ nhàng. Card đồ họa tích hợp Intel UHD đảm bảo hiệu năng ổn định. Cài sẵn Windows 11 bản quyền, Acer Aspire 3 A315-59-381E là lựa chọn đáng cân nhắc với mức giá hợp lý.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/66/60/77/f195db4d40a7b1f1fdea7e4a56c86b5c.jpg.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/2c/44/cc/5b83cdb3e6db3c59e059303b9e6177e5.jpg.webp",
@@ -480,7 +570,9 @@
       "price": 12160000,
       "discount": 28,
       "rating": 4.5,
-      "color": ["Silver"],
+      "color": [
+        "Silver"
+      ],
       "desc": "Laptop Acer Aspire A314-42P-R3B3 là mẫu laptop mỏng nhẹ với thiết kế hiện đại, màu bạc tinh tế, phù hợp cho học sinh, sinh viên và dân văn phòng. Máy sở hữu màn hình 14.0 inch Full HD+, viền mỏng, mang đến trải nghiệm hình ảnh sắc nét. Được trang bị vi xử lý AMD Ryzen 7 5700U mạnh mẽ, RAM 16GB và SSD 512GB, laptop đảm bảo hiệu suất cao, đa nhiệm mượt mà. Card đồ họa AMD Radeon Graphics hỗ trợ tốt các tác vụ đồ họa và giải trí. Cài sẵn Windows 11 Home, thời lượng pin dài, Acer Aspire A314-42P-R3B3 là lựa chọn đáng tin cậy cho công việc và học tập.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/88/bc/e7/7c6c09e33dca2ac63f19c85e06ce940c.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/51/0d/c4/3e69b56a9149ce2a7224ce143b834921.jpg.webp",
@@ -495,7 +587,9 @@
       "price": 30460000,
       "discount": 28,
       "rating": 4.5,
-      "color": ["Silver Black"],
+      "color": [
+        "Silver Black"
+      ],
       "desc": "Laptop Gigabyte G5 KF5-53VN383SH là dòng laptop gaming hiệu năng cao, sở hữu thiết kế mạnh mẽ với tông màu đen cá tính. Máy được trang bị màn hình 15.6 inch Full HD, tần số quét cao, mang lại trải nghiệm hình ảnh mượt mà và sắc nét. Sử dụng vi xử lý Intel Core i5-13500H kết hợp với card đồ họa RTX 4060 8GB, laptop này có khả năng xử lý tốt các tựa game nặng và công việc đồ họa chuyên sâu. RAM 8GB cùng SSD 512GB đảm bảo tốc độ đa nhiệm và lưu trữ nhanh. Cài sẵn Windows 11 bản quyền, hệ thống tản nhiệt tối ưu, Gigabyte G5 KF5 là lựa chọn lý tưởng cho game thủ và người dùng yêu thích hiệu suất cao.",
       "image": "https://salt.tikicdn.com/cache/750x750/ts/product/38/78/37/a88d60c99852ce1d2ea4978919c58edf.png.webp",
       "image_sp_01": "https://salt.tikicdn.com/cache/750x750/ts/product/08/e7/ec/4bc35a59bd19cd6518d733ec73d51935.jpg.webp",
@@ -604,35 +698,46 @@
       "email": "hadesdqt@gmail.com",
       "password": "123456",
       "image": ""
+    },
+    {
+      "id": "6956",
+      "firstname": "DO QUOC",
+      "lastname": "DAT",
+      "fullname": "DO QUOC DAT",
+      "sex": true,
+      "phone": "0908221710",
+      "email": "quocdat9.12@gmail.com",
+      "password": "123456",
+      "image": ""
     }
   ],
   "discounts": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Giảm phí vận chuyển 200k",
       "amount": 200000,
       "minOrderAmount": 8000000
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Giảm phí vận chuyển 150k",
       "amount": 150000,
       "minOrderAmount": 6000000
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Giảm phí vận chuyển 100k",
       "amount": 100000,
       "minOrderAmount": 4000000
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Giảm phí vận chuyển 70k",
       "amount": 70000,
       "minOrderAmount": 1000000
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Giảm phí vận chuyển 35k",
       "amount": 35000,
       "minOrderAmount": 0

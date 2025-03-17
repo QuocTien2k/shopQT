@@ -1,14 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../component/Context/DataContext"
 import { Image, message, Modal, Tooltip } from "antd";
 import { formatCurrency } from "../utils/helpers"
 import CartCardMobile from "./CartCardMobile";
 import Button from "../component/Button";
 import { useNavigate } from "react-router-dom";
+import EmptyCart from "../component/EmptyCart/EmptyCart";
 
 const ShoppingCart = () => {
     const { cart, removeFromCart, updateCartItemColor, updateCartQuantity, getColorCode } = useContext(DataContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (!userData) {
+            localStorage.removeItem("checkoutData"); // Xóa dữ liệu thanh toán    
+        }
+    }, []);
+
     //Xử lý nút thanh toán
     const handleCheckout = () => {
         if (cart.length === 0) return;
@@ -37,16 +46,14 @@ const ShoppingCart = () => {
 
                 setTimeout(() => {
                     navigate('/checkout');
-                }, 800)
+                }, 1000)
             }
         });
     };
 
     return (
         cart.length === 0 ? (
-            <div className="bg-white text-lg">
-                <p>Giỏ hàng của bạn đang trống.</p>
-            </div>
+            <EmptyCart />
         ) : (
             <div className="shopping-cart-bg container mt-3 p-8 rounded-lg shadow-gradient">
                 {/*Table for Screen >= 768px */}

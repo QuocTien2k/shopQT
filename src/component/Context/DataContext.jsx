@@ -5,6 +5,7 @@ import React, { createContext, useEffect, useState } from 'react'
 export const DataContext = createContext();
 const ContextProvider = ({ children }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
 
@@ -125,7 +126,7 @@ const ContextProvider = ({ children }) => {
     return (
         <DataContext.Provider
             value={{
-                isModalOpen, setIsModalOpen, handleOpenModal, setIsAuthenticated,
+                isModalOpen, setIsModalOpen, isOpen, setIsOpen, handleOpenModal, setIsAuthenticated,
                 handleCloseModal, isAuthenticated, user, setUser, addToCart, cart, updateCartItemColor,
                 updateCartQuantity, removeFromCart, currentPage, setCurrentPage, itemsPerPage, isMobile,
                 getColorCode

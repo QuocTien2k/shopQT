@@ -26,7 +26,7 @@ const Header = () => {
         localStorage.removeItem("user");
         setIsAuthenticated(false);
         setUser(null);
-        Navigate("/");
+        navigate(0);
     };
 
     //handle save
