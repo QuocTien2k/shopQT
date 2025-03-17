@@ -8,6 +8,8 @@ import ShoppingCart from './Pages/ShoppingCart'
 import MainLayout from './Router/MainLayout'
 import ContextProvider from './component/Context/DataContext'
 import ProductDetail from './Pages/ProductDetail'
+import CheckoutForm from './Pages/Checkout'
+
 function App() {
 
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/cart" element={<ShoppingCart />} />
+            <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/product/:id" element={<ProductDetail />} />
           </Route>
 

@@ -4,10 +4,11 @@ import { Image, message, Modal, Tooltip } from "antd";
 import { formatCurrency } from "../utils/helpers"
 import CartCardMobile from "./CartCardMobile";
 import Button from "../component/Button";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
     const { cart, removeFromCart, updateCartItemColor, updateCartQuantity, getColorCode } = useContext(DataContext);
-
+    const navigate = useNavigate();
     //Xử lý nút thanh toán
     const handleCheckout = () => {
         if (cart.length === 0) return;
@@ -33,6 +34,10 @@ const ShoppingCart = () => {
 
                 localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
                 message.success("Thanh toán thành công!");
+
+                setTimeout(() => {
+                    navigate('/checkout');
+                }, 800)
             }
         });
     };
