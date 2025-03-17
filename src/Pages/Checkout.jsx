@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../component/Button";
+import Title from "../component/Title/Title";
 
 const CheckoutForm = () => {
     const [provinces, setProvinces] = useState([]);
@@ -113,145 +114,142 @@ const CheckoutForm = () => {
     return (
         <>
             {/*Title */}
-            <div className="flex justify-center bg-white">
-                <h2 className="relative text-3xl font-bold text-gray-800 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white before:to-transparent before:animate-shimmer">
-                    Đặt hàng
-                </h2>
+            <Title text="Đặt hàng" />
 
-            </div>
+            <div className="bg-white px-6">
+                <div className="md:grid md:grid-cols-12 gap-4 p-4 mx-auto">
+                    <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
+                        {/* Infor */}
+                        <div className="flex justify-between gap-4">
+                            <div className="flex-1">
+                                <label className="block font-medium">Họ và tên</label>
+                                <input
+                                    type="text"
+                                    placeholder="Nhập họ và tên"
+                                    value={formData.fullname}
+                                    onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
+                                    className="w-full border outline-none p-2 rounded-md"
+                                />
+                            </div>
 
-            <div className="md:grid md:grid-cols-12 gap-4 p-4 mx-auto bg-white">
-                <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
-                    {/* Infor */}
-                    <div className="flex justify-between gap-4">
-                        <div className="flex-1">
-                            <label className="block font-medium">Họ và tên</label>
+                            <div className="flex-1">
+                                <label className="block font-medium">Số điện thoại</label>
+                                <input
+                                    type="text"
+                                    placeholder="Nhập số điện thoại"
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    className="w-full border outline-none p-2 rounded-md"
+                                />
+                                <div className="min-h-[16px] text-red-500 text-sm">
+                                    {errors.phone && <p>{errors.phone}</p>}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Tỉnh/Thành - Quận/Huyện - Phường/Xã */}
+                        <div className="flex justify-between gap-4 mt-3">
+                            {/* Tỉnh/Thành */}
+                            <div className="flex-1">
+                                <label className="block font-medium">Tỉnh/Thành</label>
+                                <select
+                                    className="w-full border p-2 rounded-md cursor-pointer"
+                                    value={selectedProvince}
+                                    onChange={(e) => {
+                                        setSelectedProvince(e.target.value);
+                                        setSelectedDistrict(""); // Reset quận/huyện
+                                        setSelectedWard(""); // Reset phường/xã
+                                    }}
+                                >
+                                    <option value="">Chọn tỉnh/thành</option>
+                                    {provinces.map((prov) => (
+                                        <option key={prov.code} value={prov.code}>{prov.name}</option>
+                                    ))}
+                                </select>
+                                <div className="min-h-[16px] text-red-500 text-sm">
+                                    {errors.province && <p>{errors.province}</p>}
+                                </div>
+                            </div>
+
+                            {/* Quận/Huyện */}
+                            <div className="flex-1">
+                                <label className="block font-medium">Quận/Huyện</label>
+                                <select
+                                    value={selectedDistrict}
+                                    onChange={(e) => {
+                                        setSelectedDistrict(e.target.value);
+                                        setSelectedWard(""); // Reset phường/xã
+                                    }}
+                                    disabled={!selectedProvince} // Chỉ cho chọn khi đã có tỉnh/thành
+                                    className={`w-full border p-2 rounded-md ${!selectedProvince ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                >
+                                    <option value="">Chọn quận/huyện</option>
+                                    {districts.map((dist) => (
+                                        <option key={dist.code} value={dist.code}>{dist.name}</option>
+                                    ))}
+                                </select>
+                                <div className="min-h-[16px] text-red-500 text-sm">
+                                    {errors.district && <p>{errors.district}</p>}
+                                </div>
+                            </div>
+
+                            {/* Phường/Xã */}
+                            <div className="flex-1">
+                                <label className="block font-medium">Phường/Xã</label>
+                                <select
+                                    value={selectedWard}
+                                    onChange={(e) => setSelectedWard(e.target.value)}
+                                    disabled={!selectedDistrict} // Chỉ cho chọn khi đã có quận/huyện
+                                    className={`w-full border p-2 rounded-md ${!selectedDistrict ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                >
+                                    <option value="">Chọn phường/xã</option>
+                                    {wards.map((ward) => (
+                                        <option key={ward.code} value={ward.code}>{ward.name}</option>
+                                    ))}
+                                </select>
+                                <div className="min-h-[16px] text-red-500 text-sm">
+                                    {errors.ward && <p>{errors.ward}</p>}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Địa chỉ cụ thể */}
+                        <div className="mt-4">
+                            <label className="block font-medium mb-1">Địa chỉ</label>
                             <input
                                 type="text"
-                                placeholder="Nhập họ và tên"
-                                value={formData.fullname}
-                                onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
-                                className="w-full border outline-none p-2 rounded-md"
-                            />
-                        </div>
-
-                        <div className="flex-1">
-                            <label className="block font-medium">Số điện thoại</label>
-                            <input
-                                type="text"
-                                placeholder="Nhập số điện thoại"
-                                value={formData.phone}
-                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                placeholder="Số nhà, tên đường"
+                                value={formData.addressDetail}
+                                onChange={(e) =>
+                                    setFormData({ ...formData, addressDetail: e.target.value })
+                                }
                                 className="w-full border outline-none p-2 rounded-md"
                             />
                             <div className="min-h-[16px] text-red-500 text-sm">
-                                {errors.phone && <p>{errors.phone}</p>}
+                                {errors.addressDetail && <p>{errors.addressDetail}</p>}
                             </div>
+                        </div>
+
+                        {/* Ghi chú */}
+                        <div className="mt-4">
+                            <label className="block font-medium mb-1">Ghi chú</label>
+                            <textarea
+                                placeholder="Nhập ghi chú (nếu có)"
+                                value={formData.note}
+                                onChange={(e) => setFormData({ ...formData, note: e.target.value })}
+                                className="w-full border p-2 rounded-md h-24 resize-none"
+                            />
                         </div>
                     </div>
-
-                    {/* Tỉnh/Thành - Quận/Huyện - Phường/Xã */}
-                    <div className="flex justify-between gap-4 mt-3">
-                        {/* Tỉnh/Thành */}
-                        <div className="flex-1">
-                            <label className="block font-medium">Tỉnh/Thành</label>
-                            <select
-                                className="w-full border p-2 rounded-md cursor-pointer"
-                                value={selectedProvince}
-                                onChange={(e) => {
-                                    setSelectedProvince(e.target.value);
-                                    setSelectedDistrict(""); // Reset quận/huyện
-                                    setSelectedWard(""); // Reset phường/xã
-                                }}
-                            >
-                                <option value="">Chọn tỉnh/thành</option>
-                                {provinces.map((prov) => (
-                                    <option key={prov.code} value={prov.code}>{prov.name}</option>
-                                ))}
-                            </select>
-                            <div className="min-h-[16px] text-red-500 text-sm">
-                                {errors.province && <p>{errors.province}</p>}
-                            </div>
-                        </div>
-
-                        {/* Quận/Huyện */}
-                        <div className="flex-1">
-                            <label className="block font-medium">Quận/Huyện</label>
-                            <select
-                                value={selectedDistrict}
-                                onChange={(e) => {
-                                    setSelectedDistrict(e.target.value);
-                                    setSelectedWard(""); // Reset phường/xã
-                                }}
-                                disabled={!selectedProvince} // Chỉ cho chọn khi đã có tỉnh/thành
-                                className={`w-full border p-2 rounded-md ${!selectedProvince ? "cursor-not-allowed" : "cursor-pointer"}`}
-                            >
-                                <option value="">Chọn quận/huyện</option>
-                                {districts.map((dist) => (
-                                    <option key={dist.code} value={dist.code}>{dist.name}</option>
-                                ))}
-                            </select>
-                            <div className="min-h-[16px] text-red-500 text-sm">
-                                {errors.district && <p>{errors.district}</p>}
-                            </div>
-                        </div>
-
-                        {/* Phường/Xã */}
-                        <div className="flex-1">
-                            <label className="block font-medium">Phường/Xã</label>
-                            <select
-                                value={selectedWard}
-                                onChange={(e) => setSelectedWard(e.target.value)}
-                                disabled={!selectedDistrict} // Chỉ cho chọn khi đã có quận/huyện
-                                className={`w-full border p-2 rounded-md ${!selectedDistrict ? "cursor-not-allowed" : "cursor-pointer"}`}
-                            >
-                                <option value="">Chọn phường/xã</option>
-                                {wards.map((ward) => (
-                                    <option key={ward.code} value={ward.code}>{ward.name}</option>
-                                ))}
-                            </select>
-                            <div className="min-h-[16px] text-red-500 text-sm">
-                                {errors.ward && <p>{errors.ward}</p>}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Địa chỉ cụ thể */}
-                    <div className="mt-4">
-                        <label className="block font-medium mb-1">Địa chỉ</label>
-                        <input
-                            type="text"
-                            placeholder="Số nhà, tên đường"
-                            value={formData.addressDetail}
-                            onChange={(e) =>
-                                setFormData({ ...formData, addressDetail: e.target.value })
-                            }
-                            className="w-full border outline-none p-2 rounded-md"
-                        />
-                        <div className="min-h-[16px] text-red-500 text-sm">
-                            {errors.addressDetail && <p>{errors.addressDetail}</p>}
-                        </div>
-                    </div>
-
-                    {/* Ghi chú */}
-                    <div className="mt-4">
-                        <label className="block font-medium mb-1">Ghi chú</label>
-                        <textarea
-                            placeholder="Nhập ghi chú (nếu có)"
-                            value={formData.note}
-                            onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                            className="w-full border p-2 rounded-md h-24 resize-none"
-                        />
+                    {/* Đường kẻ */}
+                    <div className="md:col-span-1 flex justify-center my-4 md:my-0">
+                        <div className="border border-gray-300 h-auto w-[1px] mx-2 hidden md:block"></div>
+                        <div className="border border-gray-300 w-full h-[1px] my-2 block md:hidden"></div>
                     </div>
                 </div>
-                {/* Đường kẻ */}
-                <div className="md:col-span-1 flex justify-center my-4 md:my-0">
-                    <div className="border border-gray-300 h-auto w-[1px] mx-2 hidden md:block"></div>
-                    <div className="border border-gray-300 w-full h-[1px] my-2 block md:hidden"></div>
+                <div className="flex justify-center">
+                    <Button label="Đặt hàng" variant="primary" onClick={() => handleSubmit()} />
                 </div>
-            </div>
-            <div className="flex justify-center">
-                <Button label="Đặt hàng" variant="primary" onClick={() => handleSubmit()} />
             </div>
         </>
     );
