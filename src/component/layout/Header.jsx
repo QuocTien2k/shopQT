@@ -164,7 +164,6 @@ const Header = () => {
                                         {/* Buttons */}
                                         <div className="flex flex-col gap-2 mt-3 items-center">
                                             <Button onClick={handleOpenModal} label="Cập nhật" variant="primary" />
-                                            <ModalUpdateInfo open={isModalOpen} onClose={handleCloseModal} />
                                             <Button onClick={handleLogout} label="Đăng xuất" variant="primary" />
                                         </div>
                                     </div>
@@ -196,7 +195,7 @@ const Header = () => {
 
             {/* Mobile Menu */}
             <div className={`z-30 absolute top-[4.6rem] right-2 w-[200px] bg-white shadow-lg rounded-lg p-3 transition-all duration-300 md:hidden
-            ${isMobileMenuOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}>
+            ${isMobileMenuOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}`}>
                 <nav className="flex flex-col gap-4 text-lg font-medium text-[13px]">
                     <Link to="/" className="text-gray-700" onClick={toggleMenu}>Trang chủ</Link>
 
@@ -223,7 +222,7 @@ const Header = () => {
                     )}
                 </nav>
             </div>
-
+            <ModalUpdateInfo open={isModalOpen} onClose={handleCloseModal} />
         </header>
     );
 };

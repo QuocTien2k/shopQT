@@ -11,15 +11,18 @@ const ContextProvider = ({ children }) => {
 
     // State cho Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Số sản phẩm trên mỗi trang
+    const [itemsPerPage, setItemsPerPage] = useState(window.innerWidth < 768 ? 4 : 10); // Mặc định theo màn hình
 
     //State on Mobile
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 820); // Xác định màn hình nhỏ
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Xác định màn hình nhỏ
     // Theo dõi thay đổi kích thước màn hình
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+            const isNowMobile = window.innerWidth < 768;
+            setIsMobile(isNowMobile);
+            setItemsPerPage(isNowMobile ? 4 : 10); // Cập nhật số sản phẩm trên mỗi trang
         };
+
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
@@ -113,7 +116,6 @@ const ContextProvider = ({ children }) => {
         return colorMap[color] || "#D3D3D3"; // Mặc định là màu xám nhạt nếu không có trong danh sách
     };
 
-
     const handleOpenModal = () => {
         setIsModalOpen(true);
     }
@@ -121,7 +123,6 @@ const ContextProvider = ({ children }) => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     }
-
 
     return (
         <DataContext.Provider

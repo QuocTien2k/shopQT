@@ -76,12 +76,6 @@ const CartCardMobile = () => {
             <div className="mt-3 px-4 py-2 text-center font-bold">
                 <p>Tổng tiền: {formatCurrency(cart.reduce((acc, item) => acc + item.price * item.cartQuantity, 0))}</p>
             </div>
-
-            {/* Nút thanh toán */}
-            <div className="flex justify-center mt-2">
-                <Button label="Thanh toán" variant="primary" />
-            </div>
-
         </div>
     );
 };

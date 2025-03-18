@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { DataContext } from "../component/Context/DataContext"
-import { Image, message, Modal, Tooltip } from "antd";
+import { Image, Modal, Tooltip } from "antd";
 import { formatCurrency } from "../utils/helpers"
 import CartCardMobile from "./CartCardMobile";
 import Button from "../component/Button";
@@ -42,7 +42,6 @@ const ShoppingCart = () => {
                 };
 
                 localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
-                message.success("Thanh toán thành công!");
 
                 setTimeout(() => {
                     navigate('/checkout');
@@ -55,7 +54,7 @@ const ShoppingCart = () => {
         cart.length === 0 ? (
             <EmptyCart />
         ) : (
-            <div className="shopping-cart-bg container mt-3 p-8 rounded-lg shadow-gradient">
+            <div className="shopping-cart-bg container my-3 p-8 rounded-lg shadow-gradient">
                 {/*Table for Screen >= 768px */}
                 <div className="hidden md:block">
                     <table className="w-full border-collapse border border-gray-300">
@@ -133,21 +132,21 @@ const ShoppingCart = () => {
                             </tr>
                         </tbody>
                     </table>
-                    {/* Nút thanh toán */}
-                    <div className="flex justify-end mt-2">
-                        <Button
-                            label="Thanh toán"
-                            variant="primary"
-                            onClick={() => {
-                                if (cart.length > 0) {
-                                    handleCheckout();
-                                };
-                            }}
-                        />
-                    </div>
                 </div>
                 {/* Card cho màn hình < 768px */}
                 <CartCardMobile />
+                {/* Nút thanh toán */}
+                <div className="flex justify-center md:justify-end mt-2">
+                    <Button
+                        label="Thanh toán"
+                        variant="primary"
+                        onClick={() => {
+                            if (cart.length > 0) {
+                                handleCheckout();
+                            };
+                        }}
+                    />
+                </div>
             </div>
         )
     )

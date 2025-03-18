@@ -199,12 +199,12 @@ const CheckoutForm = () => {
                     </div>
                 </div>
             ) : (
-                <div className="bg-white px-6">
+                <div className="bg-white px-6 pb-3 mb-3">
                     {/* Title */}
                     <Title text="Đặt hàng" />
 
                     {/*Form */}
-                    <div className="md:grid md:grid-cols-12 gap-6 p-4 mx-auto">
+                    <div className="grid md:grid-cols-12 gap-4 p-4 mx-auto">
                         <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
                             {/* Infor */}
                             <div className="flex justify-between gap-4">
