@@ -296,7 +296,7 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                                 id="upload-avatar"
                                 type="file"
                                 accept="image/*"
-                                hidden
+                                style={{ display: "none" }}
                                 onChange={(e) => onSelectFile(e)}
                             />
                         </div>
