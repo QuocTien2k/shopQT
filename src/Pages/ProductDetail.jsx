@@ -58,7 +58,7 @@ const ProductDetail = () => {
     if (!product) return <p className="text-center text-red-500">Sản phẩm không tồn tại!</p>; //Nếu lỗi API
 
     return (
-        <div className="p-6 bg-white">
+        <div className="px-6 pt-[70px] md:pt-[88px] md:mt-4 bg-white">
             <div className="md:grid md:grid-cols-12 md:gap-4 flex flex-col gap-6">
                 {/* Hình ảnh sản phẩm */}
                 <div className="md:col-span-4 flex flex-col items-center">

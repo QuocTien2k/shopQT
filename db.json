@@ -462,7 +462,7 @@
       "name": "LAPTOP Thinkpad X1 Carbon Gen 6",
       "brand": "Lenovo",
       "category": "Laptop",
-      "price": 9800000,
+      "price": 2060000,
       "discount": 0,
       "rating": 3.5,
       "color": [
@@ -700,15 +700,15 @@
       "image": ""
     },
     {
-      "id": "6956",
-      "firstname": "DO QUOC",
+      "firstname": "DO",
       "lastname": "DAT",
-      "fullname": "DO QUOC DAT",
-      "sex": true,
+      "fullname": "DAT DO",
       "phone": "0908221710",
       "email": "quocdat9.12@gmail.com",
-      "password": "123456",
-      "image": ""
+      "password": "456789",
+      "confirmPassword": "456789",
+      "image": "",
+      "id": "6956"
     }
   ],
   "discounts": [
@@ -732,9 +732,9 @@
     },
     {
       "id": "4",
-      "name": "Giảm phí vận chuyển 70k",
-      "amount": 70000,
-      "minOrderAmount": 1000000
+      "name": "Giảm phí vận chuyển 50k",
+      "amount": 50000,
+      "minOrderAmount": 100000
     },
     {
       "id": "5",

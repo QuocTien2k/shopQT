@@ -49,7 +49,7 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                 break;
             case "lastname":
                 if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
-                    error = "Họ phải có từ 4-25 ký tự và không chứa số";
+                    error = "Họ và tên lót phải có từ 4-25 ký tự không chứa số";
                 }
                 break;
             case "phone":
@@ -151,7 +151,7 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             }
 
             //kiểm tra email + sđt
-            const checkRes = await fetch('http://192.168.100.11:5000/users');
+            const checkRes = await fetch('http://localhost:5000/users');
             const users = await checkRes.json();
 
             const isEmailExist = users.some((u) => u.email === formData.email && u.id !== user.id);
@@ -216,13 +216,16 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                 <Form layout="vertical">
                     {/* Họ & Tên trên cùng một hàng */}
                     <div className="grid grid-cols-2 gap-2">
-                        <Form.Item label="Họ">
+                        <Form.Item label="Họ và tên lót">
                             <Input
                                 name="lastname"
                                 value={formData.lastname}
                                 onChange={(e) => updateField("lastname", e.target.value)}
                                 onBlur={(e) => validateField("lastname", e.target.value)}
                             />
+                            <div className="h-3">
+                                {errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
+                            </div>
                         </Form.Item>
                         <Form.Item label="Tên">
                             <Input
@@ -231,6 +234,9 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                                 onChange={(e) => updateField("firstname", e.target.value)}
                                 onBlur={(e) => validateField("firstname", e.target.value)}
                             />
+                            <div className="h-3">
+                                {errors.firstname && <p className="text-red-500 text-sm">{errors.firstname}</p>}
+                            </div>
                         </Form.Item>
                     </div>
 
@@ -242,12 +248,21 @@ const ModalUpdateInfo = ({ open, onClose }) => {
                     </Form.Item>
                     <Form.Item label="Email">
                         <Input name="email" value={formData.email} onChange={(e) => updateField("email", e.target.value)} onBlur={(e) => validateField("email", e.target.value)} />
+                        <div className="h-3">
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        </div>
                     </Form.Item>
                     <Form.Item label="Mật khẩu">
                         <Input.Password name="password" value={formData.password} onChange={(e) => updateField("password", e.target.value)} />
+                        <div className="h-3">
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                        </div>
                     </Form.Item>
                     <Form.Item label="Nhập lại mật khẩu">
                         <Input.Password name="confirmPassword" value={formData.confirmPassword} onChange={(e) => updateField("confirmPassword", e.target.value)} onBlur={(e) => validateField("confirmPassword", e.target.value)} />
+                        <div className="h-3">
+                            {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+                        </div>
                     </Form.Item>
 
                     {/* Ảnh đại diện */}

@@ -6,6 +6,7 @@ import { AiOutlineTruck } from "react-icons/ai";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../component/Context/DataContext";
+import EmptyCart from "../component/EmptyCart/EmptyCart";
 
 const CheckoutForm = () => {
     const navigate = useNavigate();
@@ -186,223 +187,214 @@ const CheckoutForm = () => {
     return (
         <>
             {isOpen ? (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                        <h2 className="text-lg font-semibold text-red-600">⚠ Giỏ hàng trống!</h2>
-                        <p className="mt-2">Vui lòng chọn sản phẩm trước khi thanh toán.</p>
-                        <button
-                            onClick={() => navigate("/cart")}
-                            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                        >
-                            Quay lại giỏ hàng
-                        </button>
-                    </div>
-                </div>
+                <EmptyCart />
             ) : (
-                <div className="bg-white px-6 pb-3 mb-3">
-                    {/* Title */}
-                    <Title text="Đặt hàng" />
+                <div className="pt-[70px] md:pt-[90px]">
+                    <div className="bg-white px-6 py-3 mb-3">
+                        {/* Title */}
+                        <Title text="Đặt hàng" />
 
-                    {/*Form */}
-                    <div className="grid md:grid-cols-12 gap-4 p-4 mx-auto">
-                        <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
-                            {/* Infor */}
-                            <div className="flex justify-between gap-4">
-                                <div className="flex-1">
-                                    <label className="block font-medium">Họ và tên</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Nhập họ và tên"
-                                        value={formData.fullname}
-                                        onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
-                                        className="w-full border outline-none p-2 rounded-md"
-                                    />
-                                </div>
-
-                                <div className="flex-1">
-                                    <label className="block font-medium">Số điện thoại</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Nhập số điện thoại"
-                                        value={formData.phone}
-                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        className="w-full border outline-none p-2 rounded-md"
-                                    />
-                                    <div className="min-h-[16px] text-red-500 text-sm">
-                                        {errors.phone && <p>{errors.phone}</p>}
+                        {/*Form */}
+                        <div className="grid md:grid-cols-12 gap-4 p-4 mx-auto">
+                            <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
+                                {/* Infor */}
+                                <div className="flex justify-between gap-4">
+                                    <div className="flex-1">
+                                        <label className="block font-medium">Họ và tên</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Nhập họ và tên"
+                                            value={formData.fullname}
+                                            onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
+                                            className="w-full border outline-none p-2 rounded-md"
+                                        />
                                     </div>
-                                </div>
-                            </div>
 
-                            {/* Tỉnh/Thành - Quận/Huyện - Phường/Xã */}
-                            <div className="flex justify-between gap-4 mt-3">
-                                {/* Tỉnh/Thành */}
-                                <div className="flex-1">
-                                    <label className="block font-medium">Tỉnh/Thành</label>
-                                    <select
-                                        className="w-full border p-2 rounded-md cursor-pointer"
-                                        value={selectedProvince}
-                                        onChange={(e) => {
-                                            setSelectedProvince(e.target.value);
-                                            setSelectedDistrict(""); // Reset quận/huyện
-                                            setSelectedWard(""); // Reset phường/xã
-                                        }}
-                                    >
-                                        <option value="">Chọn tỉnh/thành</option>
-                                        {provinces.map((prov) => (
-                                            <option key={prov.code} value={prov.code}>{prov.name}</option>
-                                        ))}
-                                    </select>
-                                    <div className="min-h-[16px] text-red-500 text-sm">
-                                        {errors.province && <p>{errors.province}</p>}
-                                    </div>
-                                </div>
-
-                                {/* Quận/Huyện */}
-                                <div className="flex-1">
-                                    <label className="block font-medium">Quận/Huyện</label>
-                                    <select
-                                        value={selectedDistrict}
-                                        onChange={(e) => {
-                                            setSelectedDistrict(e.target.value);
-                                            setSelectedWard(""); // Reset phường/xã
-                                        }}
-                                        disabled={!selectedProvince} // Chỉ cho chọn khi đã có tỉnh/thành
-                                        className={`w-full border p-2 rounded-md ${!selectedProvince ? "cursor-not-allowed" : "cursor-pointer"}`}
-                                    >
-                                        <option value="">Chọn quận/huyện</option>
-                                        {districts.map((dist) => (
-                                            <option key={dist.code} value={dist.code}>{dist.name}</option>
-                                        ))}
-                                    </select>
-                                    <div className="min-h-[16px] text-red-500 text-sm">
-                                        {errors.district && <p>{errors.district}</p>}
-                                    </div>
-                                </div>
-
-                                {/* Phường/Xã */}
-                                <div className="flex-1">
-                                    <label className="block font-medium">Phường/Xã</label>
-                                    <select
-                                        value={selectedWard}
-                                        onChange={(e) => setSelectedWard(e.target.value)}
-                                        disabled={!selectedDistrict} // Chỉ cho chọn khi đã có quận/huyện
-                                        className={`w-full border p-2 rounded-md ${!selectedDistrict ? "cursor-not-allowed" : "cursor-pointer"}`}
-                                    >
-                                        <option value="">Chọn phường/xã</option>
-                                        {wards.map((ward) => (
-                                            <option key={ward.code} value={ward.code}>{ward.name}</option>
-                                        ))}
-                                    </select>
-                                    <div className="min-h-[16px] text-red-500 text-sm">
-                                        {errors.ward && <p>{errors.ward}</p>}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Địa chỉ cụ thể */}
-                            <div className="mt-4">
-                                <label className="block font-medium mb-1">Địa chỉ</label>
-                                <input
-                                    type="text"
-                                    placeholder="Số nhà, tên đường"
-                                    value={formData.addressDetail}
-                                    onChange={(e) =>
-                                        setFormData({ ...formData, addressDetail: e.target.value })
-                                    }
-                                    className="w-full border outline-none p-2 rounded-md"
-                                />
-                                <div className="min-h-[16px] text-red-500 text-sm">
-                                    {errors.addressDetail && <p>{errors.addressDetail}</p>}
-                                </div>
-                            </div>
-
-                            {/* Ghi chú */}
-                            <div className="mt-4">
-                                <label className="block font-medium mb-1">Ghi chú</label>
-                                <textarea
-                                    placeholder="Nhập ghi chú (nếu có)"
-                                    value={formData.note}
-                                    onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                                    className="w-full border p-2 rounded-md h-24 resize-none"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
-                            <div className="p-4">
-                                <h2 className="text-xl font-semibold mb-3">Thông tin sản phẩm</h2>
-
-                                {/* Danh sách sản phẩm */}
-                                <div className="max-h-60 overflow-y-auto space-y-3">
-                                    {checkoutData.cart.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between border-b pb-2">
-                                            <div>
-                                                <p className="font-medium">{item.name}</p>
-                                                <p className="text-sm text-gray-600">Màu: {item.color}</p>
-                                                <p className="text-sm">Số lượng: {item.cartQuantity}</p>
-                                            </div>
-                                            <p className="font-semibold">{item.totalPrice.toLocaleString()}đ</p>
+                                    <div className="flex-1">
+                                        <label className="block font-medium">Số điện thoại</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Nhập số điện thoại"
+                                            value={formData.phone}
+                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                            className="w-full border outline-none p-2 rounded-md"
+                                        />
+                                        <div className="min-h-[16px] text-red-500 text-sm">
+                                            {errors.phone && <p>{errors.phone}</p>}
                                         </div>
-                                    ))}
-                                </div>
-
-                                {/* Phí vận chuyển */}
-                                <div className="flex items-center justify-between border-t py-3">
-                                    <div className="flex items-center gap-2">
-                                        <AiOutlineTruck className="w-5 h-5 text-blue-500" />
-                                        <p>Phí vận chuyển:</p>
                                     </div>
-                                    <p className="font-semibold">{delivery.toLocaleString()}đ</p>
                                 </div>
 
-                                {/* Chọn mã giảm phí vận chuyển */}
-                                <div className="mt-3">
-                                    <p className="font-medium mb-1">Mã giảm phí vận chuyển</p>
-                                    <select
-                                        className="border p-2 w-full rounded-md cursor-pointer"
-                                        value={selectedDiscount ? selectedDiscount.id : ""}
-                                        onChange={(e) => {
-                                            const selectedId = Number(e.target.value);
-                                            console.log("Selected ID:", selectedId);
-                                            const discount = discounts.find(d => Number(d.id) === selectedId);
-                                            console.log("Found Discount:", discount);
+                                {/* Tỉnh/Thành - Quận/Huyện - Phường/Xã */}
+                                <div className="flex justify-between gap-4 mt-3">
+                                    {/* Tỉnh/Thành */}
+                                    <div className="flex-1">
+                                        <label className="block font-medium">Tỉnh/Thành</label>
+                                        <select
+                                            className="w-full border p-2 rounded-md cursor-pointer"
+                                            value={selectedProvince}
+                                            onChange={(e) => {
+                                                setSelectedProvince(e.target.value);
+                                                setSelectedDistrict(""); // Reset quận/huyện
+                                                setSelectedWard(""); // Reset phường/xã
+                                            }}
+                                        >
+                                            <option value="">Chọn tỉnh/thành</option>
+                                            {provinces.map((prov) => (
+                                                <option key={prov.code} value={prov.code}>{prov.name}</option>
+                                            ))}
+                                        </select>
+                                        <div className="min-h-[16px] text-red-500 text-sm">
+                                            {errors.province && <p>{errors.province}</p>}
+                                        </div>
+                                    </div>
 
-                                            if (discount) {
-                                                setSelectedDiscount(discount); // Luôn set discount, không kiểm tra minOrderAmount ở đây
-                                            } else {
-                                                setSelectedDiscount(null);
-                                            }
-                                        }}
-                                    >
-                                        <option value="">Chọn mã giảm</option>
-                                        {discounts.map((d) => (
-                                            <option
-                                                key={d.id}
-                                                value={d.id}
-                                                disabled={totalAmount < d.minOrderAmount}
-                                                className={totalAmount < d.minOrderAmount ? "cursor-not-allowed opacity-50 line-through" : "cursor-pointer"}
-                                            >
-                                                {totalAmount < d.minOrderAmount ? `🚫 ${d.name} (${d.amount.toLocaleString()}đ) 🚫` : `${d.name} (${d.amount.toLocaleString()}đ)`}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    {/* Quận/Huyện */}
+                                    <div className="flex-1">
+                                        <label className="block font-medium">Quận/Huyện</label>
+                                        <select
+                                            value={selectedDistrict}
+                                            onChange={(e) => {
+                                                setSelectedDistrict(e.target.value);
+                                                setSelectedWard(""); // Reset phường/xã
+                                            }}
+                                            disabled={!selectedProvince} // Chỉ cho chọn khi đã có tỉnh/thành
+                                            className={`w-full border p-2 rounded-md ${!selectedProvince ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                        >
+                                            <option value="">Chọn quận/huyện</option>
+                                            {districts.map((dist) => (
+                                                <option key={dist.code} value={dist.code}>{dist.name}</option>
+                                            ))}
+                                        </select>
+                                        <div className="min-h-[16px] text-red-500 text-sm">
+                                            {errors.district && <p>{errors.district}</p>}
+                                        </div>
+                                    </div>
 
+                                    {/* Phường/Xã */}
+                                    <div className="flex-1">
+                                        <label className="block font-medium">Phường/Xã</label>
+                                        <select
+                                            value={selectedWard}
+                                            onChange={(e) => setSelectedWard(e.target.value)}
+                                            disabled={!selectedDistrict} // Chỉ cho chọn khi đã có quận/huyện
+                                            className={`w-full border p-2 rounded-md ${!selectedDistrict ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                        >
+                                            <option value="">Chọn phường/xã</option>
+                                            {wards.map((ward) => (
+                                                <option key={ward.code} value={ward.code}>{ward.name}</option>
+                                            ))}
+                                        </select>
+                                        <div className="min-h-[16px] text-red-500 text-sm">
+                                            {errors.ward && <p>{errors.ward}</p>}
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {/* Tổng tiền thanh toán */}
-                                <div className="flex justify-between text-lg font-semibold border-t pt-3">
-                                    <p>Tổng thanh toán:</p>
-                                    <p>{finalTotal.toLocaleString()}đ</p>
+                                {/* Địa chỉ cụ thể */}
+                                <div className="mt-4">
+                                    <label className="block font-medium mb-1">Địa chỉ</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Số nhà, tên đường"
+                                        value={formData.addressDetail}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, addressDetail: e.target.value })
+                                        }
+                                        className="w-full border outline-none p-2 rounded-md"
+                                    />
+                                    <div className="min-h-[16px] text-red-500 text-sm">
+                                        {errors.addressDetail && <p>{errors.addressDetail}</p>}
+                                    </div>
+                                </div>
+
+                                {/* Ghi chú */}
+                                <div className="mt-4">
+                                    <label className="block font-medium mb-1">Ghi chú</label>
+                                    <textarea
+                                        placeholder="Nhập ghi chú (nếu có)"
+                                        value={formData.note}
+                                        onChange={(e) => setFormData({ ...formData, note: e.target.value })}
+                                        className="w-full border p-2 rounded-md h-24 resize-none"
+                                    />
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
+                            <div className="md:col-span-6 shadow-gradient p-6 rounded-md">
+                                <div className="p-4">
+                                    <h2 className="text-xl font-semibold mb-3">Thông tin sản phẩm</h2>
 
-                    {/* Button */}
-                    <div className="flex justify-center">
-                        <Button label="Đặt hàng" variant="primary" onClick={() => handleSubmit()} />
+                                    {/* Danh sách sản phẩm */}
+                                    <div className="max-h-60 overflow-y-auto space-y-3">
+                                        {checkoutData.cart.map((item) => (
+                                            <div key={item.id} className="flex items-center justify-between border-b pb-2">
+                                                <div>
+                                                    <p className="font-medium">{item.name}</p>
+                                                    <p className="text-sm text-gray-600">Màu: {item.color}</p>
+                                                    <p className="text-sm">Số lượng: {item.cartQuantity}</p>
+                                                </div>
+                                                <p className="font-semibold">{item.totalPrice.toLocaleString()}đ</p>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Phí vận chuyển */}
+                                    <div className="flex items-center justify-between border-t py-3">
+                                        <div className="flex items-center gap-2">
+                                            <AiOutlineTruck className="w-5 h-5 text-blue-500" />
+                                            <p>Phí vận chuyển:</p>
+                                        </div>
+                                        <p className="font-semibold">{delivery.toLocaleString()}đ</p>
+                                    </div>
+
+                                    {/* Chọn mã giảm phí vận chuyển */}
+                                    <div className="mt-3">
+                                        <p className="font-medium mb-1">Mã giảm phí vận chuyển</p>
+                                        <select
+                                            className="border p-2 w-full rounded-md cursor-pointer"
+                                            value={selectedDiscount ? selectedDiscount.id : ""}
+                                            onChange={(e) => {
+                                                const selectedId = Number(e.target.value);
+                                                console.log("Selected ID:", selectedId);
+                                                const discount = discounts.find(d => Number(d.id) === selectedId);
+                                                console.log("Found Discount:", discount);
+
+                                                if (discount) {
+                                                    setSelectedDiscount(discount); // Luôn set discount, không kiểm tra minOrderAmount ở đây
+                                                } else {
+                                                    setSelectedDiscount(null);
+                                                }
+                                            }}
+                                        >
+                                            <option value="">Chọn mã giảm</option>
+                                            {discounts.map((d) => (
+                                                <option
+                                                    key={d.id}
+                                                    value={d.id}
+                                                    disabled={totalAmount < d.minOrderAmount}
+                                                    className={totalAmount < d.minOrderAmount ? "cursor-not-allowed opacity-50 line-through" : "cursor-pointer"}
+                                                >
+                                                    {totalAmount < d.minOrderAmount ? `🚫 ${d.name} (${d.amount.toLocaleString()}đ) 🚫` : `${d.name} (${d.amount.toLocaleString()}đ)`}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                    </div>
+
+                                    {/* Tổng tiền thanh toán */}
+                                    <div className="flex justify-between text-lg font-semibold border-t pt-3">
+                                        <p>Tổng thanh toán:</p>
+                                        <p>{finalTotal.toLocaleString()}đ</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {/* Button */}
+                        <div className="flex justify-center">
+                            <Button label="Đặt hàng" variant="primary" onClick={() => handleSubmit()} />
+                        </div>
                     </div>
                 </div>
             )}
