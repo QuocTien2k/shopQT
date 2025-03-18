@@ -96,7 +96,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
                     <div className="col-span-full">
                         <Loading tip="Đang tải sản phẩm..." />
                     </div>
-                ) : (
+                ) : filteredProducts.length >= 5 ? (
                     <Slider {...settings}>
                         {filteredProducts.map((product) => (
                             <div key={product.id} className="p-2">
@@ -113,8 +113,26 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
                             </div>
                         ))}
                     </Slider>
+                ) : (
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {filteredProducts.map((product) => (
+                            <div key={product.id} className="p-2 w-[230px]">
+                                <Card
+                                    id={product.id}
+                                    name={product.name}
+                                    image={product.image}
+                                    price={product.price}
+                                    discount={product.discount}
+                                    rating={product.rating}
+                                    quantity={product.quantity}
+                                    color={product.color}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
+
 
         </div>
     );
