@@ -7,13 +7,21 @@ const Footer = () => {
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6">
                 {/* Cột 1: Logo & Mô tả */}
                 <div>
-                    <h2 className="text-xl font-semibold">ShopQT</h2>
-                    <p className="text-gray-400 max-w-xs">
-                        ShopQT chuyên cung cấp các sản phẩm điện thoại, máy tính bảng, laptop và phụ kiện công nghệ chính hãng từ các thương hiệu hàng đầu như Apple, Samsung, Asus, Dell, Lenovo, v.v.
-                    </p>
-                    <p className="text-gray-400 max-w-xs">
-                        Cam kết hàng chính hãng 100%, bảo hành uy tín, cùng nhiều chương trình ưu đãi hấp dẫn.
-                    </p>
+                    {/* Logo */}
+                    <div className="w-26 md:w-32 font-extrabold text-3xl md:text-4xl tracking-wide">
+                        <a href="#" className="text-gray-900 border-none outline-none">
+                            <span className="font-[Italiana] italic font-light">Shop</span>
+                            <span className="font-[Italiana] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">QT</span>
+                        </a>
+                    </div>
+                    <div className="mt-2">
+                        <p className="text-gray-400 max-w-xs">
+                            ShopQT chuyên cung cấp các sản phẩm điện thoại, máy tính bảng, laptop và phụ kiện công nghệ chính hãng từ các thương hiệu hàng đầu như Apple, Samsung, Asus, Dell, Lenovo, v.v.
+                        </p>
+                        <p className="text-gray-400 max-w-xs">
+                            Cam kết hàng chính hãng 100%, bảo hành uy tín, cùng nhiều chương trình ưu đãi hấp dẫn.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Cột 2: Liên kết nhanh */}

@@ -10,15 +10,15 @@ const bannerImages = [
 
 const Banner = () => {
     return (
-        <div className="mt-4 mb-4 rounded-sm max-h-[480px] sm:max-h-[340px] md:max-h-[410px] max-w-5xl mx-auto overflow-hidden">
+        <div className="mt-6 md:mt-[3.4rem] mb-4 rounded-sm max-h-[680px] sm:max-h-[440px] md:max-h-[410px] max-w-5xl mx-auto overflow-hidden">
             {/* Slideshow */}
             <Carousel autoplay effect="fade">
                 {bannerImages.map((img, index) => (
-                    <div key={index} className="flex justify-center ">
+                    <div key={index} className="flex justify-center md:pt-[1.6rem]">
                         <img
                             src={img}
                             alt={`Banner ${index}`}
-                            className="w-full h-[350px] object-contain "
+                            className="w-full h-[280px] md:h-[350px] object-contain"
                             style={{ backgroundSize: "100% 100%" }}
                         />
                     </div>

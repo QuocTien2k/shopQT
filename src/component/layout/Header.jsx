@@ -61,7 +61,7 @@ const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <header className="h-[70px] md:h-[88px] flex items-center justify-between px-3 gap-1 md:px-7 shadow-md header-bg">
+        <header className="fixed z-50 w-full rounded-lg top-0 h-[70px] md:h-[88px] flex items-center justify-between px-3 gap-1 md:px-7 shadow-md header-bg">
             {/* Logo */}
             <div className="w-26 md:w-32 font-extrabold text-3xl md:text-4xl tracking-wide">
                 <Link to="/" className="text-gray-900 border-none outline-none">
