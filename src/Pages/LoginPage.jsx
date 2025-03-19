@@ -44,7 +44,7 @@ const LoginPage = () => {
             }
 
             const res = await API.get(`/users`);
-            const users = await res.json();
+            const users = res.data;
             //console.log(users);
 
             //tìm user
