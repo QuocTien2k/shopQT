@@ -42,7 +42,7 @@ const LoginPage = () => {
                 return;
             }
 
-            const res = await fetch(`http://localhost:5000/users`);
+            const res = await fetch(`https://shopqt.onrender.com/users`);
             const users = await res.json();
             //console.log(users);
 
