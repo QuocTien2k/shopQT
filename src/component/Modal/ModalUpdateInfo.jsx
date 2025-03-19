@@ -44,12 +44,12 @@ const ModalUpdateInfo = ({ open, onClose }) => {
         switch (field) {
             case "firstname":
                 if (!value.match(/^[A-Za-zÀ-ỹ]{2,}$/)) {
-                    error = "Tên phải có ít nhất 2 ký tự và không chứa số";
+                    error = "Tên ít nhất 2 ký tự và không chứa số";
                 }
                 break;
             case "lastname":
                 if (!value.match(/^[A-Za-zÀ-ỹ\s]{4,25}$/)) {
-                    error = "Họ và tên lót phải có từ 4-25 ký tự không chứa số";
+                    error = "Họ và tên lót từ 4-25 ký tự,không chứa số";
                 }
                 break;
             case "phone":
