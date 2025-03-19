@@ -8,12 +8,14 @@ import MainLayout from './Router/MainLayout'
 import ContextProvider from './component/Context/DataContext'
 import ProductDetail from './Pages/ProductDetail'
 import CheckoutForm from './Pages/Checkout'
+import ScrollToTop from './ScrollToTop'
 
 function App() {
 
   return (
     <>
       <ContextProvider>
+        <ScrollToTop />
         <Routes>
           {/* Layout có Header */}
           <Route element={<MainLayout />}>
