@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../component/Button";
@@ -7,6 +7,7 @@ import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
 import Loading from "../component/Loading/Loading";
 import { message } from "antd";
 import { formatCurrency } from "../utils/helpers";
+import { Frown } from "lucide-react";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -15,6 +16,7 @@ const ProductDetail = () => {
     const [selectedColor, setSelectedColor] = useState([]); // Mặc định chọn màu đầu tiên
     const [loading, setLoading] = useState(true); // trạng thái loading khi đang call api
     const { getColorCode, addToCart } = useContext(DataContext);
+    const navigate = useNavigate();
 
     //thêm giỏ hàng trang detail
     const handleAddToCartOnDetail = () => {
@@ -55,7 +57,17 @@ const ProductDetail = () => {
 
     if (loading) return <Loading tip="Đang tải sản phẩm..." />; //Hiển thị loading
 
-    if (!product) return <p className="text-center text-red-500">Sản phẩm không tồn tại!</p>; //Nếu lỗi API
+    //không có sản phẩm
+    if (!product) {
+        return (
+            <div className="flex flex-col gap-3 items-center justify-center min-h-[50vh] px-6 pt-[70px] md:pt-[88px] md:mt-4 bg-white">
+                <p className="text-center text-red-500 text-lg md:text-xl font-medium">
+                    Sản phẩm không tồn tại! 😢
+                </p>
+                <Button label="Quay về trang chủ" variant="primary" onClick={() => navigate('/')} />
+            </div>
+        );
+    }
 
     return (
         <div className="px-6 pt-[70px] md:pt-[88px] md:mt-4 bg-white">
@@ -99,7 +111,9 @@ const ProductDetail = () => {
                     <p className="text-red-500 text-lg font-semibold">
                         {formatCurrency(product.price)}
                     </p>
-                    <p className="text-gray-500 text-lg"><strong>Đã giảm: {product.discount}%</strong></p>
+                    {product.discount > 0 && (
+                        <p className="text-gray-400 text-lg"><strong>Đã giảm: {product.discount}%</strong></p>
+                    )}
                     {/* Chọn màu sắc */}
                     <div className="mt-4">
                         <p className="text-sm font-semibold">Màu sắc:</p>
