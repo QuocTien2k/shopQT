@@ -26,7 +26,7 @@ function App() {
           {/* Layout KHÔNG có Header */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/error" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
 
         {/* <Footer /> */}
