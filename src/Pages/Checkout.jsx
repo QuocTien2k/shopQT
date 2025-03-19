@@ -3,14 +3,13 @@ import axios from "axios";
 import Button from "../component/Button";
 import Title from "../component/Title/Title";
 import { AiOutlineTruck } from "react-icons/ai";
-import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../component/Context/DataContext";
 import EmptyCart from "../component/EmptyCart/EmptyCart";
 
 const CheckoutForm = () => {
     const navigate = useNavigate();
-    const { isOpen, setIsOpen } = useContext(DataContext)
+    const { isOpen, setIsOpen, removeFromCart } = useContext(DataContext)
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
@@ -161,26 +160,26 @@ const CheckoutForm = () => {
 
         console.log("Dữ liệu form:", finalData);
 
-        // 🛑 Xóa checkoutData khỏi localStorage
-        localStorage.removeItem("checkoutData");
+        // Lưu trạng thái đặt hàng vào localStorage trước khi chuyển trang
+        localStorage.setItem("orderSuccess", "true");
 
-        // 🚀 Reset form
-        setSelectedProvince("");
-        setSelectedDistrict("");
-        setSelectedWard("");
-        setFormData({
-            fullname: "",
-            phone: "",
-            addressDetail: "",
-            note: "",
-        });
+        navigate('/'); // Chuyển về trang chủ ngay
 
-        // Hiển thị thông báo đặt hàng thành công
-        message.success({
-            content: "🚀 Đặt hàng thành công! Cảm ơn bạn đã trải nghiệm Website",
-            duration: 2,
-            onClose: () => navigate(0) //tải lại trang
-        });
+        setTimeout(() => {
+            localStorage.removeItem("checkoutData"); // Xóa dữ liệu checkout
+            setSelectedProvince("");
+            setSelectedDistrict("");
+            setSelectedWard("");
+            setFormData({
+                fullname: "",
+                phone: "",
+                addressDetail: "",
+                note: "",
+            });
+
+            //Xóa sản phẩm trong giỏ hàng (DataContext)
+            checkoutData.cart.forEach(product => removeFromCart(product.id));
+        }, 2000);
 
     };
 

@@ -5,8 +5,17 @@ import FilterProducts from '../component/Filter/FilterProducts';
 import FilterMobile from '../component/Filter/FilterMobile';
 import ListProducts from '../component/ListProducts';
 import { DataContext } from '../component/Context/DataContext';
+import { message } from 'antd';
 
 const HomePage = () => {
+    //thông báo khi checkout thành công quay về HomePage
+    useEffect(() => {
+        const orderSuccess = localStorage.getItem("orderSuccess");
+        if (orderSuccess) {
+            message.success("🚀 Đặt hàng thành công! Cảm ơn bạn đã trải nghiệm Website", 2);
+            localStorage.removeItem("orderSuccess"); // Xóa trạng thái sau khi hiển thị
+        }
+    }, []);
     const [filteredBrands, setFilteredBrands] = useState([]);
     //console.log("Đã nhận prop từ FilterProducts: ", filteredBrands);
 
