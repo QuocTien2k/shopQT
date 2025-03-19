@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../api";
+
 
 const FilterBrand = ({ onFilterChange }) => {
     const [brands, setBrands] = useState([]); // Lưu danh sách brand
@@ -7,7 +8,7 @@ const FilterBrand = ({ onFilterChange }) => {
 
     // Gọi API lấy danh sách sản phẩm
     useEffect(() => {
-        axios.get("http://localhost:5000/products") // Fake API
+        API.get("/products") // Fake API
             .then((response) => {
                 const allProducts = response.data;
                 const brandList = allProducts.map((product) => product.brand);

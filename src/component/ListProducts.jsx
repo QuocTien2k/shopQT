@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo, useContext } from "react";
-import axios from "axios";
 import Card from "./Card/Card";
 import NotProduct from "./Filter/NotProduct";
 import { DataContext } from "./Context/DataContext";
 import { Pagination } from "antd";
 import Loading from "./Loading/Loading";
+import API from "../api";
 
 const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
     const [products, setProducts] = useState([]);
@@ -17,8 +17,8 @@ const ListProducts = ({ filteredBrands, filteredPrice, filterCategory }) => {
 
     // call api
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/products")
+        API
+            .get("/products")
             .then((response) => {
                 setProducts(response.data);
                 //setProducts(response.data.slice(10, 20)); // Hiển thị 10 sản phẩm đầu tiên

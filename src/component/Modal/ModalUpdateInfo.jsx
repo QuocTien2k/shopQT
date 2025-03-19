@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Modal, Input, Form, message } from "antd";
 import Button from "../Button";
 import { DataContext } from "../Context/DataContext";
+import API from "../../api";
 
 const ModalUpdateInfo = ({ open, onClose }) => {
     const { setUser } = useContext(DataContext)
@@ -151,8 +152,8 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             }
 
             //kiểm tra email + sđt
-            const checkRes = await fetch('http://localhost:5000/users');
-            const users = await checkRes.json();
+            const checkRes = await API.get('/users');
+            const users = checkRes.data;
 
             const isEmailExist = users.some((u) => u.email === formData.email && u.id !== user.id);
             const isPhoneExist = users.some((u) => u.phone === formData.phone && u.id !== user.id);
@@ -173,13 +174,12 @@ const ModalUpdateInfo = ({ open, onClose }) => {
             }
 
             // Gửi request cập nhật thông tin
-            const res = await fetch(`http://localhost:5000/users/${user.id}`, {
-                method: "PUT", // Cập nhật dữ liệu user
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (!res.ok) throw new Error("Cập nhật thất bại!");
+            try {
+                const res = await API.put(`/users/${user.id}`, updatedData);
+                console.log("Cập nhật thành công!", res.data);
+            } catch (error) {
+                console.error("Cập nhật thất bại!", error);
+            }
 
             // Cập nhật lại localStorage với thông tin mới
             localStorage.setItem("user", JSON.stringify(updatedData));

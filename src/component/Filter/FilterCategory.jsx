@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import API from '../../api';
 
 const FilterCategory = ({ onCategoryChange }) => {
     const [category, setCategory] = useState([]);
@@ -7,8 +7,8 @@ const FilterCategory = ({ onCategoryChange }) => {
 
     //call api
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/products")
+        API
+            .get("/products")
             .then((response) => {
                 const allCategory = response.data; //lấy danh sách sản phẩm
                 const categoryList = allCategory.map((product) => product.category);

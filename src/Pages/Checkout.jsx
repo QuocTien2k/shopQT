@@ -6,6 +6,7 @@ import { AiOutlineTruck } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../component/Context/DataContext";
 import EmptyCart from "../component/EmptyCart/EmptyCart";
+import API from "../api";
 
 const CheckoutForm = () => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ const CheckoutForm = () => {
 
     // Fetch danh sách mã giảm giá từ API
     useEffect(() => {
-        axios.get("http://localhost:5000/discounts")
+        API.get("/discounts")
             .then((res) => {
                 setDiscounts(res.data);
             })

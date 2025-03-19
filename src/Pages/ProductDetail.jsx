@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import Button from "../component/Button";
 import { DataContext } from "../component/Context/DataContext";
 import FeaturedProduct from "../component/FeaturedProducts/FeaturedProducts";
@@ -8,6 +7,7 @@ import Loading from "../component/Loading/Loading";
 import { message } from "antd";
 import { formatCurrency } from "../utils/helpers";
 import { Frown } from "lucide-react";
+import API from "../api";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -40,7 +40,7 @@ const ProductDetail = () => {
 
     // call api = id 
     useEffect(() => {
-        axios.get(`http://localhost:5000/products/${id}`)
+        API.get(`/products/${id}`)
             .then((res) => {
                 setProduct(res.data);
                 setSelectedColor(res.data.color[0]);

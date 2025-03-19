@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import Card from "../Card/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,6 +8,7 @@ import Clock from "../Clock/Clock";
 //import { FaFire } from "react-icons/fa";
 import Fire from "../../assets/fire.gif"
 import Loading from "../Loading/Loading";
+import API from "../../api";
 
 const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "", showClock = true }) => {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const FeaturedProduct = ({ filterType = "featured", currentBrand = "", title = "
 
     // call api
     useEffect(() => {
-        axios.get("http://localhost:5000/products")
+        API.get("/products")
             .then((res) => {
                 setProducts(res.data)
                 setLoading(false);  // ✅ Khi có dữ liệu, tắt loading

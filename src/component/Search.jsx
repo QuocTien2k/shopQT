@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from 'antd';
+import API from "../api";
 
 const Search = () => {
     const [query, setQuery] = useState("");
@@ -13,8 +14,8 @@ const Search = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("http://localhost:5000/products");
-                const data = await res.json();
+                const res = await API.get("/products");
+                const data = res.data;
                 setProducts(data);
             } catch (error) {
                 console.error("Lỗi khi lấy sản phẩm:", error);

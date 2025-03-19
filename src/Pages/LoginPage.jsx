@@ -3,6 +3,7 @@ import { DataContext } from "../component/Context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { Input, message } from "antd";
 import Button from "../component/Button";
+import API from "../api";
 
 const LoginPage = () => {
     const { setUser, setIsAuthenticated } = useContext(DataContext);
@@ -42,7 +43,7 @@ const LoginPage = () => {
                 return;
             }
 
-            const res = await fetch(`https://shopqt.onrender.com/users`);
+            const res = await API.get(`/users`);
             const users = await res.json();
             //console.log(users);
 

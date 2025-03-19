@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { Input, message, Radio } from "antd";
 import Button from "../component/Button";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -113,8 +114,8 @@ const RegisterPage = () => {
         console.log("Dữ liệu gửi đi:", formData);
 
         try {
-            const checkRes = await fetch("http://localhost:5000/users");
-            const users = await checkRes.json();
+            const checkRes = await API.get("/users");
+            const users = checkRes.data;
 
             //kiểm tra Email
             const isEmailExist = users.some((user) => user.email === formData.email);
@@ -130,10 +131,8 @@ const RegisterPage = () => {
                 return;
             }
 
-            const res = await fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
+            try {
+                const res = await API.post("/users", {
                     firstname: formData.firstname,
                     lastname: formData.lastname,
                     fullname: formData.fullname,
@@ -142,10 +141,12 @@ const RegisterPage = () => {
                     email: formData.email,
                     password: formData.password,
                     image: formData.image
-                }),
-            });
+                });
 
-            if (!res.ok) throw new Error("Đăng ký thất bại!");
+                console.log("Đăng ký thành công:", res.data);
+            } catch (error) {
+                console.error("Đăng ký thất bại!", error);
+            }
 
             message.success("Đăng ký thành công");
             setTimeout(() => {
