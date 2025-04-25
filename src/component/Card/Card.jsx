@@ -60,7 +60,7 @@ const Card = ({ id, name, image, price, discount, rating, quantity, color }) => 
 
             {/* Nút bấm */}
             <div className="mt-2 flex justify-center gap-2 text-[11px]">
-                <Button label="Mua ngay" variant="primary" onClick={handleAddToCartOnCard} />
+                <Button label="thêm vào 🛒" variant="primary" onClick={handleAddToCartOnCard} />
                 <Button
                     label="Chi tiết"
                     variant="normal"

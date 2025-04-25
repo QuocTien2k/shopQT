@@ -4,7 +4,7 @@ import { Image, Modal, Tooltip } from "antd";
 import { formatCurrency } from "../utils/helpers"
 import CartCardMobile from "./CartCardMobile";
 import Button from "../component/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmptyCart from "../component/EmptyCart/EmptyCart";
 import Title from "../component/Title/Title";
 
@@ -84,7 +84,7 @@ const ShoppingCart = () => {
                                         </td>
                                         <td className="border border-gray-300 px-2 py-2 max-w-56 truncate">
                                             <Tooltip title={item.name} placement="top">
-                                                {item.name}
+                                                <Link to={`/product/${item.id}`}>{item.name}</Link>
                                             </Tooltip>
                                         </td>
                                         <td className="border border-gray-300 px-2 py-2 w-20">
